@@ -1212,34 +1212,35 @@ footer p {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(3deg);
+    z-index: 0;
+    animation: ring-spin 4s linear infinite;
+    opacity: 0.85;
+}
+
+.hero-glow-ring::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
     background: conic-gradient(
-        from var(--ring-angle, 0deg),
+        from 0deg,
         #00E5FF,
         #7000FF,
         #00ffab,
         #00E5FF
     );
-    padding: 3px;
-    z-index: 0;
-    animation: ring-spin 6s linear infinite;
-    opacity: 0.8;
 }
 
-@property --ring-angle {
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
+.hero-glow-ring::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 20px;
+    background: var(--bg-deep);
 }
 
 @keyframes ring-spin {
-    to { --ring-angle: 360deg; }
-}
-
-/* Fallback for browsers without @property */
-@supports not (background: conic-gradient(red, blue)) {
-    .hero-glow-ring {
-        background: var(--gradient-text);
-    }
+    to { transform: translate(-50%, -50%) rotate(363deg); }
 }
 
 .hero-image {
