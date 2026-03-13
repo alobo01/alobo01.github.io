@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 
 <body>
@@ -38,7 +41,26 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-content">
-            <a href="#home" class="logo">A<span>.</span>L<span>.</span>S</a>
+            <a href="#home" class="logo">
+                <svg class="nav-logo-svg" viewBox="0 0 120 30" height="28" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 4 L28 24 L2 24 Z" fill="rgba(0, 229, 255, 0.1)" stroke="url(#nav-grad)"
+                        stroke-width="2" stroke-linejoin="round" />
+                    <circle cx="15" cy="4" r="2.5" fill="var(--text-primary)" />
+                    <circle cx="28" cy="24" r="2.5" fill="var(--accent)" />
+                    <circle cx="2" cy="24" r="2.5" fill="var(--accent-secondary)" />
+                    <path d="M15 4 L15 14 L28 24" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="2 2" />
+                    <text x="38" y="23" font-family="'Outfit', sans-serif" font-weight="800" font-size="22"
+                        fill="var(--text-primary)" letter-spacing="2">A<tspan fill="var(--accent)">.</tspan>L<tspan
+                            fill="var(--accent)">.</tspan>S</text>
+                    <defs>
+                        <linearGradient id="nav-grad" x1="2" y1="4" x2="28" y2="24" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#00E5FF" />
+                            <stop offset="100%" stop-color="#7000FF" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </a>
             <ul class="nav-links">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -632,7 +654,26 @@
         <!-- Footer -->
         <footer>
             <div class="footer-content reveal">
-                <div class="footer-logo">A<span>.</span>L<span>.</span>S</div>
+                <div class="footer-logo">
+                    <svg class="footer-logo-svg" viewBox="0 0 140 40" height="36" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 5 L35 32 L5 32 Z" fill="rgba(0, 229, 255, 0.1)" stroke="url(#foot-grad)"
+                            stroke-width="2" stroke-linejoin="round" />
+                        <circle cx="20" cy="5" r="3" fill="var(--text-primary)" />
+                        <circle cx="35" cy="32" r="3" fill="var(--accent)" />
+                        <circle cx="5" cy="32" r="3" fill="var(--accent-secondary)" />
+                        <path d="M20 5 L20 18 L35 32" stroke="var(--accent)" stroke-width="2" stroke-dasharray="2 2" />
+                        <text x="45" y="31" font-family="'Outfit', sans-serif" font-weight="800" font-size="30"
+                            fill="var(--text-primary)" letter-spacing="2">A<tspan fill="var(--accent)">.</tspan>L<tspan
+                                fill="var(--accent)">.</tspan>S</text>
+                        <defs>
+                            <linearGradient id="foot-grad" x1="5" y1="5" x2="35" y2="32" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#00E5FF" />
+                                <stop offset="100%" stop-color="#7000FF" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
                 <div class="footer-social">
                     <a href="mailto:alobosantos10@gmail.com"><i class="fa-solid fa-envelope"></i></a>
                     <a href="https://www.linkedin.com/in/antonio-lobo-a78003234/" target="_blank"><i
