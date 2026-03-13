@@ -73,8 +73,26 @@
                 <li><a href="#publications">Publications</a></li>
                 <li><a href="#projects">Projects</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#talks">Talks</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#projects">Projects</a></li>
+        </ul>
+    </div>
 
     <main>
         <!-- Hero Section -->
@@ -102,11 +120,6 @@
                     </div>
                 </div>
             </div>
-            <a href="#about" class="scroll-down">
-                <div class="mouse">
-                    <div class="wheel"></div>
-                </div>
-            </a>
         </section>
 
         <!-- About Section -->
@@ -720,6 +733,10 @@
             </div>
         </footer>
     </main>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
