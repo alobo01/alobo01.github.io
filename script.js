@@ -1,4 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Typing animation for hero role ---
+    const roles = [
+        'Research Engineer',
+        'Alignment Scientist',
+        'RL for LLMs',
+        'Post-Training Engineer'
+    ];
+    const typedEl = document.querySelector('.typed-role');
+    let roleIdx = 0;
+    let charIdx = 0;
+    let deleting = false;
+    const typeSpeed = 80;
+    const deleteSpeed = 40;
+    const pauseEnd = 2200;
+    const pauseStart = 600;
+
+    function typeLoop() {
+        const current = roles[roleIdx];
+        if (!deleting) {
+            typedEl.textContent = current.substring(0, charIdx + 1);
+            charIdx++;
+            if (charIdx === current.length) {
+                setTimeout(() => { deleting = true; typeLoop(); }, pauseEnd);
+                return;
+            }
+            setTimeout(typeLoop, typeSpeed);
+        } else {
+            typedEl.textContent = current.substring(0, charIdx);
+            charIdx--;
+            if (charIdx < 0) {
+                deleting = false;
+                charIdx = 0;
+                roleIdx = (roleIdx + 1) % roles.length;
+                setTimeout(typeLoop, pauseStart);
+                return;
+            }
+            setTimeout(typeLoop, deleteSpeed);
+        }
+    }
+    typeLoop();
+
     // Reveal Animations using Intersection Observer
     const revealElements = document.querySelectorAll('.reveal');
     
