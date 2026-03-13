@@ -38,8 +38,14 @@ h6,
     font-family: 'Outfit', sans-serif;
 }
 
-/* Typography specifics */
-span {
+/* Typography specifics — only highlight spans inside headings and named elements */
+.name span,
+.section-title span {
+    color: var(--accent);
+}
+
+.typed-role,
+.cursor {
     color: var(--accent);
 }
 
