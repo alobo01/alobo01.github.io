@@ -1239,6 +1239,7 @@ footer p {
     background: var(--bg-deep);
 }
 
+/* 363deg = 3deg initial offset + 360deg full rotation → seamless loop */
 @keyframes ring-spin {
     to { transform: translate(-50%, -50%) rotate(363deg); }
 }
