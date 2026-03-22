@@ -1,13 +1,12 @@
 <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M16 6 L29 26 L3 26 Z" fill="rgba(0, 229, 255, 0.2)" stroke="url(#grad)" stroke-width="2" stroke-linejoin="round"/>
-    <circle cx="16" cy="6" r="2.5" fill="#f0f0f0"/>
-    <circle cx="29" cy="26" r="2.5" fill="#00E5FF"/>
-    <circle cx="3" cy="26" r="2.5" fill="#7000FF"/>
-    <path d="M16 6 L16 16 L29 26" stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="2 2"/>
+    <path d="M16 4 L18 13 L27 15 L18 17 L16 26 L14 17 L5 15 L14 13 Z" fill="rgba(112, 0, 255, 0.4)" stroke="#00E5FF" stroke-width="1.5" stroke-linejoin="round"/>
+    <ellipse cx="16" cy="15" rx="10" ry="3" transform="rotate(45 16 15)" stroke="url(#spark-grad)" stroke-width="1"/>
+    <ellipse cx="16" cy="15" rx="10" ry="3" transform="rotate(-45 16 15)" stroke="url(#spark-grad)" stroke-width="1"/>
+    <circle cx="16" cy="15" r="1.5" fill="#f0f0f0"/>
     <defs>
-        <linearGradient id="grad" x1="3" y1="6" x2="29" y2="26" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#00E5FF"/>
-            <stop offset="100%" stop-color="#7000FF"/>
+        <linearGradient id="spark-grad" x1="5" y1="4" x2="27" y2="26" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#00E5FF" />
+            <stop offset="100%" stop-color="#7000FF" />
         </linearGradient>
     </defs>
 </svg>
