@@ -386,6 +386,117 @@ h6,
     filter: grayscale(15%) contrast(1.05);
 }
 
+/* AI Transforming Logo Animation */
+.ai-logo {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding: 0.2rem 0;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+
+.ai-a { color: var(--text-primary); }
+
+.ai-ntonio {
+    display: inline-block;
+    overflow: hidden;
+    white-space: pre;
+    color: var(--text-primary);
+    animation: expandTextAntonio 8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.ai-i {
+    position: relative;
+    color: transparent !important; /* hide the L */
+    display: inline-block;
+}
+
+.ai-i::before {
+    content: 'I';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent); /* 'I' in accent color */
+    animation: fadeOutI 8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.ai-i::after {
+    content: 'L';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent); /* 'L' in accent color */
+    animation: fadeInL 8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.ai-obo {
+    display: inline-block;
+    overflow: hidden;
+    white-space: pre;
+    color: var(--accent);
+    animation: expandTextObo 8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.ai-s { color: var(--accent-secondary); }
+
+.ai-antos {
+    display: inline-block;
+    overflow: hidden;
+    white-space: pre;
+    color: var(--accent-secondary);
+    animation: expandTextAntos 8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Cursor Blink */
+.ai-logo-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background-color: var(--accent-secondary);
+    margin-left: 2px;
+    animation: logoBlink 1s step-end infinite;
+    vertical-align: middle;
+}
+
+@keyframes expandTextAntonio {
+    0%, 20% { max-width: 0; opacity: 0; }
+    35%, 85% { max-width: 120px; opacity: 1; }
+    100% { max-width: 0; opacity: 0; }
+}
+
+@keyframes expandTextObo {
+    0%, 20% { max-width: 0; opacity: 0; }
+    35%, 85% { max-width: 80px; opacity: 1; }
+    100% { max-width: 0; opacity: 0; }
+}
+
+@keyframes expandTextAntos {
+    0%, 20% { max-width: 0; opacity: 0; margin-right: 0px; }
+    35%, 85% { max-width: 120px; opacity: 1; margin-right: 4px; }
+    100% { max-width: 0; opacity: 0; margin-right: 0px; }
+}
+
+@keyframes fadeOutI {
+    0%, 20% { opacity: 1; transform: translateY(0) scale(1); }
+    35%, 85% { opacity: 0; transform: translateY(-5px) scale(0.9); } 
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeInL {
+    0%, 20% { opacity: 0; transform: translateY(5px) scale(0.9); }
+    35%, 85% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(5px) scale(0.9); }
+}
+
+@keyframes logoBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 /* Work in Progress Animation */
 .wip-container {
     display: inline-flex;
