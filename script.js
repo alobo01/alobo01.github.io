@@ -1,4 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Theme Toggle (Dark / Light Mode) ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    function applyTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        const icon = themeToggle.querySelector('i');
+        if (!icon) return;
+        if (theme === 'light') {
+            icon.className = 'fa-solid fa-moon';
+            themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+        } else {
+            icon.className = 'fa-solid fa-sun';
+            themeToggle.setAttribute('aria-label', 'Switch to light mode');
+        }
+    }
+
+    // Load saved theme or fall back to system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        applyTheme('light');
+    } else {
+        applyTheme('dark');
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'light' ? 'dark' : 'light';
+        applyTheme(next);
+        localStorage.setItem('theme', next);
+    });
+
     // --- Typing animation for hero role ---
     const roles = [
         'Research Engineer',
