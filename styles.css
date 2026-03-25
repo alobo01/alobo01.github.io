@@ -882,6 +882,18 @@ h6,
     font-weight: 500;
 }
 
+.institution-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+    border-bottom: 1px dotted rgba(0, 229, 255, 0.4);
+}
+
+.institution-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
 .timeline-logo {
     width: 55px;
     height: 55px;
@@ -1799,4 +1811,8 @@ footer p {
 [data-theme="light"] .theme-toggle:hover {
     background: rgba(0, 136, 187, 0.08);
     border-color: var(--accent);
+}
+
+[data-theme="light"] .institution-link {
+    border-bottom-color: rgba(0, 136, 187, 0.4);
 }
