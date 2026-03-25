@@ -1346,6 +1346,15 @@ footer p {
         display: none;
     }
 
+    .nav-content {
+        position: relative;
+    }
+
+    .theme-toggle {
+        position: absolute;
+        left: calc(50% - 18px);
+    }
+
     .hamburger {
         display: flex;
     }
