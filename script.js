@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         applyTheme(savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-        applyTheme('light');
-    } else {
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         applyTheme('dark');
+    } else {
+        applyTheme('light');
     }
 
     themeToggle.addEventListener('click', () => {
