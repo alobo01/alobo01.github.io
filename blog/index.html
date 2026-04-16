@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antonio Lobo Santos | AI Research Engineer</title>
+    <meta name="description"
+        content="Portfolio of Antonio Lobo Santos, AI Research Engineer specialising in generative AI, large language models, reinforcement learning, and scalable ML systems.">
+
+    <!-- Open Graph for sharing -->
+    <meta property="og:title" content="Antonio Lobo Santos | AI Research Engineer">
+    <meta property="og:description"
+        content="Portfolio of Antonio Lobo Santos, AI Research Engineer specialising in generative AI, large language models, reinforcement learning, and scalable ML systems.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Outfit for Headings, Inter for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Flag Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+
+    <link rel="stylesheet" href="../styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animated">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html#home" class="logo">
+                <svg class="nav-logo-svg" viewBox="0 0 160 40" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="14" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+                    <path d="M20 6 L32 27 L8 27 Z" stroke="url(#nav-edge-grad)" stroke-width="1.5" stroke-linejoin="round" fill="rgba(0, 229, 255, 0.05)"/>
+                    <circle cx="20" cy="6" r="3" fill="var(--accent)"/>
+                    <circle cx="32" cy="27" r="2.5" fill="var(--accent-secondary)"/>
+                    <circle cx="8" cy="27" r="2" fill="var(--text-primary)"/>
+                    <text x="48" y="27" font-family="'Outfit', sans-serif" font-weight="800" font-size="22" fill="var(--text-primary)" letter-spacing="4">A<tspan fill="var(--accent)">L</tspan>S</text>
+                    <defs>
+                        <linearGradient id="nav-edge-grad" x1="8" y1="6" x2="32" y2="27">
+                            <stop offset="0%" stop-color="#00E5FF"/>
+                            <stop offset="100%" stop-color="#7000FF"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#home" >Home</a></li>
+                <li><a href="../index.html#focus">Focus</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#experience">Experience</a></li>
+                <li><a href="../index.html#education">Education</a></li>
+                <li><a href="../index.html#talks">Talks</a></li>
+                <li><a href="../index.html#publications">Publications</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul>
+            <li><a href="../index.html#home">Home</a></li>
+            <li><a href="../index.html#focus">Focus</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#education">Education</a></li>
+            <li><a href="../index.html#talks">Talks</a></li>
+            <li><a href="../index.html#publications">Publications</a></li>
+            <li><a href="../index.html#projects">Projects</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section class="section" style="padding-top: 150px; min-height: 80vh;">
+            <div class="section-container">
+                <h2 class="section-title reveal">AI Safety <span>Blog</span></h2>
+                <div class="projects-grid">
+                    <div class="project-card glass-card hover-glow reveal">
+                        <div class="project-content">
+                            <h3>Consensus Through Debate</h3>
+                            <p>How can we align advanced AI systems with human values without falling into the trap of polarized "winner-takes-all" debates? A hybrid methodology for AI safety.</p>
+                            <a href="posts/consensus-through-debate/index.html" class="project-link">
+                                Read Post <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
