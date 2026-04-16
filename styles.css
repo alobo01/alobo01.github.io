@@ -739,7 +739,8 @@ h6,
 /* Language List */
 .language-list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.9rem;
 }
 
