@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pauseStart = 600;
 
     function typeLoop() {
+        if (!typedEl) return;
         const current = roles[roleIdx];
         if (!deleting) {
             typedEl.textContent = current.substring(0, charIdx + 1);
@@ -72,7 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(typeLoop, deleteSpeed);
         }
     }
-    typeLoop();
+    
+    if (typedEl) {
+        typeLoop();
+    }
 
     // Reveal Animations using Intersection Observer
     const revealElements = document.querySelectorAll('.reveal');
