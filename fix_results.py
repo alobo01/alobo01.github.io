@@ -1,93 +1,63 @@
 import json
 import re
 
-def parse_flows(text):
-    flows = []
-    # Regular expressions for tags
-    flow_start_re = re.compile(r'<flow\s+id="([^"]+)">')
-    task_start_re = re.compile(r'<task\s+agent="([^"]+)"\s+task="([^"]+)"(?:\s+dependencies="([^"]*)")?>')
-    flow_end_re = re.compile(r'</flow>')
-    task_end_re = re.compile(r'</task>')
-    
-    current_flow = None
-    current_task = None
-    lines = text.splitlines()
-    
-    for line in lines:
-        flow_start_match = flow_start_re.search(line)
-        if flow_start_match:
-            current_flow = {
-                'flow_id': flow_start_match.group(1),
-                'tasks': []
-            }
-            continue
-
-        if current_flow is not None:
-            flow_end_match = flow_end_re.search(line)
-            if flow_end_match:
-                flows.append(current_flow)
-                current_flow = None
-                continue
-
-            task_start_match = task_start_re.search(line)
-            if task_start_match:
-                agent = task_start_match.group(1)
-                task_desc = task_start_match.group(2)
-                deps_str = task_start_match.group(3)
-                deps = []
-                if deps_str:
-                    deps = [int(x.strip()) for x in deps_str.split(',') if x.strip() != ""]
-                
-                current_task = {
-                    'agent': agent,
-                    'task': task_desc,
-                    'dependencies': deps,
-                    'final_answer': ''
-                }
-                continue
-
-            if current_task is not None:
-                task_end_match = task_end_re.search(line)
-                if task_end_match:
-                    current_flow['tasks'].append(current_task)
-                    current_task = None
-                    continue
-                else:
-                    current_task['final_answer'] += line + "\n"
-    
-    return flows
-
 with open('/home/alono/Downloads/CV_ALS/web_cv/AISafety/posts/Consensus Through Debate/media/results.md', 'r') as f:
     text = f.read()
 
-flows = parse_flows(text)
+flows_texts = text.split("Flow started with ID:")
 
 results_data = []
 tab_names = ["Experiment 1", "Experiment 2", "Experiment 3", "Experiment 4"]
 
-for i, flow in enumerate(flows):
+for i, flow_text in enumerate(flows_texts[1:]):
     name = tab_names[i] if i < len(tab_names) else f"Flow {i+1}"
-    tasks = flow.get('tasks', [])
-    if not tasks:
-        continue
     
-    final_ans = tasks[-1]['final_answer']
-    dev_tasks = tasks[:-1]
+    # Extract all elements sequentially
+    elements = []
+    
+    for m in re.finditer(r'# Agent:</span> <span[^>]*></span><span[^>]*>(.*?)</span>', flow_text):
+        elements.append({"type": "Agent", "content": m.group(1), "pos": m.start()})
+        
+    for m in re.finditer(r'## Task:</span> <span[^>]*>(.*?)</span>', flow_text, re.DOTALL):
+        elements.append({"type": "Task", "content": m.group(1).strip(), "pos": m.start()})
+        
+    for m in re.finditer(r'## Final Answer:</span> <span[^>]*>(.*?)</span>', flow_text, re.DOTALL):
+        elements.append({"type": "Final Answer", "content": m.group(1).strip(), "pos": m.start()})
+        
+    elements.sort(key=lambda x: x["pos"])
     
     dev_list = []
-    for t in dev_tasks:
-        dev_list.append({
-            'title': f"{t['agent']} - {t['task']}",
-            'content': t['final_answer']
-        })
+    final_ans = ""
+    current_agent = "Unknown"
+    last_task_desc = "Task"
+    
+    for el in elements:
+        if el["type"] == "Agent":
+            current_agent = el["content"]
+        elif el["type"] == "Task":
+            last_task_desc = el["content"]
+        elif el["type"] == "Final Answer":
+            # Extract first line of task description, max 80 chars
+            task_snippet = last_task_desc.split("\n")[0][:80]
+            if len(last_task_desc.split("\n")[0]) > 80:
+                task_snippet += "..."
+                
+            dev_list.append({
+                "title": f"{current_agent} - {task_snippet}",
+                "content": el["content"]
+            })
+            
+    if dev_list:
+        final_ans_item = dev_list.pop()
+        final_ans = final_ans_item["content"]
         
     results_data.append({
-        'name': name,
-        'final_answer': final_ans,
-        'development': dev_list
+        "name": name,
+        "final_answer": final_ans,
+        "development": dev_list
     })
 
 with open('/home/alono/Downloads/CV_ALS/web_cv/blog/posts/consensus-through-debate/data/results.json', 'w') as f:
     json.dump(results_data, f, indent=2)
 
-print("results.json updated successfully!")
+print(f"Dumped {len(results_data)} flows to results.json.")
