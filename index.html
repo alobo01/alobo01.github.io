@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antonio Lobo Santos | AI Research Engineer</title>
+    <title>Antonio Lobo Santos | Research Engineer</title>
     <meta name="description"
-        content="Portfolio of Antonio Lobo Santos, AI Research Engineer specialising in generative AI, large language models, reinforcement learning, and scalable ML systems.">
+        content="Portfolio of Antonio Lobo Santos, Research Engineer working across LLM evaluation, efficient model serving, AI safety, robotics/HRI, ML systems, and production data platforms.">
 
     <!-- Open Graph for sharing -->
-    <meta property="og:title" content="Antonio Lobo Santos | AI Research Engineer">
+    <meta property="og:title" content="Antonio Lobo Santos | Research Engineer">
     <meta property="og:description"
-        content="Portfolio of Antonio Lobo Santos, AI Research Engineer specialising in generative AI, large language models, reinforcement learning, and scalable ML systems.">
+        content="Research engineer working across LLM evaluation, efficient model serving, AI safety, robotics/HRI, ML systems, and production data platforms.">
     <meta property="og:type" content="website">
 
     <!-- Fonts: Outfit for Headings, Inter for Body -->
@@ -63,12 +63,12 @@
             <ul class="nav-links">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#focus">Focus</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#systems">Systems</a></li>
                 <li><a href="#experience">Experience</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#talks">Talks</a></li>
-                <li><a href="#publications">Publications</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#publications">Publications &amp; Talks</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="https://blog.antoniolobo.com/" target="_blank">Blog <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7em; margin-left: 2px;"></i></a></li>
             </ul>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
@@ -87,12 +87,12 @@
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#focus">Focus</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#systems">Systems</a></li>
             <li><a href="#experience">Experience</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#talks">Talks</a></li>
-            <li><a href="#publications">Publications</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#publications">Publications &amp; Talks</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
             <li><a href="https://blog.antoniolobo.com/" target="_blank">Blog <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7em;"></i></a></li>
         </ul>
     </div>
@@ -102,11 +102,12 @@
         <section id="home" class="hero section">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h2 class="greeting">Hello, I'm</h2>
+                    <h2 class="greeting">Research Engineer</h2>
                     <h1 class="name">Antonio <span>Lobo Santos</span></h1>
-                    <h3 class="role"><span class="typed-role">Research Engineer</span><span class="cursor">|</span></h3>
-                    <p class="tagline">Generative AI &bull; Large Language Models &bull; Reinforcement Learning &bull; ML Systems</p>
-                    <p class="location"><i class="fa-solid fa-location-dot"></i> Oxford, UK</p>
+                    <h3 class="role">ML Systems &middot; AI Safety &amp; Robotics</h3>
+                    <p class="hero-summary">I build evaluation, inference and software systems for difficult AI problems - from LLM safety evaluation and real-time human-robot interaction to production data platforms and on-prem infrastructure.</p>
+                    <p class="tagline">LLM Evaluation &bull; Efficient Model Serving &bull; Robotics/HRI &bull; ML Systems &bull; Production Data Platforms</p>
+                    <p class="location"><i class="fa-solid fa-location-dot"></i> Oxford, UK / Seville, Spain</p>
 
                     <div class="social-links">
                         <a href="mailto:alobosantos10@gmail.com" title="Email" class="glass-btn"><i
@@ -134,142 +135,97 @@
                 <h2 class="section-title reveal">Research & <span>Engineering Focus</span></h2>
                 <div class="focus-grid">
                     <div class="focus-card glass-card reveal">
-                        <div class="focus-icon"><i class="fa-solid fa-network-wired"></i></div>
-                        <h3>Generative AI &amp; LLMs</h3>
-                        <p>Building empirical evaluation frameworks, stress-testing model reasoning capabilities, and orchestrating robust data pipelines for foundation models.</p>
+                        <div class="focus-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>LLM Evaluation &amp; AI Safety</h3>
+                        <p>Designing evaluation pipelines for LLM robustness, moral-capability analysis and failure-mode discovery. Experience with synthetic data generation, custom metrics, adversarial prompting, value-alignment tests and computational experiment execution on shared infrastructure.</p>
                     </div>
                     <div class="focus-card glass-card reveal delay-1">
-                        <div class="focus-icon"><i class="fa-solid fa-brain"></i></div>
-                        <h3>Reinforcement Learning</h3>
-                        <p>Designing and implementing RL algorithms for LLM training - from reward modelling and PPO to robust training environments for agentic systems.</p>
+                        <div class="focus-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <h3>Efficient LLM Serving</h3>
+                        <p>Building low-latency LLM serving pipelines with vLLM, quantisation and open-weight models for multi-user research environments and real-time HRI experiments.</p>
                     </div>
                     <div class="focus-card glass-card reveal delay-2">
-                        <div class="focus-icon"><i class="fa-solid fa-sliders"></i></div>
-                        <h3>Post-Training &amp; Fine-Tuning</h3>
-                        <p>Production-grade post-training pipelines: supervised fine-tuning, preference learning, and systematic evaluation of model behaviour at scale.</p>
-                    </div>
-
-                    <div class="focus-card glass-card reveal delay-3">
-                        <div class="focus-icon"><i class="fa-solid fa-rocket"></i></div>
-                        <h3>Efficient LLM Deployment</h3>
-                        <p>Optimising large language models for rapid and scalable inference in production pipelines. Experience with model quantisation and batching workflows using frameworks like vLLM.</p>
-                    </div>
-
-                    <div class="focus-card glass-card reveal delay-4">
-                        <div class="focus-icon"><i class="fa-solid fa-network-wired"></i></div>
-                        <h3>Multi-Agent Systems</h3>
-                        <p>Leveraging game theory for multi-agent coordination. Building verifiable communication protocols and structuring debate-driven interactions to improve AI task consensus and safety.</p>
-                    </div>
-
-                    <div class="focus-card glass-card reveal delay-5">
                         <div class="focus-icon"><i class="fa-solid fa-robot"></i></div>
-                        <h3>Social Robotics</h3>
-                        <p>Integrating AI capabilities into robotic systems, with a special focus on socially assistive robotics designed to improve human life and support therapeutic outcomes.</p>
+                        <h3>Robotics &amp; Human-Robot Interaction</h3>
+                        <p>Integrating LLM-side interaction modules into ROS2-based socially assistive robotics systems, with structured dialogue, ASR/TTS coordination and real-time constraints for lab-based HRI studies.</p>
+                    </div>
+                    <div class="focus-card glass-card reveal delay-3">
+                        <div class="focus-icon"><i class="fa-solid fa-server"></i></div>
+                        <h3>ML Systems &amp; HPC</h3>
+                        <p>Training and evaluating transformer-based and BERT-style models using shared HPC, Slurm/HTCondor workflows and multi-GPU servers, with reproducible experiment configuration and analysis pipelines.</p>
+                    </div>
+                    <div class="focus-card glass-card reveal delay-4">
+                        <div class="focus-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3>Reinforcement Learning &amp; Optimisation</h3>
+                        <p>Research-level exposure to reinforcement learning, including from-scratch PPO and no-critic GRPO implementations for continuous-control experiments, plus coursework honours in Reinforcement Learning.</p>
+                    </div>
+                    <div class="focus-card glass-card reveal delay-5">
+                        <div class="focus-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                        <h3>Production Software &amp; Data Platforms</h3>
+                        <p>Designing production Python/TypeScript microservices, APIs, CI/CD pipelines, Kubernetes/MicroK8s deployments and Kafka/NiFi data-processing systems for real-time monitoring platforms.</p>
+                    </div>
+                </div>
+
+                <div class="profile-panel glass-card reveal">
+                    <h3>Professional Profile</h3>
+                    <p>I am a research engineer and ML systems builder working across LLM evaluation, efficient model serving, AI safety, robotics/HRI and production data platforms. I enjoy problems where scientific uncertainty meets engineering constraints: systems that need rigorous modelling, careful evaluation and reliable software.</p>
+                    <p>At CSIC-IIIA, I design evaluation workflows for moral capabilities, robustness and model behaviour in text classifiers and LLMs. My work includes synthetic data generation, custom metric design, BERT-style classifier fine-tuning, open-weight LLM evaluation and computational experiments on shared HPC and multi-GPU infrastructure.</p>
+                    <p>I also build efficient LLM-serving pipelines for real-time human-robot interaction, using vLLM, quantisation and structured dialogue components integrated with ROS2-based robotic systems. The goal is practical AI behaviour under real interaction constraints, not just offline benchmark performance.</p>
+                    <p>Before AI research, I worked full-time as a software engineer at Axión, building production microservices, on-prem Kubernetes/MicroK8s infrastructure, GitLab CI/CD, Kafka/NiFi ETL pipelines and real-time monitoring systems for public-service and private infrastructure.</p>
+                    <p>At Oxford, my current work focuses on game-theoretic results for learning stability and equilibrium in multi-agent systems, with applications to multi-agent coordination and learning dynamics.</p>
+                    <div class="skill-tags">
+                        <span class="tag">LLM Evaluation</span>
+                        <span class="tag">vLLM Serving</span>
+                        <span class="tag">ROS2 HRI</span>
+                        <span class="tag">HPC Experiments</span>
+                        <span class="tag">Kubernetes/Data Platforms</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="section">
+        <!-- Selected Systems Section -->
+        <section id="systems" class="section systems-section">
             <div class="section-container">
-                <h2 class="section-title reveal">Professional <span>Profile</span></h2>
-                <div class="about-grid">
-                    <div class="about-text glass-card reveal">
-                        <p>Research engineer with hands-on experience in <strong>generative AI</strong>,
-                            <strong>reinforcement learning for LLMs</strong>, and <strong>scalable evaluation
-                                pipelines</strong>. I build rigorous tools to assess, train, and improve foundational
-                            models - from stress-testing advanced reasoning under edge-case conditions to designing
-                            RLHF-style training loops and reward modelling systems.
-                        </p>
-                        <p>At CSIC-IIIA I evaluated the reasoning capabilities of LLMs and integrated them into
-                            real-time robotic-assisted systems, building end-to-end evaluation infrastructure for
-                            model behaviour and robustness analysis. This work deepened my expertise in developing AI
-                            systems that are reliable, performant, and grounded in AI Safety (AIS).</p>
-                        <p>I am currently an Academic Visitor at the University of Oxford. My earlier backend engineering experience designing event-driven microservices for
-                            distributed production systems equips me with the foundational infrastructure skills to
-                            build robust ML training and inference pipelines.</p>
-
-                        <div class="skill-tags">
-                            <span class="tag">Generative AI</span>
-                            <span class="tag">Large Language Models</span>
-                            <span class="tag">Reinforcement Learning</span>
-                            <span class="tag">Model Evaluation</span>
-                            <span class="tag">Distributed Systems</span>
-                            <span class="tag">Deep Learning</span>
-                        </div>
-                    </div>
-                    <div class="about-skills">
-                        <div class="skill-category glass-card reveal delay-1">
-                            <h3><i class="fa-solid fa-code"></i> Core Skills</h3>
-                            <div class="skill-list">
-                                <span>Python</span>
-                                <span>Machine Learning</span>
-                                <span>Deep Learning</span>
-                                <span>Generative AI</span>
-                                <span>Large Language Models</span>
-                                <span>Reinforcement Learning</span>
-                                <span>Fine-tuning / RLHF</span>
-                                <span>Model Evaluation</span>
-                                <span>Agentic Systems</span>
-                                <span>Distributed Systems</span>
-                                <span>Data Pipelines</span>
-                                <span>Statistical Modelling</span>
-                                <span>Software Engineering</span>
-                            </div>
-                        </div>
-                        <div class="skill-category glass-card reveal delay-2">
-                            <h3><i class="fa-solid fa-microchip"></i> Technologies</h3>
-                            <div class="skill-list">
-                                <span>Python</span>
-                                <span>NodeJS</span>
-                                <span>C++</span>
-                                <span>PyTorch</span>
-                                <span>Hugging Face / TRL</span>
-                                <span>ROS</span>
-                                <span>Kubernetes</span>
-                                <span>Docker</span>
-                                <span>Linux / HPC</span>
-                                <span>GitLab CI/CD</span>
-                                <span>SQL</span>
-                                <span>Apache NiFi / ETL</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category glass-card reveal delay-3" style="grid-column: 1 / -1;">
-                        <h3><i class="fa-solid fa-language"></i> Languages</h3>
-                        <div class="language-list">
-                            <div class="language-item" style="flex: 1; min-width: 200px;">
-                                <span class="fi fi-es language-flag"></span>
-                                <div class="language-info">
-                                    <span class="language-name">Spanish</span>
-                                    <span class="language-level level-native">Native</span>
-                                </div>
-                            </div>
-                            <div class="language-item" style="flex: 1; min-width: 200px;">
-                                <span class="fi fi-gb language-flag"></span>
-                                <div class="language-info">
-                                    <span class="language-name">English</span>
-                                    <span class="language-level level-advanced">Advanced (C1)</span>
-                                </div>
-                            </div>
-                            <div class="language-item" style="flex: 1; min-width: 200px;">
-                                <span class="fi fi-fr language-flag"></span>
-                                <div class="language-info">
-                                    <span class="language-name">French</span>
-                                    <span class="language-level level-intermediate">Intermediate (B2)</span>
-                                </div>
-                            </div>
-                            <div class="language-item" style="flex: 1; min-width: 200px;">
-                                <span class="fi fi-es-ct language-flag"></span>
-                                <div class="language-info">
-                                    <span class="language-name">Catalan</span>
-                                    <span class="language-level level-basic">Basic</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <h2 class="section-title reveal">Selected <span>Systems Built</span></h2>
+                <div class="systems-grid">
+                    <article class="system-card glass-card hover-glow reveal">
+                        <div class="system-label">System 01</div>
+                        <h3>Real-time LLM serving for human-robot interaction</h3>
+                        <p>Built the LLM-side serving and integration stack for ROS2-based HRI lab studies: vLLM serving, quantised open-weight models, structured dialogue components, ASR/TTS coordination and real-time inference constraints.</p>
+                        <div class="tech-list"><span>vLLM</span><span>Quantisation</span><span>Open-weight LLMs</span><span>ROS2</span><span>LangChain/LangGraph</span><span>Pydantic</span><span>ASR/TTS</span><span>Multi-GPU servers</span></div>
+                    </article>
+                    <article class="system-card glass-card hover-glow reveal delay-1">
+                        <div class="system-label">System 02</div>
+                        <h3>Moral-capability and robustness evaluation pipeline</h3>
+                        <p>Designed evaluation workflows for moral-capability analysis in text classifiers and LLMs, grounded in moral psychology theories such as Moral Foundations Theory and Schwartz's theory of values. Built synthetic datasets, custom metrics and experiment pipelines for classifier and LLM evaluation.</p>
+                        <div class="note-pill">Current research; manuscript in preparation.</div>
+                        <div class="tech-list"><span>Python</span><span>PyTorch</span><span>Transformers</span><span>BERT-style classifiers</span><span>LLM evaluation</span><span>Synthetic data</span><span>HTCondor</span><span>Shared HPC</span></div>
+                    </article>
+                    <article class="system-card glass-card hover-glow reveal delay-2">
+                        <div class="system-label">System 03</div>
+                        <h3>Production monitoring and data-platform infrastructure</h3>
+                        <p>Main developer on production monitoring systems for public-service and private infrastructure. Built Python/FastAPI and TypeScript/NestJS microservices, APIs and real-time monitoring components; operated Kafka/NiFi ETL workflows; deployed GitLab CI/CD; and migrated web applications to an on-prem high-availability MicroK8s/Kubernetes platform.</p>
+                        <div class="tech-list"><span>Python</span><span>FastAPI</span><span>TypeScript</span><span>NestJS</span><span>Kafka</span><span>Apache NiFi</span><span>Elasticsearch/Kibana</span><span>WebSockets</span><span>GraphQL</span><span>Docker</span><span>MicroK8s</span><span>GitLab CI/CD</span></div>
+                    </article>
+                    <article class="system-card glass-card hover-glow reveal">
+                        <div class="system-label">System 04</div>
+                        <h3>Deep open-set recognition framework</h3>
+                        <p>Co-designed and developed a modular PyTorch Lightning framework for open-set recognition experiments, with configurable backbones, OSR strategies, Hydra experiment configuration, standardised metrics and visualisation tools.</p>
+                        <div class="tech-list"><span>PyTorch Lightning</span><span>Hydra</span><span>ResNet</span><span>EfficientNet</span><span>ViT</span><span>DINOv2</span><span>AUROC</span><span>OSCR</span><span>ROC/t-SNE visualisation</span></div>
+                    </article>
+                    <article class="system-card glass-card hover-glow reveal delay-1">
+                        <div class="system-label">System 05</div>
+                        <h3>Flood decision-support full-stack system</h3>
+                        <p>Integrated the components of a flood decision-support project into a full-stack application combining data integration, ML models, APIs and interactive dashboards for flood risk analysis and decision support.</p>
+                        <div class="tech-list"><span>Python</span><span>FastAPI</span><span>Streamlit</span><span>ML pipelines</span><span>Data integration</span><span>Risk visualisation</span></div>
+                    </article>
+                    <article class="system-card glass-card hover-glow reveal delay-2">
+                        <div class="system-label">System 06</div>
+                        <h3>ShadowPals - computer-vision interaction system</h3>
+                        <p>Developed the mathematical parametrisation layer for an interactive shadow-puppetry learning platform using computer vision, MediaPipe hand landmarks and real-time feedback.</p>
+                        <div class="tech-list"><span>Computer vision</span><span>MediaPipe</span><span>Parametric modelling</span><span>FastAPI</span><span>React</span><span>Docker</span></div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -286,7 +242,7 @@
                         <div class="timeline-content glass-card hover-glow">
                             <div class="timeline-header">
                                 <div class="timeline-title">
-                                    <h3>Academic Visitor</h3>
+                                    <h3>Academic Visitor - Multi-Agent Systems &amp; Game Theory</h3>
                                     <h4><a href="https://www.ox.ac.uk/" target="_blank" class="institution-link">University of Oxford</a></h4>
                                 </div>
                                 <div class="timeline-logo">
@@ -297,31 +253,36 @@
                                 <span><i class="fa-regular fa-calendar"></i> March 2026 – July 2026</span>
                                 <span><i class="fa-solid fa-location-dot"></i> Oxford, UK</span>
                             </div>
-                            <div class="wip-container">
-                                <div class="wip-pulse"></div>
-                                <span class="wip-text">Work in Progress<span class="wip-dots"></span></span>
-                            </div>
+                            <p>Studying game-theoretic conditions for learning stability and equilibrium in multi-agent systems, with applications to multi-agent coordination and learning dynamics.</p>
                         </div>
                     </div>
 
-                    <!-- CSIC IIIA (Research Engineer) -->
+                    <!-- CSIC IIIA -->
                     <div class="timeline-item reveal">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content glass-card hover-glow">
                             <div class="timeline-header">
                                 <div class="timeline-title">
-                                    <h3>Research Engineer</h3>
-                                    <h4><a href="https://www.iiia.csic.es/" target="_blank" class="institution-link">CSIC – IIIA</a></h4>
+                                    <h3>Research Intern &rarr; AI Research Engineer - LLMs, Robotics &amp; Evaluation</h3>
+                                    <h4><a href="https://www.iiia.csic.es/" target="_blank" class="institution-link">CSIC-IIIA, Spanish National Research Council</a></h4>
                                 </div>
                                 <div class="timeline-logo">
                                     <img src="assets/Logo_IIIA.png" alt="CSIC IIIA Logo">
                                 </div>
                             </div>
                             <div class="timeline-meta">
-                                <span><i class="fa-regular fa-calendar"></i> Sept 2025 – Feb 2026</span>
+                                <span><i class="fa-regular fa-calendar"></i> Nov 2024 – Feb 2026</span>
                                 <span><i class="fa-solid fa-location-dot"></i> Barcelona, Spain</span>
                             </div>
-                            <p>Continued research on evaluating the advanced reasoning capabilities of large language models, building empirical evaluation pipelines for robust model assessment. Integrated LLMs for real-time interaction in robotic-assisted systems, contributing to model behaviour analysis, evaluation design, and prompt engineering for complex interactive settings.</p>
+                            <ul class="timeline-list">
+                                <li>Designed moral-capability evaluation workflows for text classifiers and LLMs, grounded in moral psychology theories including Moral Foundations Theory and Schwartz's theory of values.</li>
+                                <li>Created synthetic datasets, custom metrics and experiment pipelines for robustness, value-alignment and behavioural failure-mode analysis.</li>
+                                <li>Fine-tuned BERT-style classifiers with representation-learning techniques and custom losses for moral text classification.</li>
+                                <li>Ran computationally intensive experiments on shared HPC, HTCondor and local multi-GPU servers for classifiers and open-weight LLMs.</li>
+                                <li>Built efficient LLM-serving pipelines using vLLM, quantisation and recent open-weight models for real-time HRI lab studies.</li>
+                                <li>Integrated LLM-side dialogue components into ROS2-based socially assistive robotics systems, coordinating with ASR/TTS and robotics modules.</li>
+                                <li>Contributed to software development for ROS2 experimental workflows, including real-time interaction constraints and structured dialogue interfaces.</li>
+                            </ul>
                         </div>
                     </div>
 
@@ -348,34 +309,13 @@
                         </div>
                     </div>
 
-                    <!-- CSIC IIIA (Intern) -->
-                    <div class="timeline-item reveal">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content glass-card hover-glow">
-                            <div class="timeline-header">
-                                <div class="timeline-title">
-                                    <h3>Research Intern</h3>
-                                    <h4><a href="https://www.iiia.csic.es/" target="_blank" class="institution-link">CSIC – IIIA</a></h4>
-                                </div>
-                                <div class="timeline-logo">
-                                    <img src="assets/Logo_IIIA.png" alt="CSIC IIIA Logo">
-                                </div>
-                            </div>
-                            <div class="timeline-meta">
-                                <span><i class="fa-regular fa-calendar"></i> Nov 2024 – Aug 2025</span>
-                                <span><i class="fa-solid fa-location-dot"></i> Barcelona, Spain</span>
-                            </div>
-                            <p>Researched methodologies for evaluating reasoning and generative capabilities of large language models, building end-to-end evaluation pipelines. Designed stress-testing experiments, structured evaluation datasets, and analysed behavioural failure modes in edge-case and complex reasoning scenarios.</p>
-                        </div>
-                    </div>
-
                     <!-- Undergraduate Researcher - US -->
                     <div class="timeline-item reveal">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content glass-card hover-glow">
                             <div class="timeline-header">
                                 <div class="timeline-title">
-                                    <h3>Undergraduate Researcher</h3>
+                                    <h3>Undergraduate Researcher - LLMs &amp; Mathematical Knowledge Graphs</h3>
                                     <h4><a href="https://www.us.es/" target="_blank" class="institution-link">University of Seville</a></h4>
                                 </div>
                                 <div class="timeline-logo">
@@ -386,10 +326,7 @@
                                 <span><i class="fa-regular fa-calendar"></i> Sept 2023 – July 2024</span>
                                 <span><i class="fa-solid fa-location-dot"></i> Seville, Spain</span>
                             </div>
-                            <p>Investigated LLMs, LangChain, RAG agents, and vector databases as an undergraduate
-                                researcher in the Department of Computer Science and Artificial Intelligence. Gained
-                                hands-on experience with model evaluation, prompt engineering, and agentic LLM
-                                architectures while attending research seminars on frontier AI techniques.</p>
+                            <p>Built and evaluated a LangChain/RAG pipeline for extracting mathematical knowledge from LaTeX sources into OWL knowledge graphs. The work became my bachelor's thesis, was selected as a university finalist and later resulted in a peer-reviewed journal publication.</p>
                         </div>
                     </div>
 
@@ -399,7 +336,7 @@
                         <div class="timeline-content glass-card hover-glow">
                             <div class="timeline-header">
                                 <div class="timeline-title">
-                                    <h3>Software Engineer</h3>
+                                    <h3>Software Engineer - Platform, Microservices &amp; Real-Time Monitoring</h3>
                                     <h4><a href="https://www.axion.es/" target="_blank" class="institution-link">Axión</a></h4>
                                 </div>
                                 <div class="timeline-logo">
@@ -411,8 +348,208 @@
                                 <span><i class="fa-regular fa-calendar"></i> July 2021 – July 2023</span>
                                 <span><i class="fa-solid fa-location-dot"></i> Seville, Spain</span>
                             </div>
-                            <p>Designed and maintained event-driven microservices for high-volume data processing systems in production. Improved reliability and performance of distributed pipelines, managed ETL workflows with Apache NiFi, and implemented CI/CD pipelines with GitLab for containerised services deployed on Kubernetes - building the solid infrastructure engineering foundation needed for scalable ML systems.</p>
+                            <p class="timeline-note">Full-time while completing dual B.Sc. degrees in Computer Engineering and Mathematics.</p>
+                            <ul class="timeline-list">
+                                <li>Built and maintained Python/FastAPI and TypeScript/NestJS microservices and APIs for production monitoring platforms.</li>
+                                <li>Deployed and operated an on-prem high-availability MicroK8s/Kubernetes platform, migrating company web applications to the new deployment model with GitLab CI/CD.</li>
+                                <li>Operated Apache Kafka and Apache NiFi ETL workflows for real-time data-processing and monitoring systems.</li>
+                                <li>Developed real-time monitoring features using WebSockets, GraphQL, Elasticsearch/Kibana and selected AngularJS integrations.</li>
+                                <li>Worked on production deployments for public-service and private infrastructure monitoring, including transport, port, public-space and communications-related systems.</li>
+                                <li>Delivered training sessions to technical and non-technical public-administration users, translating operator feedback into implementation priorities.</li>
+                                <li>Coordinated a small engineering team in the second year, bridging communication between management and junior developers, reviewing work, assigning tasks, shaping architecture and mentoring two interns.</li>
+                            </ul>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="section-container">
+                <h2 class="section-title reveal">Selected <span>Projects</span></h2>
+
+                <div class="projects-grid">
+                    <div class="project-card glass-card hover-glow reveal">
+                        <div class="project-content">
+                            <h3>Moral-capability evaluation for LLMs and classifiers</h3>
+                            <p>Synthetic data, custom metrics, moral psychology, BERT-style classifiers, LLM evaluation, HPC/HTCondor and multi-GPU experiments.</p>
+                            <div class="project-tags"><span>Current research</span><span>AI safety evaluation</span></div>
+                        </div>
+                    </div>
+                    <div class="project-card glass-card hover-glow reveal delay-1">
+                        <div class="project-content">
+                            <h3>Real-time LLM serving for HRI</h3>
+                            <p>vLLM, quantised open-weight models, ROS2, structured dialogue, ASR/TTS coordination and real-time lab-study constraints.</p>
+                            <div class="project-tags"><span>vLLM</span><span>ROS2</span><span>HRI</span></div>
+                        </div>
+                    </div>
+                    <div class="project-card glass-card hover-glow reveal delay-2">
+                        <div class="project-content">
+                            <h3>Deep Open-Set Recognition framework</h3>
+                            <p>PyTorch Lightning/Hydra framework with ResNet, EfficientNet, ViT and DINOv2 backbones, OSR metrics and visualisation.</p>
+                            <a href="https://github.com/alobo01/mai-dl2" target="_blank" class="project-link">
+                                View Repository <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-card glass-card hover-glow reveal">
+                        <div class="project-content">
+                            <h3>PPO/GRPO continuous-control RL framework</h3>
+                            <p>From-scratch course project implementing PPO and no-critic GRPO variants, configurable experiments, logging, checkpoints and performance comparison.</p>
+                            <a href="https://github.com/alobo01/mai-atci-ppo" target="_blank" class="project-link">
+                                View Repository <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-card glass-card hover-glow reveal delay-1">
+                        <div class="project-content">
+                            <h3>Flood-IDSS</h3>
+                            <p>Full-stack flood decision-support application integrating data sources, ML models, backend APIs and interactive dashboards.</p>
+                            <a href="https://github.com/alobo01/mai-idss-flood" target="_blank" class="project-link">
+                                View Repository <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-card glass-card hover-glow reveal delay-2">
+                        <div class="project-content">
+                            <h3>Mathematical Knowledge Graphs with LLMs</h3>
+                            <p>LLM/RAG pipeline for extracting mathematical knowledge from LaTeX into OWL knowledge graphs; resulted in peer-reviewed publication.</p>
+                            <a href="https://www.mdpi.com/2673-3951/6/3/53" target="_blank" class="project-link">
+                                Read Publication <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-card glass-card hover-glow reveal">
+                        <div class="project-content">
+                            <h3>AB Data Challenge - Finalist</h3>
+                            <p>Transformer-based time-series anomaly detection for utility data; designed training code and deployed experiments on distributed hardware.</p>
+                            <div class="project-tags"><span>Time series</span><span>Transformers</span><span>Finalist</span></div>
+                        </div>
+                    </div>
+                    <div class="project-card glass-card hover-glow reveal delay-1">
+                        <div class="project-content">
+                            <h3>ShadowPals</h3>
+                            <p>Computer-vision learning platform using MediaPipe landmarks and mathematical hand-pose parametrisation.</p>
+                            <a href="https://github.com/alobo01/mai-cir" target="_blank" class="project-link">
+                                View Repository <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title reveal">Earlier Projects &amp; Awards</h3>
+                <div class="projects-grid compact-grid">
+                    <div class="project-card compact-card glass-card hover-glow reveal">
+                        <div class="project-content">
+                            <h3>App Inventor Against Cyberbullying</h3>
+                            <p>Mobile application recognised as MIT App Inventor "App of the Month" for community cyberbullying awareness.</p>
+                            <a href="https://appinventor.mit.edu/explore/blogs/karen/2018/03/app" target="_blank" class="project-link">
+                                Read Article <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-card compact-card glass-card hover-glow reveal delay-1">
+                        <div class="project-content">
+                            <h3>Smarthuerto</h3>
+                            <p>Award-winning smart agriculture app that won the EC2CE Grow-Lab contest and was featured by MIT App Inventor.</p>
+                            <a href="https://appinventor.mit.edu/explore/blogs/karen/2018/06.html" target="_blank" class="project-link">
+                                Read Article <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications and Presentations -->
+        <section id="publications" class="section">
+            <div class="section-container">
+                <h2 class="section-title reveal">Publications & <span>Talks</span></h2>
+
+                <h3 class="subsection-title reveal">Publications</h3>
+                <div class="publications-grid">
+                    <div class="pub-card glass-card hover-glow reveal">
+                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> ACM/IEEE HRI 2026 Demo</div>
+                        <h3 class="pub-title">EMY: Supporting Autism Therapy with a Socially Assistive Robot</h3>
+                        <p class="pub-authors">Sara Cooper, Antonio Lobo Santos, et al.</p>
+                        <p class="pub-journal">HRI '26: 21st ACM/IEEE International Conference on Human-Robot Interaction</p>
+                        <p class="pub-abstract">Contributed to LLM-supported interaction and system integration for a socially assistive robotics system.</p>
+                        <a href="https://dl.acm.org/doi/10.1145/3776734.3794581" target="_blank" class="pub-link">
+                            <i class="fa-solid fa-link"></i> View Article
+                        </a>
+                    </div>
+
+                    <div class="pub-card glass-card hover-glow reveal delay-1">
+                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> Modelling, 2025</div>
+                        <h3 class="pub-title">Enhancing Mathematical Knowledge Graphs with Large Language Models</h3>
+                        <p class="pub-authors">A. Lobo-Santos, J. Borrego-Díaz</p>
+                        <p class="pub-journal">Peer-reviewed journal article derived from my bachelor's thesis</p>
+                        <p class="pub-abstract">Built and evaluated an LLM-assisted pipeline for extracting mathematical knowledge from LaTeX into queryable knowledge graphs.</p>
+                        <a href="https://www.mdpi.com/2673-3951/6/3/53" target="_blank" class="pub-link">
+                            <i class="fa-solid fa-link"></i> View Article
+                        </a>
+                    </div>
+
+                    <div class="pub-card glass-card hover-glow reveal">
+                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> ECAI 2025 Workshop</div>
+                        <h3 class="pub-title">Trustworthy AI Through Dual-Role Reasoning</h3>
+                        <p class="pub-authors">Workshop contribution</p>
+                        <p class="pub-journal">Safety-oriented reasoning and evaluation work for LLM systems</p>
+                        <p class="pub-abstract">Explored dual-role reasoning as a safety-oriented approach to evaluating and improving reasoning behaviour in LLM systems.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title reveal">Current Research</h3>
+                <div class="publications-grid two-column-grid">
+                    <div class="pub-card glass-card hover-glow reveal">
+                        <h3 class="pub-title">Moral-capability evaluation for classifiers and LLMs</h3>
+                        <p class="pub-abstract">Designing evaluation workflows grounded in moral psychology, with synthetic data generation, custom metrics and HPC/multi-GPU experiments.</p>
+                    </div>
+                    <div class="pub-card glass-card hover-glow reveal delay-1">
+                        <h3 class="pub-title">NLP pragmatics and formal grammars</h3>
+                        <p class="pub-abstract">Researching NLP problems involving pragmatics and classical context-free grammar formalisms.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title reveal">Invited Talks</h3>
+                <div class="publications-grid two-column-grid">
+                    <div class="pub-card glass-card hover-glow reveal">
+                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> October 2025 &middot; Madrid, Spain</div>
+                        <h3 class="pub-title">Invited Speaker: LLM-Tools for Coding</h3>
+                        <p class="pub-journal">La Moncloa (Spanish Government)</p>
+                        <p class="pub-abstract">Delivered an invited seminar on effective and proper use of LLM tools for coding, focused on best practices, capabilities and safety considerations for software engineering workflows.</p>
+                    </div>
+                    <div class="pub-card glass-card hover-glow reveal delay-1">
+                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> November 2025 &middot; Barcelona, Spain</div>
+                        <h3 class="pub-title">Seminar: LLM-Tools for Coding</h3>
+                        <p class="pub-journal">CSIC-IIIA</p>
+                        <p class="pub-abstract">Conducted a technical seminar for researchers at IIIA on advanced usage of LLM tools for coding, with emphasis on prompting strategies, assistant workflows and safe implementation practices.</p>
+                        <a href="https://www.iiia.csic.es/en-us/news-events/seminar-details/?seminar_id=151" target="_blank" class="pub-link">
+                            <i class="fa-solid fa-link"></i> View Seminar Details
+                        </a>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title reveal">Earlier Publications</h3>
+                <div class="publications-grid two-column-grid">
+                    <div class="pub-card compact-card glass-card hover-glow reveal">
+                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> Sept 2023</div>
+                        <h3 class="pub-title">Building the "mapamático" (map-matic)</h3>
+                        <p class="pub-authors">Antonio Lobo Santos, Pablo Martín Berná, Juan Núñez Valdés</p>
+                        <p class="pub-journal">Epsilon Journal of Mathematics Education, Number 114</p>
+                        <a href="https://thales.cica.es/epsilon/sites/default/files/2023-09/epsilon114.pdf" target="_blank" class="pub-link">
+                            <i class="fa-solid fa-file-pdf"></i> View PDF
+                        </a>
+                    </div>
+                    <div class="pub-card compact-card glass-card hover-glow reveal delay-1">
+                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> Mar 2023</div>
+                        <h3 class="pub-title">Infinity: Some Curiosities and its Teaching in High School</h3>
+                        <p class="pub-authors">Antonio Lobo Santos, Pablo Martín Berná, Juan Núñez Valdés</p>
+                        <p class="pub-journal">Números Journal, Volume 113</p>
+                        <a href="https://scpmluisbalbuena.org/publicacion-numeros/articulo-3-113/" target="_blank" class="pub-link">
+                            <i class="fa-solid fa-link"></i> View Article
+                        </a>
                     </div>
                 </div>
             </div>
@@ -439,7 +576,7 @@
                             <span><i class="fa-regular fa-calendar"></i> 2024 – June 2026</span>
                             <span><i class="fa-solid fa-location-dot"></i> Barcelona, Spain</span>
                         </div>
-                        <p>Honours in Machine Learning, Deep Learning, Reinforcement Learning, and Complex Networks. Specialising in Generative AI, RL for LLMs, and scalable post-training methods.</p>
+                        <p>Focus: reinforcement learning, deep learning, statistical modelling, ML systems and AI research. Honours in Machine Learning, Deep Learning, Reinforcement Learning and Complex Networks. Selected projects include from-scratch PPO/GRPO implementations, open-set recognition, flood decision support and computer-vision interaction systems.</p>
                     </div>
 
                     <!-- Bachelor Math -->
@@ -529,231 +666,84 @@
             </div>
         </section>
 
-        <!-- Talks Section -->
-        <section id="talks" class="section">
+        <!-- Skills Section -->
+        <section id="skills" class="section skills-section">
             <div class="section-container">
-                <h2 class="section-title reveal">Invited <span>Talks</span></h2>
-
-                <div class="timeline">
-                    <!-- Seminar Moncloa -->
-                    <div class="timeline-item reveal">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content glass-card hover-glow">
-                            <div class="timeline-header">
-                                <div class="timeline-title">
-                                    <h3>Invited Speaker: LLM-Tools for Coding</h3>
-                                    <h4>La Moncloa (Spanish Government)</h4>
-                                </div>
-                                <div class="timeline-logo">
-                                    <i class="fa-solid fa-building-columns"
-                                        style="font-size: 2rem; color: var(--accent);"></i>
+                <h2 class="section-title reveal">Technical <span>Skills</span></h2>
+                <div class="skills-matrix">
+                    <div class="skill-category glass-card reveal">
+                        <h3><i class="fa-solid fa-compass"></i> Core areas</h3>
+                        <div class="skill-list">
+                            <span>LLM evaluation</span><span>AI safety evaluation</span><span>Efficient LLM serving</span><span>Robotics/HRI</span><span>ML systems</span><span>Reinforcement learning</span><span>Production backend engineering</span><span>Data platforms</span>
+                        </div>
+                    </div>
+                    <div class="skill-category glass-card reveal delay-1">
+                        <h3><i class="fa-solid fa-brain"></i> ML / AI</h3>
+                        <div class="skill-list">
+                            <span>PyTorch</span><span>Transformers</span><span>BERT-style classifiers</span><span>Representation learning</span><span>RAG</span><span>LangChain</span><span>LangGraph</span><span>DSPy</span><span>Model evaluation</span><span>Synthetic data</span><span>Custom metrics</span>
+                        </div>
+                    </div>
+                    <div class="skill-category glass-card reveal delay-2">
+                        <h3><i class="fa-solid fa-gauge-high"></i> LLM serving / inference</h3>
+                        <div class="skill-list">
+                            <span>vLLM</span><span>Quantisation</span><span>Open-weight LLMs</span><span>Batching</span><span>GPU server deployment</span><span>Structured outputs</span><span>Pydantic schemas</span>
+                        </div>
+                    </div>
+                    <div class="skill-category glass-card reveal">
+                        <h3><i class="fa-solid fa-chart-line"></i> RL / optimisation</h3>
+                        <div class="skill-list">
+                            <span>PPO</span><span>GRPO</span><span>SAC</span><span>TD3</span><span>Reward modelling</span><span>Continuous-control experiments</span><span>Multi-agent learning dynamics</span>
+                        </div>
+                    </div>
+                    <div class="skill-category glass-card reveal delay-1">
+                        <h3><i class="fa-solid fa-robot"></i> Robotics / HRI</h3>
+                        <div class="skill-list">
+                            <span>ROS2</span><span>Socially assistive robots</span><span>Real-time interaction pipelines</span><span>ASR/TTS integration</span><span>Structured dialogue systems</span>
+                        </div>
+                    </div>
+                    <div class="skill-category glass-card reveal delay-2">
+                        <h3><i class="fa-solid fa-server"></i> Infrastructure / systems</h3>
+                        <div class="skill-list">
+                            <span>Docker</span><span>Kubernetes</span><span>MicroK8s</span><span>GitLab CI/CD</span><span>Linux</span><span>Slurm</span><span>HTCondor</span><span>Multi-GPU servers</span><span>Observability</span>
+                        </div>
+                    </div>
+                    <div class="skill-category glass-card reveal">
+                        <h3><i class="fa-solid fa-database"></i> Backend / data</h3>
+                        <div class="skill-list">
+                            <span>Python</span><span>FastAPI</span><span>TypeScript</span><span>NestJS</span><span>GraphQL</span><span>WebSockets</span><span>PostgreSQL</span><span>ArangoDB</span><span>Kafka</span><span>Apache NiFi</span><span>Elasticsearch/Kibana</span><span>RabbitMQ</span>
+                        </div>
+                    </div>
+                    <div class="skill-category glass-card reveal delay-1">
+                        <h3><i class="fa-solid fa-language"></i> Languages</h3>
+                        <div class="language-list">
+                            <div class="language-item">
+                                <span class="fi fi-es language-flag"></span>
+                                <div class="language-info">
+                                    <span class="language-name">Spanish</span>
+                                    <span class="language-level level-native">Native</span>
                                 </div>
                             </div>
-                            <div class="timeline-meta">
-                                <span><i class="fa-regular fa-calendar"></i> October 2025</span>
-                                <span><i class="fa-solid fa-location-dot"></i> Madrid, Spain</span>
-                            </div>
-                            <p>Delivered an invited seminar at La Moncloa on the effective and proper use of LLM tools
-                                for coding. Focused on best practices, capabilities, and safety considerations when
-                                integrating AI assistants into proper software engineering workflows.</p>
-                        </div>
-                    </div>
-
-                    <!-- Seminar IIIA -->
-                    <div class="timeline-item reveal">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content glass-card hover-glow">
-                            <div class="timeline-header">
-                                <div class="timeline-title">
-                                    <h3>Seminar: LLM-Tools for Coding</h3>
-                                    <h4>CSIC – IIIA</h4>
-                                </div>
-                                <div class="timeline-logo">
-                                    <img src="assets/Logo_IIIA.png" alt="CSIC IIIA Logo">
+                            <div class="language-item">
+                                <span class="fi fi-gb language-flag"></span>
+                                <div class="language-info">
+                                    <span class="language-name">English</span>
+                                    <span class="language-level level-advanced">Advanced (C1)</span>
                                 </div>
                             </div>
-                            <div class="timeline-meta">
-                                <span><i class="fa-regular fa-calendar"></i> November 2025</span>
-                                <span><i class="fa-solid fa-location-dot"></i> Barcelona, Spain</span>
+                            <div class="language-item">
+                                <span class="fi fi-fr language-flag"></span>
+                                <div class="language-info">
+                                    <span class="language-name">French</span>
+                                    <span class="language-level level-intermediate">Intermediate (B2)</span>
+                                </div>
                             </div>
-                            <p>Conducted a technical seminar for researchers at the Artificial Intelligence Research
-                                Institute (IIIA) demonstrating advanced usage of LLM tools for coding, emphasizing
-                                prompting strategies, agentic workflows, and safe implementation practices. <br><a
-                                    href="https://www.iiia.csic.es/en-us/news-events/seminar-details/?seminar_id=151"
-                                    target="_blank"
-                                    style="color: var(--accent); text-decoration: none; display: inline-block; margin-top: 5px;"><i
-                                        class="fa-solid fa-link"></i> View Seminar Details</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Publications Section -->
-        <section id="publications" class="section">
-            <div class="section-container">
-                <h2 class="section-title reveal">Academic <span>Publications</span></h2>
-
-                <div class="publications-grid">
-                    <!-- Publication 0 -->
-                    <div class="pub-card glass-card hover-glow reveal">
-                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> Mar 2026</div>
-                        <h3 class="pub-title">EMY: Supporting Autism Therapy with a Socially Assistive Robot</h3>
-                        <p class="pub-authors">Sara Cooper, Antonio Lobo Santos, et al.</p>
-                        <p class="pub-journal">HRI '26: 21st ACM/IEEE International Conference on Human-Robot Interaction</p>
-                        <p class="pub-abstract">
-                            Presented at HRI '26. Explores the application of socially assistive robots in autism therapy, detailing the technical integration and therapeutic utility of the EMY robotic system.
-                        </p>
-                        <a href="https://dl.acm.org/doi/10.1145/3776734.3794581" target="_blank" class="pub-link">
-                            <i class="fa-solid fa-link"></i> View Article
-                        </a>
-                    </div>
-
-                    <!-- Publication 1 (Thesis) -->
-                    <div class="pub-card glass-card hover-glow reveal delay-1">
-                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> Feb 2025</div>
-                        <h3 class="pub-title">Enhancing Mathematical Knowledge Graphs with Large Language Models</h3>
-                        <p class="pub-authors">A. Lobo-Santos, J. Borrego-Díaz</p>
-                        <p class="pub-journal">Modelling, 2025</p>
-                        <p class="pub-abstract">
-                            Derived from my bachelor’s thesis research. Built and evaluated an LLM-based information
-                            extraction pipeline for converting mathematical content in LaTeX into a queryable knowledge
-                            graph.
-                        </p>
-                        <a href="https://www.mdpi.com/2673-3951/6/3/53" target="_blank" class="pub-link">
-                            <i class="fa-solid fa-link"></i> View Article
-                        </a>
-                    </div>
-
-                    <!-- Publication 2 -->
-                    <div class="pub-card glass-card hover-glow reveal">
-                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> Sept 2023</div>
-                        <h3 class="pub-title">Building the "mapamático" (map-matic)</h3>
-                        <p class="pub-authors">Antonio Lobo Santos, Pablo Martín Berná, Juan Núñez Valdés</p>
-                        <p class="pub-journal">Epsilon Journal of Mathematics Education, Number 114</p>
-                        <p class="pub-abstract">
-                            This article presents the construction, evolution, and operation of a website hosting the
-                            "mapamático", an interactive map of streets named after mathematicians in a city. It
-                            discusses the challenges encountered during its development and showcases its content for
-                            the province of Seville, the authors' birthplace. A final proposal, aimed at anyone
-                            interested, is also presented.
-                        </p>
-                        <a href="https://thales.cica.es/epsilon/sites/default/files/2023-09/epsilon114.pdf"
-                            target="_blank" class="pub-link">
-                            <i class="fa-solid fa-file-pdf"></i> View PDF
-                        </a>
-                    </div>
-
-                    <!-- Publication 2 -->
-                    <div class="pub-card glass-card hover-glow reveal delay-1">
-                        <div class="pub-date"><i class="fa-regular fa-calendar"></i> Mar 2023</div>
-                        <h3 class="pub-title">Infinity: Some Curiosities and its Teaching in High School</h3>
-                        <p class="pub-authors">Antonio Lobo Santos, Pablo Martín Berná, Juan Núñez Valdés</p>
-                        <p class="pub-journal">Números Journal, Volume 113</p>
-                        <p class="pub-abstract">
-                            This article discusses the difficulties that a secondary and high school mathematics teacher
-                            may encounter when introducing the concept of infinity to their students. The main objective
-                            is to present possible ways to start explanations about this concept, emphasizing from the
-                            outset the idea that it is not a number, but a concept, as well as the drawbacks that can
-                            arise when treating it as a number. It also discusses its origin and some curiosities about
-                            it, which can help teachers motivate their students and spark their interest in its study.
-                        </p>
-                        <a href="https://scpmluisbalbuena.org/publicacion-numeros/articulo-3-113/" target="_blank"
-                            class="pub-link">
-                            <i class="fa-solid fa-link"></i> View Article
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="section-container">
-                <h2 class="section-title reveal">Selected <span>Projects</span></h2>
-
-                <div class="projects-grid">
-                    <!-- Project 0 (Thesis) -->
-                    <div class="project-card glass-card hover-glow reveal">
-                        <div class="project-content">
-                            <h3>B.Sc. Thesis Research - Mathematical Knowledge Graphs with LLMs</h3>
-                            <ul
-                                style="padding-left: 1.2rem; margin-bottom: 1.5rem; color: var(--text-light); font-size: 0.95rem; line-height: 1.5;">
-                                <li style="margin-bottom: 0.5rem;">Built an LLM-assisted pipeline to extract structured
-                                    mathematical knowledge from LaTeX documents</li>
-                                <li style="margin-bottom: 0.5rem;">Evaluated knowledge graph construction and querying
-                                    workflow</li>
-                                <li>Resulted in a 2025 journal publication</li>
-                            </ul>
-                            <a href="https://www.mdpi.com/2673-3951/6/3/53" target="_blank" class="project-link">
-                                Read Publication <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project 1 -->
-                    <div class="project-card glass-card hover-glow reveal">
-                        <div class="project-content">
-                            <h3>Consensus Through Debate</h3>
-                            <p>Implemented and evaluated a scalable methodology where multiple LLM agents debate candidate solutions and iteratively critique each other to reach a higher-quality consensus.</p>
-                            <a href="https://blog.antoniolobo.com/posts/consensus-through-debate/"
-                                target="_blank" class="project-link">
-                                Read Blog Post <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-card glass-card hover-glow reveal delay-1">
-                        <div class="project-content">
-                            <h3>AB Data Challenge – Finalist</h3>
-                            <p>Developed a transformer-based time-series model for anomalous water-consumption
-                                detection, training the system from scratch and contributing to data preparation,
-                                modelling, and evaluation for a real-world utility use case.</p>
-                        </div>
-                    </div>
-
-                    <!-- Project 3 -->
-                    <div class="project-card glass-card hover-glow reveal delay-2">
-                        <div class="project-content">
-                            <h3>EcoRobotics (Erasmus+)</h3>
-                            <p>Participated in an Erasmus+ project in Krakow focused on sustainable robotics.
-                                Collaborated to modify a robotic assistant named "Españita," integrating AI capabilities
-                                through the OpenAI API while managing technical and electrical design intricacies.</p>
-                            <a href="https://www.linkedin.com/pulse/empowering-ecorobotics-unveiling-erasmus-projects-innovation-lobo/?trackingId=qUliafuPQzeUXOoC2cte6Q%3D%3D"
-                                target="_blank" class="project-link">
-                                Read Article <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project 4 -->
-                    <div class="project-card glass-card hover-glow reveal">
-                        <div class="project-content">
-                            <h3>App Inventor Against Cyberbullying <span
-                                    style="font-size: 0.8em; color: var(--accent);">(Age 16)</span></h3>
-                            <p>Developed a mobile application to raise community awareness of cyberbullying through
-                                interactive conversational scenarios and questionnaires. The app was recognized as
-                                <strong>"App of the Month"</strong> by MIT App Inventor.
-                            </p>
-                            <a href="https://appinventor.mit.edu/explore/blogs/karen/2018/03/app" target="_blank"
-                                class="project-link">
-                                Read Article <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project 5 -->
-                    <div class="project-card glass-card hover-glow reveal delay-1">
-                        <div class="project-content">
-                            <h3>Smarthuerto <span style="font-size: 0.8em; color: var(--accent);">(Age 16)</span></h3>
-                            <p>Co-developed an award-winning smart agriculture app that won the first edition of the
-                                EC2CE Grow-Lab contest. The project was subsequently featured as an <strong>"App of the
-                                    Month"</strong> on the MIT App Inventor blog.</p>
-                            <a href="https://appinventor.mit.edu/explore/blogs/karen/2018/06.html" target="_blank"
-                                class="project-link">
-                                Read Article <i class="fa-solid fa-arrow-right"></i>
-                            </a>
+                            <div class="language-item">
+                                <span class="fi fi-es-ct language-flag"></span>
+                                <div class="language-info">
+                                    <span class="language-name">Catalan</span>
+                                    <span class="language-level level-basic">Basic</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
