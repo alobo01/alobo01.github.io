@@ -42,7 +42,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-content">
             <a href="#home" class="logo">
                 <svg class="nav-logo-svg" viewBox="0 0 160 40" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +60,7 @@
                     </defs>
                 </svg>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="desktop-nav">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#focus">Focus</a></li>
                 <li><a href="#systems">Systems</a></li>
@@ -74,7 +74,7 @@
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
                 <i class="fa-solid fa-sun"></i>
             </button>
-            <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+            <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -83,7 +83,7 @@
     </nav>
 
     <!-- Mobile Navigation Menu -->
-    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true" inert role="navigation" aria-label="Mobile navigation">
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#focus">Focus</a></li>
@@ -106,7 +106,13 @@
                     <h1 class="name">Antonio <span>Lobo Santos</span></h1>
                     <h3 class="role">ML Systems &middot; AI Safety &amp; Robotics</h3>
                     <p class="hero-summary">I build evaluation, inference and software systems for difficult AI problems - from LLM safety evaluation and real-time human-robot interaction to production data platforms and on-prem infrastructure.</p>
-                    <p class="tagline">LLM Evaluation &bull; Efficient Model Serving &bull; Robotics/HRI &bull; ML Systems &bull; Production Data Platforms</p>
+                    <div class="hero-keywords" aria-label="Focus areas">
+                        <span>LLM Evaluation</span>
+                        <span>Efficient Model Serving</span>
+                        <span>Robotics/HRI</span>
+                        <span>ML Systems</span>
+                        <span>Production Data Platforms</span>
+                    </div>
                     <p class="location"><i class="fa-solid fa-location-dot"></i> Oxford, UK / Seville, Spain</p>
 
                     <div class="social-links">
@@ -274,7 +280,7 @@
                                 <span><i class="fa-regular fa-calendar"></i> Nov 2024 – Feb 2026</span>
                                 <span><i class="fa-solid fa-location-dot"></i> Barcelona, Spain</span>
                             </div>
-                            <ul class="timeline-list">
+                            <ul class="timeline-list timeline-list--columns">
                                 <li>Designed moral-capability evaluation workflows for text classifiers and LLMs, grounded in moral psychology theories including Moral Foundations Theory and Schwartz's theory of values.</li>
                                 <li>Created synthetic datasets, custom metrics and experiment pipelines for robustness, value-alignment and behavioural failure-mode analysis.</li>
                                 <li>Fine-tuned BERT-style classifiers with representation-learning techniques and custom losses for moral text classification.</li>
@@ -349,7 +355,7 @@
                                 <span><i class="fa-solid fa-location-dot"></i> Seville, Spain</span>
                             </div>
                             <p class="timeline-note">Full-time while completing dual B.Sc. degrees in Computer Engineering and Mathematics.</p>
-                            <ul class="timeline-list">
+                            <ul class="timeline-list timeline-list--columns">
                                 <li>Built and maintained Python/FastAPI and TypeScript/NestJS microservices and APIs for production monitoring platforms.</li>
                                 <li>Deployed and operated an on-prem high-availability MicroK8s/Kubernetes platform, migrating company web applications to the new deployment model with GitLab CI/CD.</li>
                                 <li>Operated Apache Kafka and Apache NiFi ETL workflows for real-time data-processing and monitoring systems.</li>
@@ -671,7 +677,7 @@
             <div class="section-container">
                 <h2 class="section-title reveal">Technical <span>Skills</span></h2>
                 <div class="skills-matrix">
-                    <div class="skill-category glass-card reveal">
+                    <div class="skill-category skill-category--wide glass-card reveal">
                         <h3><i class="fa-solid fa-compass"></i> Core areas</h3>
                         <div class="skill-list">
                             <span>LLM evaluation</span><span>AI safety evaluation</span><span>Efficient LLM serving</span><span>Robotics/HRI</span><span>ML systems</span><span>Reinforcement learning</span><span>Production backend engineering</span><span>Data platforms</span>
@@ -713,36 +719,40 @@
                             <span>Python</span><span>FastAPI</span><span>TypeScript</span><span>NestJS</span><span>GraphQL</span><span>WebSockets</span><span>PostgreSQL</span><span>ArangoDB</span><span>Kafka</span><span>Apache NiFi</span><span>Elasticsearch/Kibana</span><span>RabbitMQ</span>
                         </div>
                     </div>
-                    <div class="skill-category glass-card reveal delay-1">
+                </div>
+
+                <div class="language-panel glass-card reveal">
+                    <div class="language-panel-header">
                         <h3><i class="fa-solid fa-language"></i> Languages</h3>
-                        <div class="language-list">
-                            <div class="language-item">
-                                <span class="fi fi-es language-flag"></span>
-                                <div class="language-info">
-                                    <span class="language-name">Spanish</span>
-                                    <span class="language-level level-native">Native</span>
-                                </div>
+                        <p>Working languages for research, engineering and collaboration.</p>
+                    </div>
+                    <div class="language-list">
+                        <div class="language-item">
+                            <span class="fi fi-es language-flag"></span>
+                            <div class="language-info">
+                                <span class="language-name">Spanish</span>
+                                <span class="language-level level-native">Native</span>
                             </div>
-                            <div class="language-item">
-                                <span class="fi fi-gb language-flag"></span>
-                                <div class="language-info">
-                                    <span class="language-name">English</span>
-                                    <span class="language-level level-advanced">Advanced (C1)</span>
-                                </div>
+                        </div>
+                        <div class="language-item">
+                            <span class="fi fi-gb language-flag"></span>
+                            <div class="language-info">
+                                <span class="language-name">English</span>
+                                <span class="language-level level-advanced">Advanced (C1)</span>
                             </div>
-                            <div class="language-item">
-                                <span class="fi fi-fr language-flag"></span>
-                                <div class="language-info">
-                                    <span class="language-name">French</span>
-                                    <span class="language-level level-intermediate">Intermediate (B2)</span>
-                                </div>
+                        </div>
+                        <div class="language-item">
+                            <span class="fi fi-fr language-flag"></span>
+                            <div class="language-info">
+                                <span class="language-name">French</span>
+                                <span class="language-level level-intermediate">Intermediate (B2)</span>
                             </div>
-                            <div class="language-item">
-                                <span class="fi fi-es-ct language-flag"></span>
-                                <div class="language-info">
-                                    <span class="language-name">Catalan</span>
-                                    <span class="language-level level-basic">Basic</span>
-                                </div>
+                        </div>
+                        <div class="language-item">
+                            <span class="fi fi-es-ct language-flag"></span>
+                            <div class="language-info">
+                                <span class="language-name">Catalan</span>
+                                <span class="language-level level-basic">Basic</span>
                             </div>
                         </div>
                     </div>

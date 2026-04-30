@@ -73,11 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileNav = document.getElementById('mobile-nav');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
 
+    if (mobileNav) {
+        mobileNav.inert = true;
+    }
+
     hamburger.addEventListener('click', () => {
         const isOpen = hamburger.classList.toggle('open');
         hamburger.setAttribute('aria-expanded', isOpen);
         mobileNav.classList.toggle('open', isOpen);
         mobileNav.setAttribute('aria-hidden', !isOpen);
+        mobileNav.inert = !isOpen;
         document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
@@ -87,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburger.setAttribute('aria-expanded', false);
             mobileNav.classList.remove('open');
             mobileNav.setAttribute('aria-hidden', true);
+            mobileNav.inert = true;
             document.body.style.overflow = '';
         });
     });
