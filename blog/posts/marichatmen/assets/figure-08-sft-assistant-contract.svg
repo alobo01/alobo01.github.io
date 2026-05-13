@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="570" viewBox="0 0 1200 570" role="img" aria-labelledby="title desc">
+  <title id="title">SFT assistant contract</title>
+  <desc id="desc">Three-part comparison showing SFT turning text continuation into direct Andalûh assistant behaviour.</desc>
+  <style>
+  .bg{fill:#fffaf0}.card{fill:#ffffff;stroke:#222;stroke-width:2;rx:12}.blue{fill:#eaf2ff}.green{fill:#e5f5ec}.red{fill:#fff1f2}.amber{fill:#fff0df}.purple{fill:#efe9ff}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.title{font-size:36px;font-weight:800}.subtitle{font-size:20px;fill:#555555}.label{font-size:22px;font-weight:700}.small{font-size:17px}.tiny{font-size:14px}.axis{stroke:#222;stroke-width:2}.grid{stroke:#e8dcc8;stroke-width:1}.arrow{stroke:#222;stroke-width:3;marker-end:url(#arrow);fill:none}.gArrow{stroke:#0b7a3b;stroke-width:3;marker-end:url(#greenArrow);fill:none}.warn{fill:#be123c}.good{fill:#0b7a3b}.base{fill:#2563eb}
+</style>
+  
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#222"/></marker>
+    <marker id="greenArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0b7a3b"/></marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="570"/>
+<text class="text title" x="60" y="70">SFT turns continuation into assistant behaviour</text>
+<rect class="card blue" x="70" y="150" width="280" height="230"/>
+<text class="text label" x="94" y="188" fill="#202020">Base model</text>
+<text class="text small" x="94" y="220">Prompt: “Explícame overfitting”</text>
+<text class="text small" x="94" y="246">Output may continue, imitate,</text>
+<text class="text small" x="94" y="272">drift, or answer</text>
+<line class="arrow" x1="350" y1="265" x2="455" y2="265"/>
+<rect class="card amber" x="470" y="150" width="260" height="230"/>
+<text class="text label" x="494" y="188" fill="#202020">SFT examples</text>
+<text class="text small" x="494" y="220">user → assistant target</text>
+<text class="text small" x="494" y="246">assistant-only loss</text>
+<text class="text small" x="494" y="272">useful answer format</text>
+<line class="arrow" x1="730" y1="265" x2="835" y2="265"/>
+<rect class="card green" x="850" y="150" width="280" height="230"/>
+<text class="text label" x="874" y="188" fill="#202020">Instruction-tuned</text>
+<text class="text small" x="874" y="220">Prompt → direct useful</text>
+<text class="text small" x="874" y="246">Andalûh answer</text>
+<text class="text small" x="874" y="272">style is default</text>
+<rect class="card" x="250" y="455" width="700" height="70"/>
+<text class="text label" x="325" y="485">AAP teaches the model to read Andalûh.</text>
+<text class="text label good" x="395" y="515">SFT teaches it to answer.</text>
+</svg>

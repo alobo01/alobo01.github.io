@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">GRPO group generation</title>
+  <desc id="desc">One prompt produces several answers; reward scores rank them and update the policy.</desc>
+  <style>.bg{fill:#fffaf0}.box{fill:#fff;stroke:#222;stroke-width:2;rx:10}.good{fill:#e5f5ec}.mid{fill:#fff0c2}.bad{fill:#ffe8e2}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.title{font-size:36px;font-weight:800}.label{font-size:22px;font-weight:700}.small{font-size:18px}.arrow{stroke:#222;stroke-width:3;marker-end:url(#a)}</style>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#222"/></marker></defs>
+  <rect class="bg" width="1200" height="620"/>
+  <text class="text title" x="60" y="70">GRPO: sample a group, score the group, learn from relative quality</text>
+  <rect class="box" x="80" y="250" width="220" height="100"/><text class="text label" x="125" y="292">One prompt</text><text class="text small" x="118" y="322">same user request</text>
+  <line class="arrow" x1="300" y1="300" x2="390" y2="300"/>
+  <rect class="box good" x="420" y="120" width="260" height="80"/><text class="text small" x="455" y="165">Answer A reward 0.82</text>
+  <rect class="box mid" x="420" y="230" width="260" height="80"/><text class="text small" x="455" y="275">Answer B reward 0.51</text>
+  <rect class="box bad" x="420" y="340" width="260" height="80"/><text class="text small" x="455" y="385">Answer C reward 0.12</text>
+  <rect class="box mid" x="420" y="450" width="260" height="80"/><text class="text small" x="455" y="495">Answer D reward 0.44</text>
+  <line class="arrow" x1="680" y1="300" x2="780" y2="300"/>
+  <rect class="box" x="810" y="210" width="300" height="180"/><text class="text label" x="858" y="255">Reward mix</text><text class="text small" x="850" y="292">MARI-AAS + MARI-PAS</text><text class="text small" x="850" y="324">correctness + safety</text><text class="text small" x="850" y="356">minus drift + repetition</text>
+</svg>

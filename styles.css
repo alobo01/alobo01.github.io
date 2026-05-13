@@ -1298,6 +1298,13 @@ h6,
     color: white;
 }
 
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+    margin-top: 1rem;
+}
+
 /* Skills */
 .skills-matrix {
     display: grid;
@@ -2179,6 +2186,29 @@ footer p {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+.blog-content figure {
+    margin: 1.5rem 0 2rem;
+}
+
+.blog-content figure img {
+    display: block;
+    margin: 0;
+}
+
+.blog-content figure.figure-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.blog-content figcaption {
+    margin-top: 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
+    font-style: italic;
+}
+
 .blog-content code {
     background: rgba(255, 255, 255, 0.1);
     padding: 0.2rem 0.4rem;
@@ -2198,6 +2228,213 @@ footer p {
 .blog-content pre code {
     background: transparent;
     padding: 0;
+}
+
+.blog-content table {
+    width: 100%;
+    margin: 1.75rem 0 2.25rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+    font-size: 0.94rem;
+    line-height: 1.55;
+    scroll-margin-top: 110px;
+}
+
+.blog-content thead {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.045));
+}
+
+.blog-content th,
+.blog-content td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.blog-content th {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.045));
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.blog-content td {
+    color: var(--text-secondary);
+}
+
+.blog-content th + th,
+.blog-content td + td {
+    border-left: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.blog-content tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.028);
+}
+
+.blog-content tbody tr:hover {
+    background: rgba(0, 229, 255, 0.055);
+}
+
+.blog-content tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.blog-content td:first-child {
+    color: var(--text-primary);
+    font-weight: 650;
+}
+
+.blog-content table code {
+    white-space: nowrap;
+}
+
+.blog-content .mc-mini-table {
+    box-shadow: none;
+}
+
+[data-theme="light"] .blog-content table {
+    border-color: rgba(15, 23, 42, 0.12);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .blog-content thead {
+    background: linear-gradient(180deg, #f8fafc, #eef4fb);
+}
+
+[data-theme="light"] .blog-content th {
+    background: linear-gradient(180deg, #f8fafc, #eef4fb);
+    color: #0f172a;
+}
+
+[data-theme="light"] .blog-content td {
+    color: #475569;
+}
+
+[data-theme="light"] .blog-content td:first-child {
+    color: #111827;
+}
+
+[data-theme="light"] .blog-content th,
+[data-theme="light"] .blog-content td {
+    border-bottom-color: rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="light"] .blog-content th + th,
+[data-theme="light"] .blog-content td + td {
+    border-left-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .blog-content tbody tr:nth-child(even) {
+    background: rgba(15, 23, 42, 0.025);
+}
+
+[data-theme="light"] .blog-content tbody tr:hover {
+    background: rgba(0, 136, 187, 0.075);
+}
+
+@media (max-width: 768px) {
+    .blog-content table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+    }
+
+    .blog-content th,
+    .blog-content td {
+        min-width: 9rem;
+        padding: 0.75rem 0.85rem;
+    }
+
+}
+
+@media (max-width: 640px) {
+    .blog-content figure.figure-scroll {
+        padding-bottom: 0.35rem;
+    }
+
+    .blog-content figure.figure-scroll img {
+        min-width: 640px;
+        max-width: none;
+    }
+
+    .blog-content table:not(.mc-mini-table) {
+        display: block;
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .blog-content table:not(.mc-mini-table) thead {
+        display: none;
+    }
+
+    .blog-content table:not(.mc-mini-table) tbody,
+    .blog-content table:not(.mc-mini-table) tr,
+    .blog-content table:not(.mc-mini-table) td {
+        display: block;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .blog-content table:not(.mc-mini-table) tr {
+        margin: 1rem 0;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.04);
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15);
+    }
+
+    .blog-content table:not(.mc-mini-table) td {
+        display: block;
+        padding: 0.85rem 0.95rem;
+        border-left: 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .blog-content table:not(.mc-mini-table) td:last-child {
+        border-bottom: 0;
+    }
+
+    .blog-content table:not(.mc-mini-table) td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 0.35rem;
+        color: var(--text-primary);
+        font-size: 0.78rem;
+        font-weight: 750;
+        line-height: 1.35;
+        text-transform: uppercase;
+    }
+
+    .blog-content table:not(.mc-mini-table) td:first-child {
+        background: rgba(0, 229, 255, 0.055);
+    }
+
+    [data-theme="light"] .blog-content table:not(.mc-mini-table) tr {
+        background: rgba(255, 255, 255, 0.96);
+        border-color: rgba(15, 23, 42, 0.12);
+        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+    }
+
+    [data-theme="light"] .blog-content table:not(.mc-mini-table) td {
+        border-bottom-color: rgba(15, 23, 42, 0.12);
+    }
+
+    [data-theme="light"] .blog-content table:not(.mc-mini-table) td:first-child {
+        background: rgba(0, 136, 187, 0.06);
+    }
 }
 
 /* Tabs and Widgets */

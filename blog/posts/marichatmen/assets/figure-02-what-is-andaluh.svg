@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="525" viewBox="0 0 1200 525" role="img" aria-labelledby="title desc">
+  <title id="title">Standard Spanish to Andalûh EPA examples</title>
+  <desc id="desc">Two-column comparison of standard Spanish forms and Andalûh EPA spellings.</desc>
+  <style>
+  .bg{fill:#fffaf0}.card{fill:#ffffff;stroke:#222;stroke-width:2;rx:12}.blue{fill:#eaf2ff}.green{fill:#e5f5ec}.red{fill:#fff1f2}.amber{fill:#fff0df}.purple{fill:#efe9ff}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.title{font-size:36px;font-weight:800}.subtitle{font-size:20px;fill:#555555}.label{font-size:22px;font-weight:700}.small{font-size:17px}.tiny{font-size:14px}.axis{stroke:#222;stroke-width:2}.grid{stroke:#e8dcc8;stroke-width:1}.arrow{stroke:#222;stroke-width:3;marker-end:url(#arrow);fill:none}.gArrow{stroke:#0b7a3b;stroke-width:3;marker-end:url(#greenArrow);fill:none}.warn{fill:#be123c}.good{fill:#0b7a3b}.base{fill:#2563eb}
+</style>
+  
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#222"/></marker>
+    <marker id="greenArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0b7a3b"/></marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="525"/>
+<text class="text title" x="60" y="70">What Andalûh EPA changes</text>
+<text class="text subtitle" x="60" y="105">Same broad meaning, different written surface</text>
+<rect class="card blue" x="90" y="145" width="460" height="360"/>
+<text class="text label" x="114" y="183" fill="#202020">Standard Spanish</text>
+<rect class="card green" x="650" y="145" width="460" height="360"/>
+<text class="text label" x="674" y="183" fill="#202020">Andalûh EPA</text>
+<text class="mono small" x="145" y="225">cansado</text><text class="mono small" x="715" y="225">cansao</text>
+<line class="grid" x1="115" y1="241" x2="525" y2="241"/><line class="grid" x1="675" y1="241" x2="1085" y2="241"/>
+<line class="gArrow" x1="540" y1="219" x2="635" y2="219"/>
+<text class="mono small" x="145" y="270">verdad</text><text class="mono small" x="715" y="270">verdá</text>
+<line class="grid" x1="115" y1="286" x2="525" y2="286"/><line class="grid" x1="675" y1="286" x2="1085" y2="286"/>
+<line class="gArrow" x1="540" y1="264" x2="635" y2="264"/>
+<text class="mono small" x="145" y="315">para</text><text class="mono small" x="715" y="315">pa</text>
+<line class="grid" x1="115" y1="331" x2="525" y2="331"/><line class="grid" x1="675" y1="331" x2="1085" y2="331"/>
+<line class="gArrow" x1="540" y1="309" x2="635" y2="309"/>
+<text class="mono small" x="145" y="360">todo</text><text class="mono small" x="715" y="360">tó</text>
+<line class="grid" x1="115" y1="376" x2="525" y2="376"/><line class="grid" x1="675" y1="376" x2="1085" y2="376"/>
+<line class="gArrow" x1="540" y1="354" x2="635" y2="354"/>
+<text class="mono small" x="145" y="405">está</text><text class="mono small" x="715" y="405">êttá</text>
+<line class="grid" x1="115" y1="421" x2="525" y2="421"/><line class="grid" x1="675" y1="421" x2="1085" y2="421"/>
+<line class="gArrow" x1="540" y1="399" x2="635" y2="399"/>
+<text class="mono small" x="145" y="450">Sevilla</text><text class="mono small" x="715" y="450">Çebiya / çebiya</text>
+<line class="grid" x1="115" y1="466" x2="525" y2="466"/><line class="grid" x1="675" y1="466" x2="1085" y2="466"/>
+<line class="gArrow" x1="540" y1="444" x2="635" y2="444"/>
+</svg>

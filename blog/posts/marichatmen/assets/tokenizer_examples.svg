@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="555" viewBox="0 0 1200 555" role="img" aria-labelledby="title desc">
+  <title id="title">Tokeniser examples</title>
+  <desc id="desc">Token fragmentation examples for está, êttá, Sevilla and çebiya.</desc>
+  <style>
+  .bg{fill:#fffaf0}.card{fill:#ffffff;stroke:#222;stroke-width:2;rx:12}.blue{fill:#eaf2ff}.green{fill:#e5f5ec}.red{fill:#fff1f2}.amber{fill:#fff0df}.purple{fill:#efe9ff}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.title{font-size:36px;font-weight:800}.subtitle{font-size:20px;fill:#555555}.label{font-size:22px;font-weight:700}.small{font-size:17px}.tiny{font-size:14px}.axis{stroke:#222;stroke-width:2}.grid{stroke:#e8dcc8;stroke-width:1}.arrow{stroke:#222;stroke-width:3;marker-end:url(#arrow);fill:none}.gArrow{stroke:#0b7a3b;stroke-width:3;marker-end:url(#greenArrow);fill:none}.warn{fill:#be123c}.good{fill:#0b7a3b}.base{fill:#2563eb}
+</style>
+  
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#222"/></marker>
+    <marker id="greenArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0b7a3b"/></marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="555"/>
+<text class="text title" x="60" y="70">Token fragmentation before and after expansion</text>
+<rect class="card" x="70" y="135" width="1060" height="180"/>
+<text class="mono small" x="105" y="173">está</text><text class="text small" x="245" y="173">Original tokeniser</text>
+<rect x="455" y="148" width="76" height="34" rx="7" fill="#2563eb" stroke="#222" stroke-width="1.2"/><text class="mono small" x="465" y="171" fill="#202020">está</text>
+<text class="text small" x="940" y="173">1 token</text>
+<text class="mono small" x="105" y="223">êttá</text><text class="text small" x="245" y="223">Original tokeniser</text>
+<rect x="455" y="198" width="54" height="34" rx="7" fill="#fff1f2" stroke="#222" stroke-width="1.2"/><text class="mono small" x="465" y="221" fill="#202020">ê</text>
+<rect x="519" y="198" width="54" height="34" rx="7" fill="#fef08a" stroke="#222" stroke-width="1.2"/><text class="mono small" x="529" y="221" fill="#202020">tt</text>
+<rect x="583" y="198" width="54" height="34" rx="7" fill="#e5f5ec" stroke="#222" stroke-width="1.2"/><text class="mono small" x="593" y="221" fill="#202020">á</text>
+<text class="text small" x="940" y="223">3 tokens</text>
+<text class="mono small" x="105" y="273">êttá</text><text class="text small" x="245" y="273">Expanded tokeniser</text>
+<rect x="455" y="248" width="76" height="34" rx="7" fill="#e5f5ec" stroke="#222" stroke-width="1.2"/><text class="mono small" x="465" y="271" fill="#202020">êttá</text>
+<text class="text small" x="940" y="273">1 token</text>
+<rect class="card" x="70" y="355" width="1060" height="180"/>
+<text class="mono small" x="105" y="393">Sevilla</text><text class="text small" x="245" y="393">Original tokeniser</text>
+<rect x="455" y="368" width="54" height="34" rx="7" fill="#2563eb" stroke="#222" stroke-width="1.2"/><text class="mono small" x="465" y="391" fill="#202020">Se</text>
+<rect x="519" y="368" width="89" height="34" rx="7" fill="#dbeafe" stroke="#222" stroke-width="1.2"/><text class="mono small" x="529" y="391" fill="#202020">villa</text>
+<text class="text small" x="940" y="393">2 tokens</text>
+<text class="mono small" x="105" y="443">çebiya</text><text class="text small" x="245" y="443">Original tokeniser</text>
+<rect x="455" y="418" width="54" height="34" rx="7" fill="#fff1f2" stroke="#222" stroke-width="1.2"/><text class="mono small" x="465" y="441" fill="#202020">ç</text>
+<rect x="519" y="418" width="54" height="34" rx="7" fill="#fef08a" stroke="#222" stroke-width="1.2"/><text class="mono small" x="529" y="441" fill="#202020">eb</text>
+<rect x="583" y="418" width="63" height="34" rx="7" fill="#e5f5ec" stroke="#222" stroke-width="1.2"/><text class="mono small" x="593" y="441" fill="#202020">iya</text>
+<text class="text small" x="940" y="443">3 tokens</text>
+<text class="mono small" x="105" y="493">çebiya</text><text class="text small" x="245" y="493">Expanded tokeniser</text>
+<rect x="455" y="468" width="102" height="34" rx="7" fill="#e5f5ec" stroke="#222" stroke-width="1.2"/><text class="mono small" x="465" y="491" fill="#202020">çebiya</text>
+<text class="text small" x="940" y="493">1 token</text>
+</svg>

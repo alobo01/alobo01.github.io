@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="480" viewBox="0 0 920 480">
+<rect width="100%" height="100%" fill="#fffaf0"/>
+<text x="40" y="38" font-size="25" font-family="Georgia" fill="#111">Evaluation loss</text>
+<line x1="62" y1="418" x2="858" y2="418" stroke="#333" stroke-width="1.2"/>
+<line x1="62" y1="62" x2="62" y2="418" stroke="#333" stroke-width="1.2"/>
+<text x="420.0" y="464" font-size="14" font-family="Arial">global step</text>
+<text transform="translate(18 300.0) rotate(-90)" font-size="14" font-family="Arial">eval loss</text>
+<line x1="62.0" y1="418" x2="62.0" y2="423" stroke="#333"/>
+<text x="46.0" y="440" font-size="11" font-family="Arial">100</text>
+<line x1="57" y1="418.0" x2="62" y2="418.0" stroke="#333"/>
+<text x="8" y="422.0" font-size="11" font-family="Arial">1.6</text>
+<line x1="261.0" y1="418" x2="261.0" y2="423" stroke="#333"/>
+<text x="245.0" y="440" font-size="11" font-family="Arial">375</text>
+<line x1="57" y1="329.0" x2="62" y2="329.0" stroke="#333"/>
+<text x="8" y="333.0" font-size="11" font-family="Arial">1.8</text>
+<line x1="62" y1="329.0" x2="858" y2="329.0" stroke="#eadfca" stroke-width="1"/>
+<line x1="460.0" y1="418" x2="460.0" y2="423" stroke="#333"/>
+<text x="444.0" y="440" font-size="11" font-family="Arial">650</text>
+<line x1="57" y1="240.0" x2="62" y2="240.0" stroke="#333"/>
+<text x="8" y="244.0" font-size="11" font-family="Arial">2.1</text>
+<line x1="62" y1="240.0" x2="858" y2="240.0" stroke="#eadfca" stroke-width="1"/>
+<line x1="659.0" y1="418" x2="659.0" y2="423" stroke="#333"/>
+<text x="643.0" y="440" font-size="11" font-family="Arial">925</text>
+<line x1="57" y1="151.0" x2="62" y2="151.0" stroke="#333"/>
+<text x="8" y="155.0" font-size="11" font-family="Arial">2.3</text>
+<line x1="62" y1="151.0" x2="858" y2="151.0" stroke="#eadfca" stroke-width="1"/>
+<line x1="858.0" y1="418" x2="858.0" y2="423" stroke="#333"/>
+<text x="842.0" y="440" font-size="11" font-family="Arial">1200</text>
+<line x1="57" y1="62.0" x2="62" y2="62.0" stroke="#333"/>
+<text x="8" y="66.0" font-size="11" font-family="Arial">2.6</text>
+<line x1="62" y1="62.0" x2="858" y2="62.0" stroke="#eadfca" stroke-width="1"/>
+<polyline fill="none" stroke="#006847" stroke-width="2.4" points="62.0,92.7 134.4,190.7 206.7,231.0 279.1,254.4 351.5,270.2 423.8,282.4 496.2,290.5 568.5,298.2 640.9,303.1 713.3,306.7 785.6,309.4 858.0,310.6"/>
+<circle cx="785.6" cy="309.4" r="3.2" fill="#006847"/>
+<circle cx="858.0" cy="310.6" r="3.2" fill="#006847"/>
+<polyline fill="none" stroke="#c0182f" stroke-width="2.4" points="62.0,235.9 134.4,315.6 206.7,349.1 279.1,368.1 351.5,381.5 423.8,390.5 496.2,397.1 568.5,403.7 640.9,407.4 713.3,412.0 785.6,415.3 858.0,418.0"/>
+<circle cx="785.6" cy="415.3" r="3.2" fill="#c0182f"/>
+<circle cx="858.0" cy="418.0" r="3.2" fill="#c0182f"/>
+<polyline fill="none" stroke="#1f77b4" stroke-width="2.4" points="62.0,62.0 134.4,111.8 206.7,148.5 279.1,175.4 351.5,198.5 423.8,208.0 496.2,213.8 568.5,214.9"/>
+<circle cx="496.2" cy="213.8" r="3.2" fill="#1f77b4"/>
+<circle cx="568.5" cy="214.9" r="3.2" fill="#1f77b4"/>
+<rect x="643" y="58" width="250" height="90" rx="6" fill="#ffffff" stroke="#eadfca"/>
+<line x1="655" y1="82" x2="679" y2="82" stroke="#006847" stroke-width="3"/>
+<text x="687" y="86" font-size="12" font-family="Arial">0.8B QWEN AAP</text>
+<line x1="655" y1="104" x2="679" y2="104" stroke="#c0182f" stroke-width="3"/>
+<text x="687" y="108" font-size="12" font-family="Arial">2B QWEN AAP</text>
+<line x1="655" y1="126" x2="679" y2="126" stroke="#1f77b4" stroke-width="3"/>
+<text x="687" y="130" font-size="12" font-family="Arial">0.8B QWEN SFT</text>
+</svg>

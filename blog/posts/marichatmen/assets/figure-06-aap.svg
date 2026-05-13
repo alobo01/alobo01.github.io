@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="550" viewBox="0 0 1200 550" role="img" aria-labelledby="title desc">
+  <title id="title">Andalûh adaptive pretraining</title>
+  <desc id="desc">Before and after model familiarity diagram for AAP.</desc>
+  <style>
+  .bg{fill:#fffaf0}.card{fill:#ffffff;stroke:#222;stroke-width:2;rx:12}.blue{fill:#eaf2ff}.green{fill:#e5f5ec}.red{fill:#fff1f2}.amber{fill:#fff0df}.purple{fill:#efe9ff}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.title{font-size:36px;font-weight:800}.subtitle{font-size:20px;fill:#555555}.label{font-size:22px;font-weight:700}.small{font-size:17px}.tiny{font-size:14px}.axis{stroke:#222;stroke-width:2}.grid{stroke:#e8dcc8;stroke-width:1}.arrow{stroke:#222;stroke-width:3;marker-end:url(#arrow);fill:none}.gArrow{stroke:#0b7a3b;stroke-width:3;marker-end:url(#greenArrow);fill:none}.warn{fill:#be123c}.good{fill:#0b7a3b}.base{fill:#2563eb}
+</style>
+  
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#222"/></marker>
+    <marker id="greenArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0b7a3b"/></marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="550"/>
+<text class="text title" x="60" y="70">AAP makes Andalûh less surprising</text>
+<rect class="card red" x="80" y="150" width="380" height="260"/>
+<text class="text label" x="104" y="188" fill="#be123c">Before AAP</text>
+<text class="text small" x="104" y="220">êttá, çîttema, dêppuê</text>
+<text class="text small" x="104" y="246">→ rare-looking fragments</text>
+<text class="text small" x="104" y="272">→ high surprise</text>
+<line class="gArrow" x1="470" y1="275" x2="720" y2="275"/>
+<text class="text small" x="490" y="245">Continue pretraining</text><text class="text small" x="515" y="305">on Andalûh-shaped text</text>
+<rect class="card green" x="740" y="150" width="380" height="260"/>
+<text class="text label" x="764" y="188" fill="#0b7a3b">After AAP</text>
+<text class="text small" x="764" y="220">êttá, çîttema, dêppuê</text>
+<text class="text small" x="764" y="246">→ familiar continuations</text>
+<text class="text small" x="764" y="272">→ lower surprise</text>
+</svg>

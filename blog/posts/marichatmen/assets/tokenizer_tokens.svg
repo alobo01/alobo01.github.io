@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">Most useful added tokens</title>
+  <desc id="desc">Horizontal bar chart of added Andalûh tokens by frequency-weighted savings.</desc>
+  <style>
+  .bg{fill:#fffaf0}.card{fill:#ffffff;stroke:#222;stroke-width:2;rx:12}.blue{fill:#eaf2ff}.green{fill:#e5f5ec}.red{fill:#fff1f2}.amber{fill:#fff0df}.purple{fill:#efe9ff}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.title{font-size:36px;font-weight:800}.subtitle{font-size:20px;fill:#555555}.label{font-size:22px;font-weight:700}.small{font-size:17px}.tiny{font-size:14px}.axis{stroke:#222;stroke-width:2}.grid{stroke:#e8dcc8;stroke-width:1}.arrow{stroke:#222;stroke-width:3;marker-end:url(#arrow);fill:none}.gArrow{stroke:#0b7a3b;stroke-width:3;marker-end:url(#greenArrow);fill:none}.warn{fill:#be123c}.good{fill:#0b7a3b}.base{fill:#2563eb}
+</style>
+  
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#222"/></marker>
+    <marker id="greenArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0b7a3b"/></marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="560"/>
+<text class="text title" x="60" y="65">Most useful Andalûh tokens added</text>
+<text class="text subtitle" x="60" y="98">Frequency-weighted token savings in the transformed corpus</text>
+<text class="mono small" x="90" y="162">lô</text><rect x="250" y="140" width="760.0" height="25" rx="5" fill="#0b7a3b"/><text class="text tiny" x="1020.0" y="158">56,107</text>
+<text class="mono small" x="90" y="200">dêh</text><rect x="250" y="178" width="697.4" height="25" rx="5" fill="#0b7a3b"/><text class="text tiny" x="957.4" y="196">51,482</text>
+<text class="mono small" x="90" y="238">lâ</text><rect x="250" y="216" width="540.7" height="25" rx="5" fill="#0b7a3b"/><text class="text tiny" x="800.7" y="234">39,918</text>
+<text class="mono small" x="90" y="276">çîttema</text><rect x="250" y="254" width="145.5" height="25" rx="5" fill="#0b7a3b"/><text class="text tiny" x="405.5" y="272">10,743</text>
+<text class="mono small" x="90" y="314">êttá</text><rect x="250" y="292" width="107.1" height="25" rx="5" fill="#0b7a3b"/><text class="text tiny" x="367.1" y="310">7,906</text>
+<text class="mono small" x="90" y="352">dêppuê</text><rect x="250" y="330" width="108.1" height="25" rx="5" fill="#0b7a3b"/><text class="text tiny" x="368.1" y="348">7,980</text>
+<text class="mono small" x="90" y="390">enlaçê</text><rect x="250" y="368" width="135.0" height="25" rx="5" fill="#0b7a3b"/><text class="text tiny" x="395.0" y="386">9,969</text>
+<text class="mono small" x="90" y="428">referençiâ</text><rect x="250" y="406" width="147.8" height="25" rx="5" fill="#0b7a3b"/><text class="text tiny" x="407.8" y="424">10,911</text>
+<text class="mono small" x="90" y="466">carâtterítticâ</text><rect x="250" y="444" width="91.8" height="25" rx="5" fill="#0b7a3b"/><text class="text tiny" x="351.8" y="462">6,774</text>
+<text class="mono small" x="90" y="504">êttênnô</text><rect x="250" y="482" width="168.3" height="25" rx="5" fill="#0b7a3b"/><text class="text tiny" x="428.3" y="500">12,424</text>
+</svg>

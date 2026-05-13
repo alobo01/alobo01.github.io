@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">ATIR tokenisation audit</title>
+  <desc id="desc">Bar chart comparing Spanish and Andalûh token counts.</desc>
+  <style>.bg{fill:#fbfcfe}.axis{stroke:#222;stroke-width:2}.bar1{fill:#2f80ed}.bar2{fill:#0b7a3b}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.title{font-size:36px;font-weight:800}.label{font-size:22px}.big{font-size:54px;font-weight:800}.note{font-size:19px;fill:#555}</style>
+  <rect class="bg" width="1200" height="560"/>
+  <text class="text title" x="60" y="70">ATIR: Andalûh Token Inflation Ratio</text>
+  <line class="axis" x1="110" y1="460" x2="760" y2="460"/><line class="axis" x1="110" y1="150" x2="110" y2="460"/>
+  <rect class="bar1" x="210" y="250" width="130" height="210"/><rect class="bar2" x="470" y="180" width="130" height="280"/>
+  <text class="text label" x="188" y="500">Spanish</text><text class="text label" x="457" y="500">Andalûh</text>
+  <text class="text label" x="243" y="235">18</text><text class="text label" x="503" y="165">24</text>
+  <text class="text big" x="840" y="250">24 / 18</text><text class="text big" x="890" y="330">= 1.33</text>
+  <text class="text note" x="820" y="390">Amber zone: keep tokeniser,</text><text class="text note" x="820" y="420">but do adaptive pretraining.</text>
+</svg>

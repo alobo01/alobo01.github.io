@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" role="img" aria-labelledby="title desc">
+  <title id="title">0.8B final evaluation metrics</title>
+  <desc id="desc">MARI-AAS, MARI-PAS, MARI-TOTAL, and selected penalties for the 0.8B GRPO checkpoint.</desc>
+  <style>
+    .bg{fill:#fbfcfe}.card{fill:#fff;stroke:#263238;stroke-width:2;rx:8}.text{font-family:Arial,Helvetica,sans-serif;fill:#111827}.title{font-size:26px;font-weight:700}.metric{font-size:54px;font-weight:700}.label{font-size:20px;font-weight:700}.small{font-size:17px}.aas{fill:#e8f8ef}.pas{fill:#fff0e8}.total{fill:#e8f3ff}.penalty{fill:#f7f7f7}
+  </style>
+  <rect class="bg" width="1200" height="480"/>
+  <text class="text title" x="50" y="55">0.8B persona chain: final evaluation snapshot</text>
+  <text class="text small" x="50" y="85">This is an interim research checkpoint, not a release-quality model.</text>
+  <rect class="card aas" x="60" y="130" width="300" height="190"/>
+  <text class="text label" x="95" y="172">MARI-AAS</text>
+  <text class="text metric" x="95" y="245">61.11</text>
+  <text class="text small" x="95" y="282">Andalûh accent score</text>
+  <rect class="card pas" x="450" y="130" width="300" height="190"/>
+  <text class="text label" x="485" y="172">MARI-PAS</text>
+  <text class="text metric" x="485" y="245">21.40</text>
+  <text class="text small" x="485" y="282">Persona adherence score</text>
+  <rect class="card total" x="840" y="130" width="300" height="190"/>
+  <text class="text label" x="875" y="172">MARI-TOTAL</text>
+  <text class="text metric" x="875" y="245">45.93</text>
+  <text class="text small" x="875" y="282">Combined score</text>
+  <rect class="card penalty" x="60" y="355" width="1080" height="75"/>
+  <text class="text small" x="95" y="387">Spanish leak: 13.64%</text>
+  <text class="text small" x="325" y="387">Caricature penalty: 0.00</text>
+  <text class="text small" x="590" y="387">Regional hostility: 0.00</text>
+  <text class="text small" x="835" y="387">Province flourish: 0.00</text>
+  <text class="text small" x="95" y="415">Persona consistency: 0.4885</text>
+  <text class="text small" x="325" y="415">Samples: 200</text>
+  <text class="text small" x="590" y="415">Generation time: 1146s</text>
+</svg>

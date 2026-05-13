@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">MARI metrics dashboard</title>
+  <desc id="desc">Two gauges and a total score card for MARI-AAS, MARI-PAS, and MARI-TOTAL.</desc>
+  <style>.bg{fill:#fbfcfe}.card{fill:#fff;stroke:#222;stroke-width:2;rx:10}.aas{fill:#e5f5ec}.pas{fill:#fff0df}.total{fill:#eaf2ff}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.title{font-size:36px;font-weight:800}.big{font-size:58px;font-weight:800}.label{font-size:24px;font-weight:700}.small{font-size:18px}.arc{fill:none;stroke:#0b7a3b;stroke-width:22;stroke-linecap:round}.arc2{fill:none;stroke:#c62828;stroke-width:22;stroke-linecap:round}</style>
+  <rect class="bg" width="1200" height="620"/>
+  <text class="text title" x="60" y="70">Custom metrics: accent is not enough</text>
+  <rect class="card aas" x="90" y="140" width="300" height="320"/><text class="text label" x="145" y="190">MARI-AAS</text><path class="arc" d="M145 330a95 95 0 0 1 190 0"/><text class="text big" x="155" y="360">61.11</text><text class="text small" x="142" y="410">Andalûh accent score</text>
+  <rect class="card pas" x="450" y="140" width="300" height="320"/><text class="text label" x="505" y="190">MARI-PAS</text><path class="arc2" d="M505 330a95 95 0 0 1 95-95"/><text class="text big" x="515" y="360">21.40</text><text class="text small" x="502" y="410">Persona adherence</text>
+  <rect class="card total" x="810" y="140" width="300" height="320"/><text class="text label" x="865" y="190">MARI-TOTAL</text><text class="text big" x="865" y="315">45.93</text><text class="text small" x="858" y="370">accent + persona</text><text class="text small" x="858" y="402">+ helpfulness - drift</text>
+</svg>

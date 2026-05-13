@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" role="img" aria-labelledby="title desc">
+  <title id="title">ATIR before and after tokeniser expansion</title>
+  <desc id="desc">Before and after ATIR bar chart.</desc>
+  <style>
+  .bg{fill:#fffaf0}.card{fill:#ffffff;stroke:#222;stroke-width:2;rx:12}.blue{fill:#eaf2ff}.green{fill:#e5f5ec}.red{fill:#fff1f2}.amber{fill:#fff0df}.purple{fill:#efe9ff}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.title{font-size:36px;font-weight:800}.subtitle{font-size:20px;fill:#555555}.label{font-size:22px;font-weight:700}.small{font-size:17px}.tiny{font-size:14px}.axis{stroke:#222;stroke-width:2}.grid{stroke:#e8dcc8;stroke-width:1}.arrow{stroke:#222;stroke-width:3;marker-end:url(#arrow);fill:none}.gArrow{stroke:#0b7a3b;stroke-width:3;marker-end:url(#greenArrow);fill:none}.warn{fill:#be123c}.good{fill:#0b7a3b}.base{fill:#2563eb}
+</style>
+  
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#222"/></marker>
+    <marker id="greenArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0b7a3b"/></marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="540"/>
+<text class="text title" x="60" y="70">Tokeniser expansion lowers ATIR</text>
+<line class="grid" x1="160" y1="430" x2="1040" y2="430"/><text class="text small" x="1048" y="436">Parity with Spanish</text>
+<rect x="330" y="146.2" width="180" height="283.8" rx="8" fill="#d97706"/>
+<text class="text label" x="364" y="128.2" fill="#d97706">ATIR = 1.33</text>
+<text class="text small" x="346" y="470">Original tokeniser</text>
+<rect x="760" y="344.2" width="180" height="85.8" rx="8" fill="#0b7a3b"/>
+<text class="text label" x="794" y="326.2" fill="#0b7a3b">ATIR = 1.03</text>
+<text class="text small" x="776" y="470">Expanded tokeniser</text>
+<line class="gArrow" x1="525" y1="230" x2="735" y2="355"/>
+</svg>

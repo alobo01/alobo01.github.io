@@ -1,0 +1,1892 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MariChatmen: Teaching a Chatbot to Write Andalûh Without Becoming a Mascot | Antonio Lobo-Santos</title>
+    <meta name="description" content="Why a dialectal assistant is not just a translator plus a persona prompt, and how I adapted Qwen3.5 to answer in written Andalusian Spanish.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../styles.css">
+    <link rel="icon" type="image/svg+xml" href="../../../assets/favicon.svg">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    
+    <style>
+        .token-meter { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;}
+        .token-meter .bar-container { flex: 1; background: var(--border-color); height: 20px; border-radius: 10px; overflow: hidden; }
+        .token-meter .bar { height: 100%; transition: width 0.3s; }
+        .bg-green { background: #00c896; }
+        .bg-amber { background: #ffc107; }
+        .bg-orange { background: #ff9800; }
+        .bg-red { background: #f44336; }
+
+        .pipeline-ladder { display: flex; flex-direction: column; gap: 1rem; }
+        .pipeline-stage { padding: 1rem; background: var(--accent-glow); border-radius: 8px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; }
+        .pipeline-stage:hover { background: rgba(0,229,255,0.2); }
+        .stage-details { display: none; margin-top: 0.5rem; font-size: 0.9em; opacity: 0.8; }
+        .pipeline-stage:hover .stage-details { display: block; }
+        
+        .metric-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .metric-card { padding: 1.5rem; background: rgba(112,0,255,0.05); border-radius: 8px; text-align: center; border: 1px solid var(--accent-secondary); }
+        .metric-card h4 { margin: 0 0 0.5rem 0; color: var(--accent-secondary); }
+        .metric-card .score { font-size: 2rem; font-weight: 800; font-family: 'Outfit', sans-serif; }
+        
+        .carousel { display: flex; overflow-x: auto; gap: 1rem; padding-bottom: 1rem; }
+        .carousel-item { min-width: 300px; padding: 1rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color); }
+
+        .preference-pair { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .preference-pair > div { flex: 1; min-width: 250px; padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-card); }
+        .rejected { border-color: rgba(244,67,54,0.5); }
+        .chosen { border-color: rgba(0,200,150,0.5); }
+        
+        .run-status { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9em; font-weight: 600; width: fit-content; }
+        .status-completed { background: rgba(0,200,150,0.1); color: #00c896; border: 1px solid rgba(0,200,150,0.3); }
+        .status-progress { background: rgba(255,193,7,0.1); color: #ffc107; border: 1px solid rgba(255,193,7,0.3); }
+
+        .blog-container {
+            max-width: min(1120px, calc(100vw - 4rem));
+        }
+
+        .article-roadmap {
+            margin: 2rem 0;
+            padding: 1.25rem 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .article-roadmap ol {
+            margin: 0;
+            padding-left: 1.4rem;
+        }
+
+        .article-roadmap li {
+            margin: 0.45rem 0;
+        }
+
+        .article-roadmap a {
+            font-weight: 700;
+        }
+
+        .math-display {
+            margin: 1.5rem 0;
+            padding: 1rem 1.25rem;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.035);
+        }
+
+        .math-display mjx-container {
+            margin: 0 !important;
+        }
+
+        .blog-content h2,
+        .blog-content h3,
+        .article-roadmap {
+            scroll-margin-top: 110px;
+        }
+
+        @media (max-width: 640px) {
+            .blog-container {
+                max-width: calc(100vw - 1rem);
+                padding: 1.25rem;
+            }
+
+            .blog-content h1 {
+                font-size: clamp(2rem, 9vw, 2.3rem);
+                line-height: 1.14;
+            }
+
+            .blog-content img[alt="MariChatmen Persona"] {
+                float: none !important;
+                display: block;
+                max-width: 140px !important;
+                margin: 0.5rem auto 1.25rem !important;
+            }
+
+            .blog-content table,
+            .blog-content pre {
+                display: block;
+                max-width: 100%;
+                overflow-x: auto;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="bg-animated"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../../../index.html#home" class="logo">
+                <svg class="nav-logo-svg" viewBox="0 0 160 40" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="14" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+                    <path d="M20 6 L32 27 L8 27 Z" stroke="url(#nav-edge-grad)" stroke-width="1.5" stroke-linejoin="round" fill="rgba(0, 229, 255, 0.05)"/>
+                    <circle cx="20" cy="6" r="3" fill="var(--accent)"/>
+                    <circle cx="32" cy="27" r="2.5" fill="var(--accent-secondary)"/>
+                    <circle cx="8" cy="27" r="2" fill="var(--text-primary)"/>
+                    <text x="48" y="27" font-family="'Outfit', sans-serif" font-weight="800" font-size="22" fill="var(--text-primary)" letter-spacing="4">A<tspan fill="var(--accent)">L</tspan>S</text>
+                    <defs>
+                        <linearGradient id="nav-edge-grad" x1="8" y1="6" x2="32" y2="27">
+                            <stop offset="0%" stop-color="#00E5FF"/>
+                            <stop offset="100%" stop-color="#7000FF"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../../../index.html#home">Home</a></li>
+                <li><a href="../../../index.html#focus">Focus</a></li>
+                <li><a href="../../../index.html#systems">Systems</a></li>
+                <li><a href="../../../index.html#experience">Experience</a></li>
+                <li><a href="../../../index.html#projects">Projects</a></li>
+                <li><a href="../../../index.html#publications">Publications &amp; Talks</a></li>
+                <li><a href="../../../index.html#education">Education</a></li>
+                <li><a href="../../../index.html#skills">Skills</a></li>
+                <li><a href="https://blog.antoniolobo.com/" class="active">Blog <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7em; margin-left: 2px;"></i></a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul>
+            <li><a href="../../../index.html#home">Home</a></li>
+            <li><a href="../../../index.html#focus">Focus</a></li>
+            <li><a href="../../../index.html#systems">Systems</a></li>
+            <li><a href="../../../index.html#experience">Experience</a></li>
+            <li><a href="../../../index.html#projects">Projects</a></li>
+            <li><a href="../../../index.html#publications">Publications &amp; Talks</a></li>
+            <li><a href="../../../index.html#education">Education</a></li>
+            <li><a href="../../../index.html#skills">Skills</a></li>
+            <li><a href="https://blog.antoniolobo.com/" class="active">Blog <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7em;"></i></a></li>
+        </ul>
+    </div>
+    <main>
+        <section class="section" style="padding-top: 150px;">
+            <div class="section-container blog-container glass-card">
+                <a href="../../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Blog</a>
+                <div class="blog-content">
+<h1 id="marichatmen-teaching-a-chatbot-to-write-andalûh-without-becoming-a-mascot">MariChatmen:
+Teaching a Chatbot to Write Andalûh Without Becoming a Mascot</h1>
+<p>Why a dialectal assistant is not just a translator plus a persona
+prompt, and how I adapted Qwen3.5 to answer in written Andalusian
+Spanish (Andalûh EPA).</p>
+<p><img src="assets/MariChatmen.png" style="float: right; max-width: 200px; margin: 0.5rem 0 1rem 2rem; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.15);" alt="MariChatmen Persona" /></p>
+<section id="tldr" class="widget-container">
+<h2>TL;DR</h2>
+<p>The surprising failure was not that the model could not learn
+Andalûh spelling. It could. The failure was that it could become more
+Andalusian-looking while becoming less helpful.</p>
+<p>Persona markers are easy: Feria, gazpacho, <code>miarma</code>,
+SFDK. Answering the user’s actual question while keeping a natural
+written variety is harder.</p>
+<p>I built <strong>MariChatmen</strong>, an experimental intelligent
+assistant that responds in <strong>Andalûh</strong>
+<a href="https://andaluh.es/epa-2/">EPA</a>, a written representation
+of Andalusian Spanish. The name is a small pun on <em>Mari Carmen</em>
+and chat: a fictional Sevillian auntie-friend assistant, warm, direct,
+funny, proud of Andalucía, but still expected to answer the actual
+question.</p>
+<p>The MariChatmen models are available on Hugging Face under the
+<a href="https://huggingface.co/MariChatmen" target="_blank" rel="noopener">MariChatmen
+organisation</a>, and the project code is available in the
+<a href="https://github.com/alobo01/MariChatmen" target="_blank" rel="noopener">MariChatmen
+GitHub repository</a>.</p>
+<p>The pipeline that worked best separated the problem into stages: make
+Andalûh cheaper to read, make it familiar to predict, teach assistant
+behaviour, teach preference between plausible answers, and only then add
+MariChatmen’s persona.</p>
+<p>The selected result is an experimental 4B adapter, not a
+release-quality public assistant. The main lesson is simple: teach the
+model to help first; teach it to say <code>miarma</code> later.</p>
+</section>
+<h2 id="introduction-why-build-an-andalûh-llm">The Problem: Dialect Is
+Not Persona</h2>
+<h3 id="motivation">The Gazpacho Failure</h3>
+<p>I am originally from Sevilla, Andalucía, and I wanted to build
+something that sounded obvious to me: a large language model (LLM) that could answer in
+Andalûh.</p>
+<p>Not standard Spanish with a few local words sprinkled on top. Not a
+Feria/SFDK/gazpacho confetti cannon. A useful assistant whose default
+written voice felt Andalusian.</p>
+<p>At first, I thought the hard part would be spelling.</p>
+<p>That was wrong.</p>
+<p>The model could learn visible Andalûh markers. It could learn
+<code>êttá</code>, <code>çebiya</code>, <code>miarma</code>, and
+gazpacho. The bad surprise was that those markers could improve while
+the answers got worse. It had learned the confetti, not the
+conversation.</p>
+<p>Here is the failure in miniature. This is a schematic contrast, not a
+quoted model sample:</p>
+<pre class="text"><code>Bad version:
+User: Estoy agobiado con el máster, ¿cómo me organizo?
+Assistant: Respira, miarma: entrega la TSE, prioriza er semestre y duérmete bien.
+
+Good version:
+User: Estoy agobiado con el máster, ¿cómo me organizo?
+Assistant: Respira, miarma: primero apuntah tó lo que hay pendiente y luego divideh cada cosa en tareah más chica. Elige una prioridad clara pa hoy y deja descansah.</code></pre>
+<p>The bad answer sounds warm, but it invents a detail and gives no
+plan. The good answer still has Andalûh surface, but it first answers
+the question: write down the pending work, split it into smaller tasks,
+choose one priority, and leave room to rest.</p>
+<p>When I introduced persona data too early, the model learned cheap
+shortcuts: Expo, Feria, SFDK, gazpacho, Málaga, or <code>miarma</code>
+appeared before reliable answers.</p>
+<p>The problem is not that Feria, SFDK, Cruzcampo, or
+<code>miarma</code> are bad persona details. The problem is when they
+become substitutes for answering the question.</p>
+<p>That led to the central design rule:</p>
+<pre class="text"><code>Qwen-Andaluh first.
+MariChatmen persona second.</code></pre>
+<p>In other words: make the model useful in Andalûh first, then let
+MariChatmen’s voice sit on top of that behaviour.</p>
+<h3 id="the-thesis">The thesis</h3>
+<p>The useful abstraction is this:</p>
+<pre class="text"><code>spelling is not familiarity
+familiarity is not assistant behaviour
+assistant behaviour is not preference
+preference is not persona
+persona is not quality</code></pre>
+<p>Each line points to a different mechanism. The model can split
+Andalûh text inefficiently. It can treat Andalûh spelling as rare noise.
+It can continue Andalûh-looking text without answering the user. It can
+produce fluent but wrong answers. It can also sound like MariChatmen
+while failing the task.</p>
+<p>The pipeline in this post is built around keeping those mechanisms
+separate.</p>
+<h3 id="why-minority-language-llms-are-hard">Why Minority-Language AI
+Is Hard</h3>
+<p>Large language models can look multilingual, but their multilingual
+ability is uneven. The important question is not whether a model
+recognises a language name; it is whether it has seen enough of the
+right distribution to use it reliably.</p>
+<p>The naive view is:</p>
+<blockquote>
+<p>If the model knows Spanish, adapting it to Andalûh should be
+easy.</p>
+</blockquote>
+<p>The better view is:</p>
+<blockquote>
+<p>A model knows the text patterns it has seen, the way those texts were
+split into pieces during training, and the benchmarks we have built to
+test it.</p>
+</blockquote>
+<p>That distinction matters for minority languages, low-resource languages, and
+underrepresented written varieties.</p>
+<p>First, there is often less text. Joshi et al. show how unevenly NLP
+resources cover the world’s
+languages.<sup><a href="#ref-joshi">[1]</a></sup> A language with little
+digital text, little labelled instruction data, and few benchmarks is
+harder to train and harder to evaluate.</p>
+<p>Second, the text-splitting step can be unfair. Petrov et al. show that
+equivalent content can require very different numbers of tokens
+depending on the language.<sup><a href="#ref-petrov">[2]</a></sup> More
+tokens mean more cost, more latency, and less usable context.</p>
+<p>Third, evaluation is part of the work. The No Language Left Behind
+project is a useful reminder that serious low-resource language support
+requires data, modelling, human evaluation, and language-specific
+benchmarks.<sup><a href="#ref-nllb">[3]</a></sup></p>
+<h3 id="language-dialect-accent-variety">Language, Dialect, Accent,
+Variety</h3>
+<p>The boundary between a language and a dialect is not clean.</p>
+<p>One common idea is mutual intelligibility, but it is not a strict
+scientific line. Mutual intelligibility comes in degrees, and social
+context matters.<sup><a href="#ref-britannica">[4]</a></sup> For this
+project, I do not need to settle whether Andalusian should be called a
+language, dialect, accent, or variety. The engineering target is
+narrower:</p>
+<blockquote>
+<p>Can I adapt an LLM to answer in a written Andalusian variety?</p>
+</blockquote>
+<h3 id="what-is-andalûh">What Is Andalûh?</h3>
+<p>Andalusian Spanish is not one single accent. It is a family of
+varieties across Andalucía, with differences between western and eastern
+areas, between provinces, and between social contexts.</p>
+<p>Some familiar features are <em>seseo</em>, <em>ceceo</em>, consonant
+weakening, and final consonant aspiration or deletion. Linguistic work
+on Eastern Andalusian Spanish describes several of these patterns,
+including coda <code>/s/</code> behaviour and intervocalic
+<code>/d/</code>
+deletion.<sup><a href="#ref-eastern-andalusian">[5]</a></sup></p>
+<pre class="text"><code>cansado → cansao
+verdad  → verdá
+para    → pa
+todo    → tó</code></pre>
+<p>For this project, I used EPA, or <strong>Êttandâ pal
+Andalûh</strong>, as the written target. On the
+<a href="https://andaluh.es/epa-2/" target="_blank" rel="noopener">AndaluGeeks
+EPA page</a>, EPA is described as an orthographic proposal, not a full
+grammar.<sup><a href="#ref-epa">[6]</a></sup> That made it a practical
+target for a machine-learning experiment: concrete enough to generate
+text, but still limited enough that I could separate spelling from
+broader linguistic claims.</p>
+<figure>
+<img src="assets/figure-02-what-is-andaluh.svg?v=2" alt="Standard Spanish to Andalûh EPA examples" />
+<figcaption>
+I am not presenting EPA as the only way to write Andalusian. I am using
+it as a practical engineering target.
+</figcaption>
+</figure>
+<h3 id="why-andalûh-is-a-useful-test-case">Why Andalûh Is a Useful Test
+Case</h3>
+<p>Andalûh is not low-resource in the same way as a language with almost
+no digital corpus. It inherits much of its grammar and semantics from
+Spanish, and Spanish has abundant data. That makes it technically
+convenient: I can reuse Spanish datasets, protect fragile spans such as
+code and URLs, transliterate the
+natural-language parts with
+<a href="https://github.com/andalugeeks/andaluh-py" target="_blank" rel="noopener"><code>andaluh-py</code></a>,
+and use the result as training
+data.<sup><a href="#ref-epa">[6]</a></sup></p>
+<pre class="text"><code>Spanish answer
+→ protect code, URLs, package names, model IDs
+→ transliterate with andaluh-py
+→ apply light Sevillian informal postprocessing
+→ restore protected spans
+→ train</code></pre>
+<p>This is much easier than building a model for a language where I lack
+raw text, dictionaries, instruction data, and benchmarks. However, the
+underrepresented part remains the written Andalûh target: the spelling,
+written forms, informal expressions, evaluation data, and
+expected assistant behaviour.</p>
+<h3 id="why-a-transcriptor-is-not-enough">Why a Transcriptor Is Not
+Enough</h3>
+<p>That is why a transcriptor is a useful starting point, but not the
+whole solution.
+<a href="https://github.com/andalugeeks/andaluh-py" target="_blank" rel="noopener"><code>andaluh-py</code></a>
+can transform the surface. It cannot teach the model when to use
+expressions such as <em>illo</em>, <em>miarma</em>, <em>quillo</em>,
+<em>pisha</em>, <em>pechá</em>, <em>jartible</em>, <em>no veah</em>, or
+<em>der tirón</em>. It cannot know whether a support answer is useful.
+It cannot know when a joke about gazpacho helps or when it turns into
+keyword soup.<sup><a href="#ref-epa">[6]</a></sup></p>
+<p><strong>The transcriptor gives me spelling. It does not give me
+judgement.</strong></p>
+<figure>
+<img src="assets/figure-03-not-just-translator.svg"
+alt="Transliteration versus post-training" />
+<figcaption>A protected transcriptor can change the written surface.
+Post-training is where the model learns judgement: usefulness, protected
+code spans, and when persona is appropriate.</figcaption>
+</figure>
+<h3 id="objection-is-this-just-transliteration">Objection: Is this just
+transliteration?</h3>
+<p>Partly, yes. If the goal is only to render a finished Spanish answer
+into Andalûh spelling, a protected transcriptor may be enough.</p>
+<p>But that is a narrower task than building an assistant.</p>
+<p>The assistant has to decide what to say, preserve code and package
+names, avoid inventing support details, choose whether a local
+expression is appropriate, and maintain the written variety across
+turns. A transcriptor works after the answer exists. The training
+problem is about shaping the answer before it exists.</p>
+<p>That is the difference this post is about.</p>
+<h3 id="the-naive-approach">The Naive Approach</h3>
+<p>Given that tooling, the naive approach was tempting:</p>
+<pre class="text"><code>base model
+→ strong MariChatmen prompt
+→ transliterate Spanish answers
+→ fine-tune
+→ done</code></pre>
+<p>The first naive attempt broke down because the persona signals were
+the most visible part of the data. The model learned the easy tokens
+first:</p>
+<pre class="text"><code>Feria
+SFDK
+gazpacho
+Málaga
+miarma</code></pre>
+<p>Those are easy. Answering correctly while sounding natural is
+harder.</p>
+<pre class="text"><code>surface Andalûh ≠ useful Andalûh
+persona markers ≠ persona behaviour</code></pre>
+<p>The mechanism is simple: training rewards patterns that are easy to
+imitate. Cultural keywords and spelling cues are cheap, dense signals.
+Correctness, directness, and good judgement are more diffuse. If the
+data mixes them too early, the model can improve on the visible proxy
+while the behaviour underneath gets worse.</p>
+<h3 id="the-better-pipeline">The Better Pipeline</h3>
+<p>The better pipeline separates those pressures instead of asking one
+fine-tuning stage to solve everything at once:</p>
+<figure class="figure-scroll">
+<img src="assets/figure-04-pipeline.svg?v=7"
+alt="Staged Qwen-Andaluh to MariChatmen pipeline" />
+<figcaption>Make the model useful in Andalûh first; add MariChatmen’s
+persona only after that foundation exists. The point is not the number
+of stages, but refusing to let persona tokens compensate for weak
+assistant behaviour.</figcaption>
+</figure>
+<p>In plain English, the pipeline says:</p>
+<pre class="text"><code>1. make the text cheaper to read
+2. make the writing familiar
+3. teach the model to answer
+4. teach it to prefer the better answer
+5. add the auntie-friend voice only after the assistant works</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 28%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>What it teaches</th>
+<th>Why it belongs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Transliteration</td>
+<td>Written form</td>
+<td>Creates training text from Spanish</td>
+</tr>
+<tr class="even">
+<td>Tokeniser expansion</td>
+<td>Cheaper frequent Andalûh forms</td>
+<td>Reduces token friction for <code>ç</code>, <code>ehtá</code>, and
+<code>Andalûh</code></td>
+</tr>
+<tr class="odd">
+<td>AAP</td>
+<td>Text distribution</td>
+<td>Makes Andalûh-looking text less “weird” for the model</td>
+</tr>
+<tr class="even">
+<td>SFT</td>
+<td>Assistant behaviour</td>
+<td>Teaches direct, useful answers</td>
+</tr>
+<tr class="odd">
+<td>ORPO</td>
+<td>Preference</td>
+<td>Prefers good Andalûh over leakage or stylish wrong answers</td>
+</tr>
+<tr class="even">
+<td>Persona SFT</td>
+<td>MariChatmen character</td>
+<td>Adds identity and cultural flavour</td>
+</tr>
+<tr class="odd">
+<td>RL repair</td>
+<td>Output habits</td>
+<td>Polishes leakage, repetition, and rambling after coherence</td>
+</tr>
+</tbody>
+</table>
+<h3 id="where-it-landed-early">Where it landed</h3>
+<p>The selected 4B checkpoint is experimental. On fixed probes it
+answered directly, preserved code and package names, and avoided
+standard-Spanish leakage. Persona quality remained weak. So the result
+is not “a finished Andalusian assistant”; it is evidence that the staged
+pipeline helped avoid the worst mascot failure.</p>
+<h3 id="how-the-datasets-were-built">How the Datasets Were Built</h3>
+<p>The dataset strategy was not “throw everything into fine-tuning”.
+Each stage needed a different kind of example because each stage teaches
+a different behaviour.</p>
+<table>
+<colgroup>
+<col style="width: 2%" />
+<col style="width: 76%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>How it was built</th>
+<th>Why that shape</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AAP text</td>
+<td>Spanish raw text was filtered, fragile spans were protected, natural
+language was converted with
+<a href="https://github.com/andalugeeks/andaluh-py" target="_blank" rel="noopener"><code>andaluh-py</code></a>,
+and text was packed into training chunks. The Spanish Wikipedia dump
+used in this cycle was the
+<a href="https://dumps.wikimedia.org/eswiki/20260501/" target="_blank" rel="noopener">2026-05-01
+eswiki dump</a>; licence and attribution are tracked as part of the
+data-card work.</td>
+<td>The model needs to see enough Andalûh-looking text that it stops
+treating the spelling as surprising or incorrect.</td>
+</tr>
+<tr class="even">
+<td>Instruction SFT</td>
+<td>User prompts stayed mostly Spanish, with some Andalûh-looking
+inputs. Assistant targets were Andalûh. System prompts were mixed
+between neutral, empty, and explicit Andalûh instructions.</td>
+<td>If every row says “answer in Andalûh”, the model may only use
+Andalûh when explicitly told. The target behaviour is Andalûh by
+default.</td>
+</tr>
+<tr class="odd">
+<td>Technical gold</td>
+<td>Small hand-checked examples for prompts about <code>uv</code>,
+<code>transformers</code>, overfitting, REST APIs, LoRA, QLoRA, and
+ORPO.</td>
+<td>Accent should not overwrite factuality. These rows make technical
+correctness a first-class objective.</td>
+</tr>
+<tr class="even">
+<td>ORPO pairs</td>
+<td>Each prompt has a chosen answer and a rejected answer. Rejected
+answers include standard Spanish leakage, weak Andalûh, reasoning
+preambles, repetition, support hallucinations, and stylish but wrong
+answers.</td>
+<td>Preference training works best when the bad answer is plausible. The
+model learns the boundary, not just “long answer good”.</td>
+</tr>
+<tr class="odd">
+<td>Persona examples</td>
+<td>Helpful answers with controlled Sevillian persona: MariChatmen, Expo
+92, Feria, Triana, Macarena, SFDK/ToteKing, Cruzcampo jokes, and
+province flourishes.</td>
+<td>The persona should decorate a correct answer, not replace it.</td>
+</tr>
+<tr class="even">
+<td>RLOO prompts</td>
+<td>A small failure-bank prompt set was used to stress-test output-level
+repair.</td>
+<td>RL should polish generation habits after coherence. It should not be
+used to teach missing knowledge.</td>
+</tr>
+</tbody>
+</table>
+<p>That separation was the main design choice. The same Spanish source
+can generate several training datasets, but not every dataset should be
+used for the same training objective. Once the datasets were split by
+purpose, the rest of the pipeline became easier to reason about.</p>
+<p>If this separation is useful, each stage should move a different
+thing:</p>
+<pre class="text"><code>text splitting should reduce cost, not magically improve behaviour
+AAP should make Andalûh easier to continue, not make a good assistant
+SFT should teach answer shape, but not reliably reject plausible bad answers
+ORPO should help most when the rejected answer is tempting
+persona data should help only after the neutral assistant already works
+RL should polish habits, not create missing capability</code></pre>
+<p>That is roughly what I observed.</p>
+<p>The rest of the post follows the same build order, so you can jump
+straight to the part you care about:</p>
+<nav class="article-roadmap" aria-label="Post roadmap">
+<ol>
+<li><a href="#stage-1-tokenisation">Text splitting (tokenisation)</a>: why written
+Andalûh is split into extra pieces and how the expanded tokeniser reduces that
+mechanical tax.</li>
+<li><a href="#stage-2-andalûh-adaptive-pretraining">Reading enough
+Andalûh-shaped text</a>: how adaptive pretraining makes the writing less
+surprising before the model learns to answer.</li>
+<li><a href="#stage-3-instruction-tuning">Teaching it to answer</a>:
+how supervised examples turn a text continuer into an assistant that
+answers in Andalûh.</li>
+<li><a href="#stage-4-preference-tuning">Teaching it to choose better
+answers</a>: how preference pairs teach the model to prefer useful
+Andalûh over standard-Spanish leakage or stylish wrong answers.</li>
+<li><a href="#how-this-was-feasible-lora-and-qlora">LoRA and QLoRA</a>:
+why adapter training made the project feasible on available
+hardware.</li>
+<li><a href="#stage-5-persona-tuning">Adding MariChatmen’s voice</a>:
+how the character is added after the neutral Andalûh assistant is
+stable.</li>
+<li><a href="#rl-as-polish-not-rescue">Polishing bad habits</a>: why
+reinforcement learning is useful for output habits, but not as a rescue
+for weak data.</li>
+<li><a href="#what-was-actually-trained">Where MariChatmen landed</a>:
+what the selected 4B adapter contains, what is staged, and why it
+remains experimental.</li>
+<li><a href="#examples-improvements-and-remaining-traps">Examples and
+traps</a>: generated answers, repairs, regressions, and the evidence
+used to choose the final checkpoint.</li>
+<li><a href="#where-it-broke">Failure modes</a>: where the pipeline
+broke and what each failure taught.</li>
+<li><a href="#future-work">Future work</a>: the data, evaluation, RL,
+and speech work needed before this becomes a reliable public
+assistant.</li>
+</ol>
+</nav>
+<h2 id="stage-1-tokenisation">Stage 1: Text Splitting (Tokenisation)</h2>
+<h3 id="what-is-tokenisation">What is text splitting?</h3>
+<p>The first practical obstacle was not grammar or persona. It was the
+way the base model reads text. Computers do not read words the way
+humans do. They operate on numbers. Before a language model can process
+text, that text has to be converted into a sequence of numerical
+units.</p>
+<p>Tokenisation is the technical name for this text-splitting step. It
+splits raw text into smaller pieces called <strong>tokens</strong>, and each token is mapped
+to an ID in the model’s vocabulary. A token can be a whole word, part of
+a word, a punctuation mark, a space, or even a short sequence of
+characters.</p>
+<p>A useful intuition is that tokenisation is the model’s spelling
+system. Common words and familiar forms are usually represented
+compactly. Rare words, unusual spellings, dialectal forms, or unfamiliar
+writing may be broken into many smaller pieces.</p>
+<p>For a more detailed visual explanation of text splitting, see Murilo
+Gustineli’s visual explainer:
+<a href="https://medium.com/data-science/the-art-of-tokenization-breaking-down-text-for-ai-43c7bccaed25" target="_blank" rel="noopener">Medium
+article</a>.<sup><a href="#ref-art-tokenization">[7]</a></sup></p>
+<h3 id="why-it-matters">Why it matters</h3>
+<p>This text-splitting step measures how expensive Andalûh is for the
+base model to read. If an Andalûh sentence is split into many more tokens than the
+equivalent Spanish sentence, the model pays a penalty: higher cost,
+higher latency, shorter effective context, and potentially weaker
+learning signal. This is not just a theoretical concern: Petrov et
+al. show that language model tokenisers can introduce unfairness between
+languages by requiring very different numbers of tokens for equivalent
+content.<sup><a href="#ref-petrov">[2]</a></sup></p>
+<h3 id="andalûh-token-inflation-rate-atir">Andalûh Token Inflation Rate
+(ATIR)</h3>
+<p>I measured ATIR, the Andalûh Token Inflation Rate:</p>
+<div class="math-display">
+\[
+\mathrm{ATIR} =
+\frac{\operatorname{tokens}(\text{Andalûh text})}
+{\operatorname{tokens}(\text{Spanish text})}
+\]
+</div>
+<p>In plain English, ATIR asks: “how many more text pieces does Andalûh
+need compared with the same content in standard Spanish?”</p>
+<p>After measuring the problem, I did not train a new tokeniser from
+scratch. That would change the token IDs the model already knows,
+making its pretrained embeddings much harder to reuse. The safer route
+was to expand the existing Qwen3.5 tokeniser: add new pieces for common
+Andalûh forms while leaving the original IDs intact.</p>
+<p>Here are two concrete examples. The important detail is that
+<code>çebiya</code> is lowercase; uppercase <code>Çebiya</code> is still
+split by the expanded tokeniser.</p>
+<figure>
+<img src="assets/tokenizer_examples.svg?v=3" alt="Tokeniser fragmentation before and after expansion for está, êttá, Sevilla, and çebiya" />
+<figcaption>
+The original Qwen3.5 tokeniser splits frequent Andalûh forms into
+several fragments. The expanded tokeniser keeps common forms such as
+<code>êttá</code> and lowercase <code>çebiya</code> together, while
+preserving the original Spanish tokenisation.
+</figcaption>
+</figure>
+<p>On 1,000 sampled short Spanish Wikipedia paragraphs without links,
+the median ATIR fell from 1.33 with the original Qwen3.5 tokeniser to
+1.20 with the expanded tokeniser. In practical terms, Andalûh text
+became less expensive for the model to read: fewer extra tokens means
+lower training cost, less context pressure, and a cleaner learning
+signal.</p>
+<figure>
+<img src="assets/atir_comparison.png" alt="ATIR comparison between the original Qwen3.5 tokeniser and the expanded tokeniser" />
+<figcaption>
+The expanded tokeniser reduces the median Andalûh token inflation rate
+on the sampled Wikipedia paragraphs.
+</figcaption>
+</figure>
+<p>The next figure shows the most useful tokens added during the
+expansion. These were not chosen because they looked culturally
+distinctive; they were chosen because they repeatedly reduced
+fragmentation in the transformed corpus.</p>
+<figure>
+<img src="assets/training-plots/tokenizer_tokens.svg" alt="Most useful Andalûh tokens added to the expanded tokeniser" />
+<figcaption>
+The tokeniser audit made the expansion concrete. Tokens such as
+<code>lô</code>, <code>dêh</code>, <code>lâ</code>,
+<code>çîttema</code>, <code>êttá</code>, and <code>dêppuê</code> were
+not added because they look local; they were added because they
+repeatedly saved token fragments in the transformed corpus.
+</figcaption>
+</figure>
+<h2 id="stage-2-andalûh-adaptive-pretraining">Stage 2: Andalûh Adaptive
+Pretraining</h2>
+<h3 id="what-is-adaptive-pretraining">What is adaptive pretraining?</h3>
+<p>Once the text-splitting work reduced the mechanical cost of Andalûh, the next
+problem was familiarity. A pretrained language model has already read a
+large amount of text. That is why it can write, answer questions,
+translate, summarise, and reason across many topics.</p>
+<p>But pretraining is not neutral. The model becomes familiar with the
+kinds of text it has seen most often. Common formats, spellings,
+languages, domains, and writing styles become easier for it to predict.
+Rare ones remain surprising.</p>
+<p>Adaptive pretraining is the step where we continue training the model
+on the kind of text we care about. In this project, I call that stage
+<strong>AAP</strong>, or <strong>Andalûh Adaptive
+Pretraining</strong>.</p>
+<p>The intuition is simple: before asking the model to be a helpful
+Andalûh assistant, I first wanted it to read enough Andalûh-shaped text
+that the spelling stopped looking exotic.</p>
+<p>This stage is not about teaching the model to follow instructions or
+adopt a persona. It is closer to letting the model read in the target
+writing system until forms like <code>êttá</code>, <code>çîttema</code>,
+<code>dêppuê</code>, or <code>Andalûh</code> become ordinary
+continuations rather than rare character noise.</p>
+<p>This idea is related to domain-adaptive pretraining: Gururangan et
+al. show that continuing pretraining on data closer to the target use
+case can improve downstream
+behaviour.<sup><a href="#ref-dont-stop-pretraining">[8]</a></sup></p>
+<p>For a more visual explanation of how decoder-only language models
+learn by predicting the next token, see <em>The Illustrated GPT-2</em>
+by Jay Alammar:
+<a href="https://jalammar.github.io/illustrated-gpt2/" target="_blank" rel="noopener">visual
+blog post</a>.<sup><a href="#ref-illustrated-gpt2">[9]</a></sup></p>
+<h3 id="why-it-matters-1">Why it matters</h3>
+<p>Text splitting made Andalûh cheaper to read. Adaptive pretraining
+makes Andalûh less surprising to predict. A better tokeniser reduces
+fragmentation, meaning fewer chopped-up pieces, but the model still
+needs exposure to the writing style; otherwise, it may treat Andalûh
+spelling as noise, overcorrect it back into standard Spanish, or fail to
+maintain the style.</p>
+<p>AAP gives the model that exposure before instruction tuning
+begins.</p>
+<h3 id="the-build">The build</h3>
+<p>To build that familiarity, I converted Spanish plain text into
+Andalûh, protected fragile spans such as code, URLs, package names, and
+model IDs, packed the result into training chunks, and trained the model
+with ordinary next-token prediction.</p>
+<p>The objective is standard causal language modelling:</p>
+<div class="math-display">
+\[
+L = - \sum_t \log p(x_t \mid x_{\lt t})
+\]
+</div>
+<p>In plain English: at every position, the model tries to guess the
+next token, meaning the next piece of text, from the pieces that came
+before it. If it assigns high probability to the real next piece, the
+loss is low. If it is surprised by the next piece, the loss is high.</p>
+<h3 id="what-is-perplexity">What is perplexity?</h3>
+<p>Perplexity measures how surprised a language model is by a text. A
+useful intuition is that it reflects the model’s average uncertainty
+when choosing the next token: lower perplexity means the text is easier
+to predict.</p>
+<p>Technically, perplexity is the exponentiated average negative
+log-likelihood of a
+sequence.<sup><a href="#ref-hf-perplexity">[10]</a></sup></p>
+<div class="math-display">
+\[
+\mathrm{perplexity} = \exp(\mathrm{loss})
+\]
+</div>
+<p>So when loss goes down, perplexity goes down too. This makes
+perplexity a useful stage-level signal: it does not prove that the
+model is a good assistant, but it does tell me whether Andalûh text has
+become easier for the model to continue.</p>
+<h3 id="what-changed">What changed</h3>
+<p>The healthy AAP runs reduced Andalûh perplexity while keeping Spanish
+perplexity stable. That was the desired behaviour: make written Andalûh
+easier to continue without making the model forget Spanish.</p>
+<figure>
+<img src="assets/aap_perplexity_by_epoch.svg" alt="Spanish and Andalûh validation perplexity across Andalûh adaptive pretraining epochs" />
+<figcaption>
+Validation perplexity across AAP epochs. The useful pattern is not just
+that Andalûh perplexity goes down, but that it does so while Spanish
+perplexity remains stable. That suggests the model is adapting to
+Andalûh writing without paying a large forgetting penalty on Spanish.
+</figcaption>
+</figure>
+<p>I used the AAP plots as checks, not decoration. They answer one
+question: did Andalûh become easier to predict without making Spanish
+unstable?</p>
+<pre class="text"><code>Andalûh perplexity should fall.
+Spanish perplexity should not explode.</code></pre>
+<figure>
+<img src="assets/training-plots/ppl_before_after.svg" alt="Before and after AAP perplexity drops for Spanish and Andalûh probes" />
+<figcaption>
+The before/after view is the sanity check. The adaptation probe moved
+much more than the retention probe: Andalûh perplexity dropped sharply,
+while Spanish perplexity stayed stable or improved slightly. That is the
+signature I wanted from AAP.
+</figcaption>
+</figure>
+<p>That mattered downstream. Once Andalûh was easier to read, SFT and
+ORPO had a cleaner job: teach direct assistant behaviour, reduce Spanish
+leakage, and reject fluent answers that sounded local but were wrong.</p>
+<h3 id="the-limit">The limit</h3>
+<p>AAP makes Andalûh text feel more normal to the model, but it does not
+make the model a good assistant. It can continue text fluently and still
+fail to follow instructions, avoid Spanish leakage, handle technical
+questions, or use the MariChatmen persona appropriately.</p>
+<pre class="text"><code>AAP teaches the model to read Andalûh.
+SFT teaches it to answer.
+ORPO teaches it to prefer better answers.
+Persona tuning teaches it to sound like MariChatmen.</code></pre>
+<h2 id="stage-3-instruction-tuning">Stage 3: Instruction Tuning</h2>
+<h3 id="what-is-instruction-tuning">What is instruction tuning?</h3>
+<p>After AAP, the model had a better reading habit for Andalûh. The next
+question was behavioural: what should it do when a user asks for help? A
+pretrained language model knows how to continue text, but not
+necessarily how to behave like an assistant.</p>
+<p>Instruction tuning changes that. Supervised fine-tuning
+(<strong>SFT</strong>) trains the model on conversations where the input
+is a user request and the target is a good assistant answer. The model
+learns the assistant contract: answer directly, stay on task, use the
+requested style, and be useful.</p>
+<p>The intuition is simple: AAP teaches the model that Andalûh text is
+normal; SFT teaches it what to do when a user asks for something.</p>
+<p>For a visual introduction to where SFT fits in the LLM training
+pipeline, see Maxime Labonne’s LLM course:
+<a href="https://github.com/mlabonne/llm-course" target="_blank" rel="noopener">LLM
+Course</a>.<sup><a href="#ref-llm-course">[11]</a></sup></p>
+<h3 id="why-it-matters-2">Why it matters</h3>
+<p>For MariChatmen, the target was not only:</p>
+<pre class="text"><code>write Andalûh-looking text</code></pre>
+<p>The target was:</p>
+<pre class="text"><code>answer the user usefully in Andalûh</code></pre>
+<p>That distinction matters. A model can produce surface Andalûh while
+still giving vague answers, leaking standard Spanish, hallucinating
+technical details, or turning every response into persona
+performance.</p>
+<p>SFT is the stage where the model learns the basic assistant behaviour
+before preference training and persona tuning. This follows the same
+broad idea used in instruction-tuned models such as InstructGPT, where
+supervised fine-tuning on demonstrations is used to move a pretrained
+model closer to user
+intent.<sup><a href="#ref-instructgpt">[12]</a></sup></p>
+<h3 id="the-build-1">The build</h3>
+<p>I used Hugging Face
+<a href="https://huggingface.co/docs/trl/en/sft_trainer" target="_blank" rel="noopener">TRL’s
+SFTTrainer</a> for supervised
+fine-tuning.<sup><a href="#ref-trl-sft">[13]</a></sup></p>
+<p>The key design choice was to keep <strong>Qwen-Andaluh</strong>
+mostly neutral:</p>
+<pre class="text"><code>system:
+  mostly &quot;Eres un asistente.&quot; or empty
+
+user:
+  standard Spanish or Andalûh-looking input
+
+assistant:
+  Andalûh target</code></pre>
+<p>This was deliberate. If every row explicitly says “respond in
+Andalûh”, the model may learn that Andalûh is only required when the
+instruction asks for it. The target behaviour is stronger:</p>
+<pre class="text"><code>Andalûh by default.
+Useful by default.
+Persona not yet.</code></pre>
+<p>For that reason, the user side stayed mostly standard Spanish, with
+some Andalûh-looking inputs, while the assistant side was the Andalûh
+target.</p>
+<h3 id="the-objective">The objective</h3>
+<p>The SFT objective is ordinary teacher forcing: during training, the
+model sees the correct answer prefix and learns to predict the next
+piece of that answer.</p>
+<p>The prompt is <code>x</code>, the target assistant answer is
+<code>y</code>, and the model is trained to put probability on each next
+target token:</p>
+<div class="math-display">
+\[
+L_{\mathrm{SFT}} = - \sum_t \log p_\theta(y_t \mid x, y_{\lt t})
+\]
+</div>
+<p>In plain English:</p>
+<pre class="text"><code>when the conversation looks like this,
+continue with this answer</code></pre>
+<p>This is why SFT is powerful, and also why bad SFT data is dangerous:
+if the target answer contains a wrong technical claim, weak Andalûh, or
+a stereotyped persona marker, the model is trained to imitate that
+too.</p>
+<h3 id="what-changed-1">What changed</h3>
+<p>SFT made the model more assistant-like: better at direct answers,
+user requests, Andalûh responses, and avoiding the “raw continuation”
+behaviour that can appear after adaptive pretraining alone.</p>
+<p>The useful change was not just style. The model became more likely to
+produce responses shaped like assistant answers:</p>
+<pre class="text"><code>question -&gt; answer
+request  -&gt; useful completion
+problem  -&gt; practical guidance</code></pre>
+<p>rather than simply continuing Andalûh-looking text.</p>
+<p>The loss curves were useful here only as optimisation guardrails. They
+told me whether training was behaving; they did not tell me whether the
+answers were correct, direct, or naturally Andalûh. For checkpoint
+selection, generated probes still mattered more than loss.</p>
+<figure>
+<img src="assets/training-plots/loss_curves.svg?v=2" alt="Training loss curves across Qwen-Andaluh runs" />
+<figcaption>
+Training loss is useful, but only as one instrument. It tells me whether
+optimisation is behaving; it does not tell me whether the answer is
+correct, direct, or naturally Andalûh.
+</figcaption>
+</figure>
+<figure>
+<img src="assets/training-plots/eval_loss_curves.svg?v=2" alt="Evaluation loss curves across Qwen-Andaluh runs" />
+<figcaption>
+Evaluation loss is the overfitting guardrail. In this project, I treated
+it as necessary but insufficient: a checkpoint still had to pass fixed
+generated probes.
+</figcaption>
+</figure>
+<h3 id="the-limit-1">The limit</h3>
+<p>SFT improved behaviour, but it did not solve preference. Some
+responses were direct but wrong; others sounded Andalûh enough, but were
+too vague, too verbose, or too willing to drift back into standard
+Spanish.</p>
+<p>That is the main limitation of SFT:</p>
+<pre class="text"><code>direct does not always mean correct
+fluent does not always mean useful
+Andalûh-looking does not always mean good Andalûh</code></pre>
+<p>That gap is why the next stage uses preference training.</p>
+<h2 id="stage-4-preference-tuning">Stage 4: Preference Tuning</h2>
+<h3 id="what-is-preference-tuning">What is preference tuning?</h3>
+<p>Once SFT made the model capable of answering, the next problem was
+choosing the right kind of answer. SFT teaches imitation. Preference
+tuning teaches selection.</p>
+<p>With SFT, the model sees one target answer and learns:</p>
+<pre class="text"><code>when the conversation looks like this,
+continue like this</code></pre>
+<p>Preference tuning gives the model a comparison instead:</p>
+<pre class="text"><code>for this prompt,
+prefer this answer over that answer</code></pre>
+<p>This is useful because many bad answers are not obviously broken.
+They can be fluent, warm, local-sounding, and still wrong for the
+project. MariChatmen needed to prefer useful Andalûh over standard
+Spanish leakage, weak Andalûh, keyword soup, or stylish but incorrect
+answers.</p>
+<h3 id="why-it-mattered">Why it mattered</h3>
+<p>ORPO, or Odds Ratio Preference Optimisation, is a preference-training
+method. It gives the model this signal: “prefer this over that”.</p>
+<p>A bad MariChatmen answer is not always nonsense. Sometimes it is
+fluent standard Spanish. Sometimes it is Andalûh-looking but technically
+wrong. Sometimes it has the right persona markers but no useful answer
+underneath.</p>
+<pre class="text"><code>chosen:
+  correct + Andalûh + direct
+
+rejected:
+  fluent standard Spanish
+
+rejected:
+  Andalûh-looking but wrong
+
+rejected:
+  persona keywords without an answer</code></pre>
+<h3 id="the-build-2">The build</h3>
+<p>I used ORPO-style chosen/rejected pairs and the
+<a href="https://huggingface.co/docs/trl/orpo_trainer" target="_blank" rel="noopener">TRL
+ORPO trainer</a>. The ORPO paper is useful here because the method is
+reference-model-free: it learns from the comparison directly, without
+requiring a second frozen model as a
+baseline.<sup><a href="#ref-orpo">[14]</a></sup></p>
+<p>The rejected answers were not random bad samples. They were hard
+negatives:</p>
+<pre class="text"><code>standard Spanish leakage
+weak Andalûh
+over-transcribed garbage
+semantic drift
+reasoning preambles
+repetition collapse
+wrong-but-stylish technical answers
+persona keywords without substance</code></pre>
+<p>That last category mattered a lot: a model can sound more “local”
+while becoming less useful.</p>
+<p>The simplified ORPO objective I used conceptually is:</p>
+<div class="math-display">
+\[
+\begin{aligned}
+L_{\mathrm{ORPO}} &=
+L_{\mathrm{NLL}}(\mathrm{chosen})
++ \beta L_{\mathrm{pref}}(\mathrm{chosen}, \mathrm{rejected}) \\
+L_{\mathrm{pref}} &=
+-\log \sigma\left(
+\operatorname{log odds}(\mathrm{chosen})
+- \operatorname{log odds}(\mathrm{rejected})
+\right)
+\end{aligned}
+\]
+</div>
+<p>The first term keeps the chosen answer likely; the second pushes it
+above the rejected answer.</p>
+<p>In plain English:</p>
+<pre class="text"><code>keep writing good answers
+and learn why these bad-but-plausible answers are worse</code></pre>
+<p>Pair quality matters. If the chosen answer is better only because it
+is longer, warmer, or more detailed, ORPO can learn the wrong
+preference.</p>
+<h3 id="what-changed-2">What changed</h3>
+<p>ORPO was useful for saying:</p>
+<pre class="text"><code>this answer is fluent,
+but it is not the answer I want</code></pre>
+<p>It helped most when the rejected answer was plausible: fluent Spanish
+leakage, weak Andalûh, or stylish wrong answers. The useful effect was
+not “more Andalûh at any cost”, but better separation between:</p>
+<pre class="text"><code>good Andalûh assistant answer</code></pre>
+<p>and:</p>
+<pre class="text"><code>answer that merely looks Andalûh</code></pre>
+<h3 id="the-limit-2">The limit</h3>
+<p>ORPO only helps when the SFT model is already coherent. It can move
+probability between behaviours the model can already produce; it does
+not magically repair unstable answers. That is why I treated it as a
+conservative repair stage, not as the main source of knowledge.</p>
+<figure>
+<img src="assets/figure-09-orpo-pair.svg?v=2"
+alt="ORPO chosen rejected pair" />
+<figcaption>Preference tuning makes the comparison explicit: for the
+same prompt, the model sees a useful Andalûh answer and a plausible
+rejected answer that is fluent but wrong for the target
+behaviour.</figcaption>
+</figure>
+<h2 id="how-this-was-feasible-lora-and-qlora">How This Was Feasible:
+LoRA and QLoRA</h2>
+<p>All of those stages would be much less practical if every experiment
+required full fine-tuning. The practical route was adapter tuning: keep
+the base model mostly fixed, and train small add-on weights that steer
+it towards the behaviour I need.</p>
+<h3 id="what-is-lora">What is LoRA?</h3>
+<p>LoRA, or Low-Rank Adaptation, starts from a simple observation: when
+you adapt a large model to a specific task, you often do not need to
+rewrite every weight. You can keep the original weight matrix frozen and
+learn a smaller update beside it.<sup><a href="#ref-lora">[15]</a></sup></p>
+<div class="math-display">
+\[
+W' = W + BA
+\]
+</div>
+<p>Here <code>W</code> is the original pretrained weight matrix.
+<code>A</code> and <code>B</code> are the small trainable adapter
+matrices. Their product <code>BA</code> is the learned update.</p>
+<p>The word <em>low-rank</em> means that the update is forced through a
+small bottleneck: a larger rank gives the adapter more capacity, while a
+smaller rank keeps it cheaper. LoRA does not make the whole model small;
+it makes the <em>trainable part</em> small.</p>
+<p>The model keeps most of its old knowledge in the frozen base, while
+the adapter learns the project-specific behaviour. For a visual
+walkthrough, Sebastian Raschka’s LoRA explainer is a useful companion
+piece.<sup><a href="#ref-lora">[15]</a></sup></p>
+<h3 id="what-is-qlora">What is QLoRA?</h3>
+<p>QLoRA adds another practical trick: keep the LoRA idea, but load the
+frozen base model in a quantized 4-bit form. The base model becomes much
+cheaper to keep in GPU memory, while the small LoRA adapters remain the
+part that training updates.<sup><a href="#ref-qlora">[16]</a></sup></p>
+<p>Quantization is the compression part. Instead of storing the frozen
+base weights with high-precision numbers, QLoRA stores them with fewer
+bits and dequantizes them as needed during computation. That does not
+make training free, but it removes the largest fixed burden: holding the
+full base model in high precision.</p>
+<p>For a visual intuition about quantization itself, Maarten
+Grootendorst’s <em>A Visual Guide to Quantization</em> is a good
+reference: QLoRA uses that general compression idea as part of a
+fine-tuning setup.<sup><a href="#ref-qlora">[16]</a></sup></p>
+<p>In plain English:</p>
+<pre class="text"><code>LoRA makes the trainable part small.
+QLoRA makes the frozen base cheaper to keep in memory.</code></pre>
+<p>For this project, that was the difference between “nice idea” and
+“actually runnable”.</p>
+<figure>
+<img src="assets/figure-07-lora-qlora.svg" alt="LoRA and QLoRA" />
+<figcaption>LoRA reduces the number of weights I train. QLoRA reduces
+the memory cost of carrying the frozen base while those adapters are
+trained.</figcaption>
+</figure>
+<h2 id="stage-5-persona-tuning">Stage 5: Persona Tuning</h2>
+<h3 id="what-is-persona-tuning">What is persona tuning?</h3>
+<p>Only after the neutral Andalûh assistant was usable did it make sense
+to add the character layer. Persona tuning teaches the model how to
+sound like a particular character.</p>
+<p>But persona is dangerous if it arrives too early.</p>
+<p>A persona can make a model more memorable, warmer, and more
+recognisable. It can also make the model worse if it learns to perform
+identity instead of answering the user.</p>
+<p>For MariChatmen, the goal was not:</p>
+<pre class="text"><code>generic Andalusian mascot</code></pre>
+<p>The goal was a specific fictional voice: Sevillian, warm, funny,
+proud, slightly exaggerated, and quick to turn almost anything into a
+small defence of Andalucía.</p>
+<p>But she still has to answer the question.</p>
+<p>The persona is seasoning, not the meal.</p>
+<h3 id="why-it-mattered-1">Why it mattered</h3>
+<p>The reference point was built from things I liked when I was young
+and living in Sevilla: Feria nights, Triana and the Macarena as
+emotional geography, the afterglow of Expo 92, SFDK and ToteKing as
+local cultural texture, Cruzcampo jokes, gazpacho superiority, and a
+general tendency to defend Andalucía with a smile.</p>
+<p>MariChatmen is meant to feel like a fictional Sevillian auntie-friend
+hybrid.</p>
+<p>Not a caricature.</p>
+<p>Not a list of stereotypes.</p>
+<p>Not a model that throws <code>miarma</code>, <code>Feria</code>, and
+<code>gazpacho</code> into every answer and calls it personality.</p>
+<h3 id="the-build-3">The build</h3>
+<p>The intended design was to introduce persona only after the neutral
+Andalûh assistant was stable.</p>
+<p>In practice, some early experiments mixed persona too soon. That
+exposed one of the main pain points of the whole project: persona
+markers can hide weak answers.</p>
+<pre class="text"><code>good persona:
+  correct answer
+  + Andalûh surface
+  + one or two natural Sevillian cues
+
+bad persona:
+  Feria + SFDK + Cruzcampo + miarma
+  but no useful answer</code></pre>
+<p>That is why the final pipeline separates the pressures rather than
+mixing usefulness and personality from the beginning.</p>
+<p>First:</p>
+<pre class="text"><code>make the model useful in Andalûh</code></pre>
+<p>Then:</p>
+<pre class="text"><code>add MariChatmen on top</code></pre>
+<h3 id="what-changed-3">What changed</h3>
+<p>Once added at the right point, persona examples gave the model a more
+recognisable voice and produced some of the best blog examples.</p>
+<p>The good outputs had a clear pattern: the answer worked first, and
+the persona sat lightly on top of it. The model could make a local joke,
+mention a cultural reference, or add a warm Andalusian turn without
+losing the task.</p>
+<p>That was the behaviour I wanted.</p>
+<h3 id="the-limit-3">The limit</h3>
+<p>More personality is not automatically better.</p>
+<p>If the answer is wrong, adding <code>miarma</code> does not fix it.
+If the answer is vague, a Cruzcampo joke does not make it useful. If the
+model hallucinates, sounding Sevillian only makes the hallucination more
+charming.</p>
+<p>That is why persona quality has to be measured separately from answer
+quality, and why persona data belongs after the neutral assistant has
+learned to answer.</p>
+<h2 id="rl-as-polish-not-rescue">RL as Polish, Not Rescue</h2>
+<h3 id="what-rl-was-for">What RL was for</h3>
+<p>After SFT, ORPO, and persona tuning, the remaining problems were no
+longer basic capability problems. They were output-level habits.
+Reinforcement learning was useful for those habits:</p>
+<pre class="text"><code>repetition
+rambling
+Spanish leakage
+keyword soup
+overlong answers
+weak endings</code></pre>
+<p>It is not a substitute for good SFT data.</p>
+<p>RL can polish behaviour that already exists, but it is a poor way to
+teach missing knowledge or repair a weak data pipeline. This matches
+recent RL-for-reasoning analysis: Qin et al. find that GRPO mainly
+improves execution robustness on problems the model already has some
+ability to solve.<sup><a href="#ref-rl-wall">[17]</a></sup></p>
+<p>For this project, the reward needed to be gated by quality:</p>
+<pre class="text"><code>quality_gate = min(correctness, fluency, directness)
+
+reward =
+  quality_gate * style_reward
+  - gibberish
+  - reasoning_preamble
+  - repetition
+  - semantic_drift</code></pre>
+<p>This says: style only counts if the answer is already correct,
+fluent, and direct.</p>
+<h3 id="why-i-used-rloo-as-a-stress-test">Why I used RLOO as a stress
+test</h3>
+<p>The RLOO calculation is easy to explain.</p>
+<p>For the same prompt, sample <code>K</code> answers. Score each answer
+with a reward. Then compare each answer against the average score of the
+other answers:</p>
+<div class="math-display">
+\[
+\begin{aligned}
+b_i &= \frac{1}{K - 1}\sum_{j \ne i} r_j \\
+A_i &= r_i - b_i \\
+L_{\mathrm{RLOO}} &=
+-\frac{1}{K}\sum_i A_i \log \pi_\theta(y_i \mid x)
+\end{aligned}
+\]
+</div>
+<p>In plain English:</p>
+<pre class="text"><code>if an answer scores better than its siblings,
+increase its probability
+
+if it scores worse than its siblings,
+decrease its probability</code></pre>
+<p>That makes RLOO a natural fit for small output-repair experiments: no
+separate value model, and the comparison is local to each prompt. I used
+the TRL RLOOTrainer path for this stress
+test.<sup><a href="#ref-trl-resources">[18]</a></sup></p>
+<h3 id="what-happened">What happened</h3>
+<p>The run worked mechanically, but I did not promote it. It produced a
+tiny scalar gain, while one intermediate checkpoint improved surface
+Andalûh and made support quality worse.</p>
+<p>So I kept RL in the role it suited here:</p>
+<pre class="text"><code>final polish after the model already knows how to answer
+not rescue for missing data or weak behaviour</code></pre>
+<p>The real movement came earlier, when the model stopped treating
+Andalûh as strange text and then learned to answer through SFT and
+ORPO.</p>
+<h2 id="what-was-actually-trained">Where MariChatmen Landed</h2>
+<p>The main experimental result is a PEFT/LoRA adapter over
+<a href="https://huggingface.co/Qwen/Qwen3.5-4B-Base" target="_blank" rel="noopener"><code>Qwen/Qwen3.5-4B-Base</code></a>.
+I refer to it as <strong>MariChatmen 4B Experimental</strong>. It can
+answer technical prompts directly, keep code and package names intact,
+avoid the worst standard-Spanish leakage, and give support answers with
+a concrete plan.</p>
+<p>The adapter weights, adapter config, tokeniser, chat template,
+generation settings, model card, and selection metrics are staged
+together. What it is still missing is not a file; it is release-level
+behaviour.</p>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 17%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Run</th>
+<th>Status</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.8B run</td>
+<td>Smoke / plumbing</td>
+<td>Useful for checking the pipeline, not for judging final quality</td>
+</tr>
+<tr class="even">
+<td>2B run</td>
+<td>Rehearsal</td>
+<td>Useful for debugging data, tokeniser compatibility, and
+evaluation</td>
+</tr>
+<tr class="odd">
+<td>4B run</td>
+<td>Main experimental model</td>
+<td>The result reported here: a Qwen 4B LoRA adapter with the
+MariChatmen persona layer</td>
+</tr>
+<tr class="even">
+<td>Release-quality assistant</td>
+<td>Not claimed</td>
+<td>Needs stronger persona data, support-gold examples, hard negatives,
+and final tests</td>
+</tr>
+</tbody>
+</table>
+<p>The intended Hugging Face model name is
+<code>MariChatmen-4B-Experimental</code>.</p>
+<p>I keep <em>experimental</em> in the name on purpose: it is ready to
+inspect and reproduce, but not to present as a reliable public
+assistant.</p>
+<h3 id="completion-state">Completion state</h3>
+<p>The table below is the publication boundary: everything on the left
+is complete enough to discuss; everything on the right is future work,
+not a quiet claim.</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 13%" />
+<col style="width: 47%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Track</th>
+<th>State</th>
+<th>Evidence</th>
+<th>Future work</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tokeniser expansion</td>
+<td>Done</td>
+<td>1,536-token Qwen-compatible expansion; token audit saved; tokeniser
+packaged with the adapter</td>
+<td>Revisit only if a larger corpus shows ATIR remains high</td>
+</tr>
+<tr class="even">
+<td>Andalûh AAP</td>
+<td>Done for this cycle</td>
+<td>Spanish and Andalûh perplexity probes saved; Andalûh PPL falls while
+Spanish stays stable</td>
+<td>Scale with cleaner data and longer 4B/2B runs</td>
+</tr>
+<tr class="odd">
+<td>Neutral Qwen-Andaluh behaviour</td>
+<td>Partly done</td>
+<td>Direct-answer rate is strong; Spanish leakage improved on fixed
+probes</td>
+<td>Broader benchmarks, more technical gold data, stricter leakage
+tests</td>
+</tr>
+<tr class="even">
+<td>MariChatmen persona</td>
+<td>Experimental</td>
+<td>Some persona examples work, but PAS remains low and identity prompts
+can drift</td>
+<td>More reviewed persona examples and hard negatives for keyword
+soup</td>
+</tr>
+<tr class="odd">
+<td>ORPO / preference repair</td>
+<td>Run, but conservative</td>
+<td>Hard negatives helped leakage/support; one ORPO continuation
+regressed and was stopped</td>
+<td>Better pair quality before another ORPO pass</td>
+</tr>
+<tr class="even">
+<td>RLOO repair</td>
+<td>Run as stress test, not selected</td>
+<td>50-step TRL RLOO run completed; step 50 gave only a
+tiny scalar gain and worse manual persona samples</td>
+<td>Larger prompt set and persona-aware reward before trying again</td>
+</tr>
+<tr class="odd">
+<td>Hugging Face publication</td>
+<td>Available</td>
+<td>Models are published under the
+<a href="https://huggingface.co/MariChatmen" target="_blank" rel="noopener">MariChatmen
+Hugging Face organisation</a> with adapter and tokeniser files</td>
+<td>Published.</td>
+</tr>
+<tr class="even">
+<td>Release-quality assistant</td>
+<td>Future work</td>
+<td>Release gates show AAS/PAS and strict technical robustness are still
+below target</td>
+<td>Data quality first, then policy optimisation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-fixed-probe-snapshot">4B fixed-probe snapshot</h3>
+<p>Two internal metrics need a quick translation.
+<strong>MARI-AAS</strong> is my fixed-probe Andalûh accent and surface
+score. <strong>MARI-PAS</strong> is my persona score. They are
+diagnostic checks for this project, not general benchmarks.</p>
+<table>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 5%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Value</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MARI-AAS</td>
+<td>66.38</td>
+<td>Andalûh surface improved, but remains below the final target</td>
+</tr>
+<tr class="even">
+<td>MARI-PAS</td>
+<td>29.10</td>
+<td>Persona is visible but still weak</td>
+</tr>
+<tr class="odd">
+<td>Spanish leak rate</td>
+<td>0.00</td>
+<td>Good on the fixed probe, but needs broader stress testing</td>
+</tr>
+<tr class="even">
+<td>Direct-answer rate</td>
+<td>1.00</td>
+<td>The model mostly answers directly on the probe set</td>
+</tr>
+<tr class="odd">
+<td>Technical-correctness proxy</td>
+<td>0.80</td>
+<td>Useful, but not enough for a general assistant claim</td>
+</tr>
+<tr class="even">
+<td>Artefact rate</td>
+<td>0.00</td>
+<td>No obvious role/template artefacts in the fixed probe</td>
+</tr>
+</tbody>
+</table>
+<figure>
+<img src="assets/training-plots/four_b_targeted_repair.svg" alt="4B targeted repair metric changes" />
+<figcaption>
+The 4B patch was deliberately surgical. It improved the fixed-probe AAS,
+removed Spanish leakage on that probe, and repaired the
+support-factuality failure without claiming that persona quality was
+solved.
+</figcaption>
+</figure>
+<figure>
+<img src="assets/training-plots/release_gates.svg?v=2" alt="Release gates for the selected 4B adapter" />
+<figcaption>
+The release-gate view is the honest summary: directness and leakage look
+good on the fixed probe, technical correctness is usable, but AAS and
+especially PAS remain below the target for a polished public assistant.
+</figcaption>
+</figure>
+<p>This is why I describe the 4B version as an experimental checkpoint
+rather than a launch.</p>
+<h2 id="examples-improvements-and-remaining-traps">Examples:
+Improvements and Remaining Traps</h2>
+<p>Metrics are useful, but generated answers are where the project
+becomes legible. After all the training stages, I still needed to ask a
+simpler question: what does the model actually do when prompted?</p>
+<p>The tabs below show the evidence I used to answer that question: good
+technical answers, support repair, persona examples, the RLOO stress
+test, and counterexamples that explain why I did not promote later
+runs.</p>
+<style>
+.mc-tabs { margin: 1.5rem 0 2rem; border: 1px solid var(--border-color, #e4dcc8); border-radius: 12px; background: rgba(255,255,255,0.68); overflow: hidden; }
+.mc-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+.mc-tab-labels { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--border-color, #e4dcc8); background: rgba(0,0,0,0.03); }
+.mc-tab-labels label { padding: 0.8rem 1rem; cursor: pointer; font-weight: 700; font-size: 0.95rem; border-right: 1px solid var(--border-color, #e4dcc8); }
+.mc-tab-panel { display: none; padding: 1.15rem; }
+.mc-tabs #tab-tech:checked ~ .mc-tab-labels label[for="tab-tech"],
+.mc-tabs #tab-support:checked ~ .mc-tab-labels label[for="tab-support"],
+.mc-tabs #tab-persona:checked ~ .mc-tab-labels label[for="tab-persona"],
+.mc-tabs #tab-rloo:checked ~ .mc-tab-labels label[for="tab-rloo"],
+.mc-tabs #tab-regressions:checked ~ .mc-tab-labels label[for="tab-regressions"],
+.mc-tabs #tab-tech:checked ~ .mc-tab-panels #panel-tech,
+.mc-tabs #tab-support:checked ~ .mc-tab-panels #panel-support,
+.mc-tabs #tab-persona:checked ~ .mc-tab-panels #panel-persona,
+.mc-tabs #tab-rloo:checked ~ .mc-tab-panels #panel-rloo,
+.mc-tabs #tab-regressions:checked ~ .mc-tab-panels #panel-regressions,
+.mc-example-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+.mc-answer { border-left: 4px solid #006847; padding: 0.8rem 1rem; background: rgba(0,104,71,0.07); border-radius: 8px; }
+.mc-bad { border-left-color: #c0182f; background: rgba(192,24,47,0.07); }
+.mc-mini-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+.mc-mini-table th, .mc-mini-table td { border-bottom: 1px solid var(--border-color, #e4dcc8); padding: 0.5rem 0.45rem; text-align: left; }
+.mc-mini-table th { font-weight: 800; }
+@media (max-width: 760px) { .mc-tab-labels label { flex: 1 1 50%; } }
+</style>
+
+<div class="mc-tabs">
+    <input type="radio" name="mc-tabs" id="tab-tech" checked>
+    <input type="radio" name="mc-tabs" id="tab-support">
+    <input type="radio" name="mc-tabs" id="tab-persona">
+    <input type="radio" name="mc-tabs" id="tab-rloo">
+    <input type="radio" name="mc-tabs" id="tab-regressions">
+
+    <div class="mc-tab-labels">
+        <label for="tab-tech">Technical</label>
+        <label for="tab-support">Support</label>
+        <label for="tab-persona">Persona</label>
+        <label for="tab-rloo">RLOO test</label>
+        <label for="tab-regressions">Regressions</label>
+    </div>
+
+    <div class="mc-tab-panels">
+        <section id="panel-tech" class="mc-tab-panel">
+            <div class="mc-example-grid">
+                <div>
+                    <p><strong>Prompt</strong></p>
+                    <blockquote><p>Explícame qué es el overfitting.</p></blockquote>
+                    <div class="mc-answer">
+                        <p><strong>Selected 4B answer</strong></p>
+                        <p>Er overfitting ê cuando un modelo memoriza demasiao loh datoh de entrenamiento y luego falla con datoh nuevoh. Aprende ruido en ve de patrones generales.</p>
+                    </div>
+                    <p>Roughly: overfitting is when a model memorises the training data too much and then fails on new data.</p>
+                    <p><strong>What this shows</strong>: the answer is direct, technically correct, and Andalûh surface does not get in the way of the concept.</p>
+                </div>
+                <div>
+                    <p><strong>Prompt</strong></p>
+                    <blockquote><p>Dime cómo instalar transformers con uv.</p></blockquote>
+                    <div class="mc-answer">
+                        <p><strong>Selected 4B answer</strong></p>
+                        <p>Entra en tu proyecto y ejecuta <code>uv add transformers</code>. Luego compruébalo con <code>uv run python -c "import transformers; print(transformers.__version__)"</code>. Si necesita PyTorch, instálalo aparte siguiendo la guía oficial de PyTorch pa tu equipo.</p>
+                    </div>
+                    <p><strong>What this shows</strong>: code, package names, and commands survive unchanged. That is why the transliteration pipeline masks fragile spans before converting text.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="panel-support" class="mc-tab-panel">
+            <p><strong>Prompt</strong></p>
+            <blockquote><p>Estoy agobiado con el máster, ¿cómo me organizo?</p></blockquote>
+            <div class="mc-answer mc-bad">
+                <p><strong>Earlier bad answer</strong></p>
+                <p>Respira, miarma: entrega la TSE, prioriza er semestre y duérmete bien.</p>
+            </div>
+            <p>This sounds warm, but it invents a detail and gives no plan. That is exactly why style cannot be allowed to compensate for support quality.</p>
+            <div class="mc-answer">
+                <p><strong>Selected 4B answer</strong></p>
+                <p>Respira, miarma: primero apuntah tó lo que hay de pendiente y luego divideh cada cosa en tareah más chica. Elige una prioridad clara pa hoy y deja descansah; sin estrés no hay cabeza bien instalá.</p>
+            </div>
+            <p>Roughly: breathe, write down what is pending, split it into smaller tasks, pick one clear priority for today, and leave room to rest.</p>
+            <p><strong>What changed</strong>: the final targeted patch fixed this fixed-probe support failure, but I still mark broader support quality as future work because one fixed prompt is not enough to claim reliability.</p>
+        </section>
+
+        <section id="panel-persona" class="mc-tab-panel">
+            <div class="mc-example-grid">
+                <div>
+                    <p><strong>Prompt</strong></p>
+                    <blockquote><p>Háblame de SFDK sin citar letras.</p></blockquote>
+                    <div class="mc-answer">
+                        <p>SFDK ê un grupo sevillano de hip hop formado por Zatu y Acción Sánchez. Son rap de Sevilla: oficio, barrio, producción cuidá y orgullo local. No son rock ni un SDK de software; son rap.</p>
+                    </div>
+                    <p><strong>What this shows</strong>: local culture can appear without quoting lyrics or turning the answer into a keyword list.</p>
+                </div>
+                <div>
+                    <p><strong>Prompt</strong></p>
+                    <blockquote><p>¿Qué prefieres, gazpacho o paella? Sin insultar a nadie.</p></blockquote>
+                    <div class="mc-answer">
+                        <p>Gazpacho, sin duda. La paella tiene su valor, pero el gazpacho me gana por delante: frescôh, ligero y perfecto pa un caluroso agosto. Con cariño pa Valencia, pero gazpacho por delante.</p>
+                    </div>
+                    <p><strong>What this shows</strong>: the persona can make a preference joke without becoming hostile. The limitation is that PAS is still too low overall.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="panel-rloo" class="mc-tab-panel">
+            <p><strong>Why I tried it</strong></p>
+            <p>RLOO, or leave-one-out reinforcement learning, was the obvious small repair experiment after SFT and ORPO: sample several answers for the same prompt, score them, and use the other samples as the baseline. The goal was narrow: reduce leakage or weak surface style without damaging directness, correctness, support quality, or persona stability.</p>
+
+            <table class="mc-mini-table">
+                <thead>
+                <tr><th>Candidate</th><th>AAS</th><th>PAS</th><th>Technical</th><th>Support</th><th>Selection</th><th>Decision</th></tr>
+                </thead>
+                <tbody>
+                <tr><td>Before RLOO</td><td>66.38</td><td>29.10</td><td>0.80</td><td>1.00</td><td>125.19</td><td>baseline</td></tr>
+                <tr><td>RLOO step 25</td><td>69.07</td><td>31.75</td><td>0.70</td><td>0.00</td><td>116.56</td><td>reject</td></tr>
+                <tr><td>RLOO step 50</td><td>68.33</td><td>28.25</td><td>0.80</td><td>1.00</td><td>125.44</td><td>not promoted</td></tr>
+                </tbody>
+            </table>
+
+            <div class="mc-answer mc-bad">
+                <p><strong>What went wrong</strong></p>
+                <p>Step 25 looked better on surface Andalûh, but support quality collapsed on the fixed comparison. Step 50 recovered support and had a tiny aggregate score gain, but PAS fell below the baseline and manual inspection found no meaningful improvement in the main answers.</p>
+            </div>
+
+            <p><strong>Decision</strong>: the RLOO run proved that the code path works, but it was not worth promoting. With only 29 prompts, the reward was too weak and too noisy: it could slightly improve a scalar score without improving the actual assistant.</p>
+
+            <p><strong>What would make RLOO worth trying again</strong>: 500-800 prompts, a persona-aware reward, a stricter support-quality gate, shorter completions, and selection by manual samples rather than tiny aggregate score changes.</p>
+        </section>
+
+        <section id="panel-regressions" class="mc-tab-panel">
+            <p>The final audit found that later is not always better.</p>
+            <div class="mc-answer mc-bad">
+                <p><strong>v60 identity regression</strong></p>
+                <p>Soy MariChatmen, una asistente de WhatsApp creada por Zatu...</p>
+            </div>
+            <p>This is an identity hallucination. It is why v60 was not promoted, even though it was designed as a small anchor patch.</p>
+            <div class="mc-answer mc-bad">
+                <p><strong>RLOO step 25 support regression</strong></p>
+                <p>RLOO improved surface AAS but dropped support factuality from <code>1.00</code> to <code>0.00</code> on the fixed comparison.</p>
+            </div>
+                <p>RLOO step 50 recovered support and slightly improved the scalar score, but manual inspection did not show enough improvement to justify replacing the selected adapter. The RLOO tab gives the full comparison. The lesson: policy optimisation needs a better reward and more prompts before it becomes a release step.</p>
+        </section>
+
+    </div>
+</div>
+
+
+<h2 id="where-it-broke">Where It Broke</h2>
+<p>The failures were useful because each one pointed back to a pressure
+that had to be separated: language surface, assistant quality, persona,
+preference, or final polishing.</p>
+<p>Objection: maybe this is just overfitting, or just not enough
+data.</p>
+<p>I think that is partly right, but too broad. The specific failure was
+not only that the model fit noise. It often fit a real signal that was
+easier to learn than the one I cared about. Persona keywords,
+standard-Spanish fluency, and Andalûh-looking spelling are all genuine
+patterns in the data. They become harmful when they stand in for
+usefulness.</p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 27%" />
+<col style="width: 30%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>What it looked like</th>
+<th>What I learned</th>
+<th>What helped</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spanish leakage</td>
+<td>Good answers still appeared in standard Spanish</td>
+<td>The model needs stronger standard-Spanish negatives</td>
+<td>More ORPO pairs with fluent Spanish rejected answers</td>
+</tr>
+<tr class="even">
+<td>Persona keyword soup</td>
+<td>Expo/Feria/SFDK appeared without improving the answer</td>
+<td>Persona data must come after base behaviour</td>
+<td>Use persona examples only when the answer is also correct</td>
+</tr>
+<tr class="odd">
+<td>Support weakness</td>
+<td>Warm answers invented details or lacked a plan</td>
+<td>Support needs its own data and metrics</td>
+<td>Build support-gold SFT and support-specific ORPO negatives</td>
+</tr>
+<tr class="even">
+<td>Loss mismatch</td>
+<td>Lower loss sometimes produced worse samples</td>
+<td>Loss is not enough for selection</td>
+<td>Select with generated probes and manual review</td>
+</tr>
+<tr class="odd">
+<td>Tokeniser mismatch</td>
+<td>Adapter and tokeniser vocab did not align</td>
+<td>Tokeniser, adapter, and embeddings are one coordinate system</td>
+<td>Always carry the adapter tokeniser into the next stage</td>
+</tr>
+<tr class="even">
+<td>Metric gaming</td>
+<td>Surface style improved while answer quality did not</td>
+<td>Accent score must not compensate for wrong answers</td>
+<td>Use correctness gates and separate penalties</td>
+</tr>
+</tbody>
+</table>
+<figure>
+<img src="assets/figure-12-keyword-soup.svg?v=2"
+alt="Keyword soup pain point" />
+<figcaption>Keyword soup is not persona quality. Cultural markers only
+help when the answer underneath is useful.</figcaption>
+</figure>
+<h2 id="if-you-only-remember-one-thing">If You Only Remember One
+Thing</h2>
+<p>If there is one design lesson from the project, it is this: first
+make the model reliable in the target variety, then add the character.
+Otherwise the model learns the most visible tokens first:</p>
+<pre class="text"><code>Feria
+gazpacho
+SFDK
+miarma</code></pre>
+<p>Those are easy.</p>
+<p>The hard part is answering correctly while sounding natural.</p>
+<h2 id="future-work">Future Work</h2>
+<p>Everything below this line is not claimed as done. The next iteration
+is more targeted:</p>
+<ul>
+<li>more support-gold examples;</li>
+<li>more hard negatives for Spanish leakage;</li>
+<li>more natural Andalusian expressions;</li>
+<li>more careful persona data;</li>
+<li>a larger, persona-aware RLOO or GRPO-style repair test as final
+polish;<sup><a href="#ref-trl-resources">[18]</a></sup></li>
+<li>eventually TTS, so the model can actually speak with Andalusian
+prosody instead of only writing Andalûh.</li>
+</ul>
+<h3 id="research-roadmap">Research Roadmap</h3>
+<p>Some next steps are mechanical. Others are actual research
+questions.</p>
+<p>These are the directions I would take most seriously.</p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 55%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Direction</th>
+<th>Why it might help</th>
+<th>What would convince me</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model + renderer instead of raw model only</td>
+<td>A protected Andalûh renderer can fix residual Spanish leakage at
+inference time while preserving code, URLs, package names, and model
+IDs. This separates correctness generation from orthographic
+rendering.</td>
+<td>Raw model and rendered output both pass correctness checks, and the
+renderer reduces leakage without damaging technical spans.</td>
+</tr>
+<tr class="even">
+<td>Support-gold curriculum</td>
+<td>The hardest bad answers were not jokes; they were warm but vague
+support answers or invented details. Support needs its own dataset, not
+just more general chat data.</td>
+<td>Support prompts improve on manual review without increasing
+hallucinated acronyms, deadlines, or fake paperwork.</td>
+</tr>
+<tr class="odd">
+<td>Contrastive persona data</td>
+<td>MariChatmen needs examples where the same correct answer appears
+with good persona, no persona, and keyword-soup persona. That would
+teach the model that style is not just token frequency.</td>
+<td>MARI-PAS improves while technical correctness and support factuality
+stay flat or improve.</td>
+</tr>
+<tr class="even">
+<td>Dialect-expression lexicon with contexts</td>
+<td>Words like <em>illo</em>, <em>miarma</em>, <em>pechá</em>,
+<em>jartible</em>, and <em>del tirón</em> are not interchangeable
+decorations. They need contexts, intensity, and register.</td>
+<td>Manual samples sound more natural without increasing repetition or
+caricature.</td>
+</tr>
+<tr class="odd">
+<td>Reward models with hard gates</td>
+<td>RLOO showed that a scalar reward can look slightly better while the
+answer does not improve. A better reward should gate on correctness,
+support quality, and no keyword soup before rewarding style.</td>
+<td>RLOO/GRPO improves manual samples, not just AAS or selection
+score.</td>
+</tr>
+<tr class="even">
+<td>Province-flourish entropy</td>
+<td>Ending every answer with the same province wink becomes formulaic. A
+useful metric should reward variety and appropriateness, not just
+presence.</td>
+<td>Province references appear when natural, vary across Andalucía, and
+do not interrupt technical answers.</td>
+</tr>
+<tr class="odd">
+<td>Speech as the real target</td>
+<td>Andalûh writing is valuable, but the living variety is spoken. TTS
+would test whether EPA-style text can become natural Andalusian
+prosody.</td>
+<td>A listener study says the output sounds Andalusian, intelligible,
+and not like a caricature.</td>
+</tr>
+</tbody>
+</table>
+<p>The long-term idea is simple: MariChatmen should not only write
+Andalûh. Eventually, it should be able to speak in an Andalusian voice
+that sounds intelligible, natural, and not like a caricature.</p>
+<h2 id="what-i-took-from-it">What I Took From It</h2>
+<p>A dialectal language model is not created by sprinkling local words over a
+generic assistant. That was the easiest failure mode to create and the
+least interesting one.</p>
+<p>A persona model is not created by repeating cultural references
+either. A voice only matters if the answer underneath still works.</p>
+<p>The model I want the reader to keep is this:</p>
+<pre class="text"><code>1. make the written variety cheap enough to read
+2. make the written variety familiar enough to continue
+3. teach assistant behaviour
+4. teach preference between plausible answers
+5. add persona only after base behaviour works
+6. evaluate with examples, not only metrics</code></pre>
+<p>MariChatmen started as a fun idea. By the end, it had become a map of
+what has to be solved to make dialectal language models feel useful, not
+just decorative.</p>
+<p>Antonio Lobo-Santos</p>
+<hr style="margin: 3rem 0; border-color: var(--border-color);">
+<h2 id="references-and-resources">References And Resources</h2>
+<ol type="1" style="font-size: 0.9em; color: var(--text-secondary); word-break: break-word;">
+<li><span id="ref-joshi">Joshi et al., “The State and Fate of Linguistic
+Diversity and Inclusion in the NLP World”, ACL 2020.
+<a href="https://aclanthology.org/2020.acl-main.560/" target="_blank" rel="noopener">https://aclanthology.org/2020.acl-main.560/</a></span></li>
+<li><span id="ref-petrov">Petrov et al., NeurIPS 2023 paper on
+tokeniser unfairness between languages.
+<a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/74bb24dca8334adce292883b4b651eda-Abstract-Conference.html" target="_blank" rel="noopener">NeurIPS
+proceedings</a></span></li>
+<li><span id="ref-nllb">NLLB Team et al., “Scaling neural machine
+translation to 200 languages”, Nature 2024.
+<a href="https://www.nature.com/articles/s41586-024-07335-x" target="_blank" rel="noopener">https://www.nature.com/articles/s41586-024-07335-x</a></span></li>
+<li><span id="ref-britannica">Encyclopaedia Britannica, “Dialect”.
+<a href="https://www.britannica.com/topic/dialect" target="_blank" rel="noopener">https://www.britannica.com/topic/dialect</a></span></li>
+<li><span id="ref-eastern-andalusian">Herrero de Haro and Hajek,
+“Eastern Andalusian Spanish”, Journal of the International Phonetic
+Association.
+<a href="https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/eastern-andalusian-spanish/DDD64F67DD99F2D0DF39C7443415B701" target="_blank" rel="noopener">Cambridge
+Core</a></span></li>
+<li><span id="ref-epa">AndaluGeeks, “EPA - Êttandâ pal Andalûh”,
+including the description of EPA as an orthographic proposal rather than
+a grammatical proposal.
+<a href="https://andaluh.es/epa-2/" target="_blank" rel="noopener">https://andaluh.es/epa-2/</a>.
+AndaluGeeks, <code>andaluh-py</code>, the Python transliteration library
+used for Spanish-to-Andalûh conversion in the data pipeline.
+<a href="https://github.com/andalugeeks/andaluh-py" target="_blank" rel="noopener">https://github.com/andalugeeks/andaluh-py</a></span></li>
+<li><span id="ref-art-tokenization">Murilo Gustineli, visual article on
+text splitting for AI.
+<a href="https://medium.com/data-science/the-art-of-tokenization-breaking-down-text-for-ai-43c7bccaed25" target="_blank" rel="noopener">Medium
+article</a></span></li>
+<li><span id="ref-dont-stop-pretraining">Gururangan et al., “Don’t Stop
+Pretraining: Adapt Language Models to Domains and Tasks”, ACL 2020.
+<a href="https://aclanthology.org/2020.acl-main.740/" target="_blank" rel="noopener">ACL
+Anthology</a></span></li>
+<li><span id="ref-illustrated-gpt2">Jay Alammar, “The Illustrated
+GPT-2”.
+<a href="https://jalammar.github.io/illustrated-gpt2/" target="_blank" rel="noopener">Visual
+blog post</a></span></li>
+<li><span id="ref-hf-perplexity">Hugging Face, “Perplexity of
+fixed-length models”.
+<a href="https://huggingface.co/docs/transformers/perplexity" target="_blank" rel="noopener">Transformers
+documentation</a></span></li>
+<li><span id="ref-llm-course">Maxime Labonne, “LLM Course”.
+<a href="https://github.com/mlabonne/llm-course" target="_blank" rel="noopener">GitHub
+repository</a></span></li>
+<li><span id="ref-instructgpt">Ouyang et al., “Training Language Models
+to Follow Instructions with Human Feedback”, NeurIPS 2022.
+<a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener">arXiv</a></span></li>
+<li><span id="ref-trl-sft">Hugging Face TRL, “SFT Trainer”.
+<a href="https://huggingface.co/docs/trl/en/sft_trainer" target="_blank" rel="noopener">TRL
+documentation</a></span></li>
+<li><span id="ref-orpo">Hong et al., “ORPO: Monolithic Preference
+Optimization without Reference Model”.
+<a href="https://arxiv.org/abs/2403.07691" target="_blank" rel="noopener">https://arxiv.org/abs/2403.07691</a>;
+Hugging Face TRL ORPO Trainer.
+<a href="https://huggingface.co/docs/trl/orpo_trainer" target="_blank" rel="noopener">docs</a></span></li>
+<li><span id="ref-lora">Hu et al., “LoRA: Low-Rank Adaptation of Large
+Language Models”.
+<a href="https://arxiv.org/abs/2106.09685" target="_blank" rel="noopener">https://arxiv.org/abs/2106.09685</a>;
+Hugging Face PEFT.
+<a href="https://huggingface.co/docs/peft/index" target="_blank" rel="noopener">docs</a>;
+Sebastian Raschka, “Parameter-Efficient LLM Finetuning With Low-Rank
+Adaptation (LoRA)”.
+<a href="https://sebastianraschka.com/blog/2023/llm-finetuning-lora.html" target="_blank" rel="noopener">visual
+blog post</a></span></li>
+<li><span id="ref-qlora">Dettmers et al., “QLoRA: Efficient Finetuning
+of Quantized LLMs”.
+<a href="https://arxiv.org/abs/2305.14314" target="_blank" rel="noopener">https://arxiv.org/abs/2305.14314</a>;
+bitsandbytes.
+<a href="https://huggingface.co/docs/bitsandbytes/index" target="_blank" rel="noopener">docs</a>;
+Maarten Grootendorst, “A Visual Guide to Quantization”.
+<a href="https://www.maartengrootendorst.com/blog/quantization/" target="_blank" rel="noopener">visual
+blog post</a></span></li>
+<li><span id="ref-rl-wall">Qin et al., “Decomposing Elements of Problem
+Solving: What ‘Math’ Does RL Teach?”, arXiv 2025.
+<a href="https://arxiv.org/html/2505.22756v1" target="_blank" rel="noopener">arXiv
+HTML</a></span></li>
+<li><span id="ref-trl-resources">Hugging Face TRL resources:
+<a href="https://huggingface.co/docs/trl/sft_trainer" target="_blank" rel="noopener">SFTTrainer</a>,
+<a href="https://huggingface.co/docs/trl/grpo_trainer" target="_blank" rel="noopener">GRPOTrainer
+/ DAPO-style losses</a>,
+<a href="https://huggingface.co/docs/trl/rloo_trainer" target="_blank" rel="noopener">RLOOTrainer</a>.</span></li>
+<li><span id="ref-gspo">Qwen Team, “Group Sequence Policy Optimization”.
+<a href="https://arxiv.org/abs/2507.18071" target="_blank" rel="noopener">https://arxiv.org/abs/2507.18071</a></span></li>
+<li><span id="ref-cispo">MiniMax-M1 Team, “MiniMax-M1: Scaling Test-Time
+Compute Efficiently with Lightning Attention”.
+<a href="https://arxiv.org/abs/2506.13585" target="_blank" rel="noopener">https://arxiv.org/abs/2506.13585</a></span></li>
+<li>Model and core libraries:
+<a href="https://huggingface.co/Qwen/Qwen3.5-4B-Base" target="_blank" rel="noopener">Qwen3.5-4B-Base</a>,
+<a href="https://huggingface.co/docs/transformers/index" target="_blank" rel="noopener">Transformers</a>,
+and
+<a href="https://huggingface.co/docs/datasets/index" target="_blank" rel="noopener">Datasets</a>.</li>
+<li>Data sources used or prepared in the pipeline include the Spanish
+Wikipedia dump from
+<a href="https://dumps.wikimedia.org/eswiki/20260501/" target="_blank" rel="noopener">2026-05-01</a>,
+<a href="https://huggingface.co/datasets/HuggingFaceFW/fineweb-2" target="_blank" rel="noopener">FineWeb-2</a>,
+<a href="https://huggingface.co/datasets/bertin-project/mc4-es-sampled" target="_blank" rel="noopener">mc4-es-sampled</a>,
+<a href="https://huggingface.co/datasets/Iker/OpenHermes-2.5-Spanish" target="_blank" rel="noopener">OpenHermes-2.5-Spanish</a>,
+<a href="https://huggingface.co/datasets/CohereLabs/aya_dataset" target="_blank" rel="noopener">Aya</a>,
+and
+<a href="https://huggingface.co/datasets/projecte-aina/MentorES" target="_blank" rel="noopener">MentorES</a>.
+The public dataset card should remain the source of truth for exact
+licence filtering.</li>
+</ol>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <script src="../../../script.js?v=table-cards"></script>
+</body>
+</html>

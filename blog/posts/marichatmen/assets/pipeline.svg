@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">MariChatmen training pipeline</title>
+  <desc id="desc">Two-stage pipeline: Qwen-Andaluh first, then MariChatmen persona training.</desc>
+  <style>
+    .bg{fill:#f8fafc}.box{fill:#fff;stroke:#263238;stroke-width:2;rx:8}.base{fill:#e8f3ff}.accent{fill:#e8f8ef}.persona{fill:#fff0e8}.rl{fill:#f2e8ff}.text{font-family:Arial,Helvetica,sans-serif;fill:#172026}.small{font-size:18px}.label{font-size:22px;font-weight:700}.arrow{stroke:#263238;stroke-width:2.5;marker-end:url(#arrow)}
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#263238"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="520"/>
+  <text class="text label" x="50" y="58">Qwen-Andaluh first, MariChatmen second</text>
+  <text class="text small" x="50" y="90">Dialect adaptation, assistant behaviour, and persona are trained as separate pressures.</text>
+  <rect class="box base" x="60" y="160" width="180" height="80"/>
+  <text class="text label" x="95" y="195">Qwen</text>
+  <text class="text small" x="92" y="222">base model</text>
+  <line class="arrow" x1="240" y1="200" x2="305" y2="200"/>
+  <rect class="box accent" x="320" y="130" width="190" height="140"/>
+  <text class="text label" x="355" y="166">Tokeniser</text>
+  <text class="text small" x="350" y="198">audit ATIR</text>
+  <text class="text small" x="350" y="226">protect spans</text>
+  <line class="arrow" x1="510" y1="200" x2="575" y2="200"/>
+  <rect class="box accent" x="590" y="130" width="190" height="140"/>
+  <text class="text label" x="620" y="166">AAP</text>
+  <text class="text small" x="620" y="198">predict Andalûh</text>
+  <text class="text small" x="620" y="226">lower perplexity</text>
+  <line class="arrow" x1="780" y1="200" x2="845" y2="200"/>
+  <rect class="box accent" x="860" y="130" width="250" height="140"/>
+  <text class="text label" x="910" y="166">Accent SFT</text>
+  <text class="text small" x="890" y="198">system: Eres un asistente</text>
+  <text class="text small" x="890" y="226">always answer in Andalûh</text>
+  <line class="arrow" x1="985" y1="270" x2="985" y2="320"/>
+  <rect class="box persona" x="60" y="350" width="250" height="95"/>
+  <text class="text label" x="94" y="386">Persona SFT</text>
+  <text class="text small" x="90" y="416">teach MariChatmen voice</text>
+  <line class="arrow" x1="310" y1="397" x2="420" y2="397"/>
+  <rect class="box persona" x="435" y="350" width="250" height="95"/>
+  <text class="text label" x="480" y="386">Persona ORPO</text>
+  <text class="text small" x="468" y="416">prefer useful style</text>
+  <line class="arrow" x1="685" y1="397" x2="795" y2="397"/>
+  <rect class="box rl" x="810" y="350" width="300" height="95"/>
+  <text class="text label" x="880" y="386">Persona GRPO</text>
+  <text class="text small" x="850" y="416">reward accent, persona, safety</text>
+</svg>

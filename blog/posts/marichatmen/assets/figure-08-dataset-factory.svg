@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Dataset factory</title>
+  <desc id="desc">A flowchart of source curation, transliteration, QA, persona generation, preference building, and reward engineering.</desc>
+  <style>.bg{fill:#fffaf0}.box{fill:#fff;stroke:#222;stroke-width:2;rx:10}.qa{fill:#e5f5ec}.persona{fill:#fff0df}.pref{fill:#efe9ff}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.title{font-size:36px;font-weight:800}.small{font-size:18px}.arrow{stroke:#222;stroke-width:2.5;marker-end:url(#a)}</style>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#222"/></marker></defs>
+  <rect class="bg" width="1200" height="680"/>
+  <text class="text title" x="60" y="70">Most of the work is dataset engineering</text>
+  <g transform="translate(70,130)">
+    <rect class="box" width="210" height="65"/><text class="text small" x="38" y="40">Source Curator</text>
+    <line class="arrow" x1="210" y1="33" x2="280" y2="33"/><rect class="box qa" x="295" width="230" height="65"/><text class="text small" x="335" y="40">Andalûh Transcriptor</text>
+    <line class="arrow" x1="525" y1="33" x2="595" y2="33"/><rect class="box qa" x="610" width="190" height="65"/><text class="text small" x="655" y="40">Accent QA</text>
+    <line class="arrow" x1="800" y1="33" x2="870" y2="33"/><rect class="box persona" x="885" width="220" height="65"/><text class="text small" x="920" y="40">Prompt Planner</text>
+  </g>
+  <g transform="translate(70,255)">
+    <rect class="box persona" width="210" height="65"/><text class="text small" x="38" y="40">Answer Writer</text>
+    <line class="arrow" x1="210" y1="33" x2="280" y2="33"/><rect class="box persona" x="295" width="210" height="65"/><text class="text small" x="350" y="40">Critic</text>
+    <line class="arrow" x1="505" y1="33" x2="575" y2="33"/><rect class="box persona" x="590" width="210" height="65"/><text class="text small" x="642" y="40">Repair</text>
+    <line class="arrow" x1="800" y1="33" x2="870" y2="33"/><rect class="box pref" x="885" width="220" height="65"/><text class="text small" x="925" y="40">ORPO Builder</text>
+  </g>
+  <g transform="translate(250,405)">
+    <rect class="box pref" width="230" height="65"/><text class="text small" x="55" y="40">ORPO Verifier</text>
+    <line class="arrow" x1="230" y1="33" x2="310" y2="33"/><rect class="box pref" x="325" width="230" height="65"/><text class="text small" x="370" y="40">Reward Engineer</text>
+    <line class="arrow" x1="555" y1="33" x2="635" y2="33"/><rect class="box qa" x="650" width="230" height="65"/><text class="text small" x="702" y="40">Benchmark Judge</text>
+  </g>
+</svg>

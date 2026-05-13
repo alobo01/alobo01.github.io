@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">RL as polish not rescue</title>
+  <desc id="desc">Two path diagram showing RL polish versus RL rescue failure.</desc>
+  <style>
+  .bg{fill:#fffaf0}.card{fill:#ffffff;stroke:#222;stroke-width:2;rx:12}.blue{fill:#eaf2ff}.green{fill:#e5f5ec}.red{fill:#fff1f2}.amber{fill:#fff0df}.purple{fill:#efe9ff}.text{font-family:Arial,Helvetica,sans-serif;fill:#202020}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.title{font-size:36px;font-weight:800}.subtitle{font-size:20px;fill:#555555}.label{font-size:22px;font-weight:700}.small{font-size:17px}.tiny{font-size:14px}.axis{stroke:#222;stroke-width:2}.grid{stroke:#e8dcc8;stroke-width:1}.arrow{stroke:#222;stroke-width:3;marker-end:url(#arrow);fill:none}.gArrow{stroke:#0b7a3b;stroke-width:3;marker-end:url(#greenArrow);fill:none}.warn{fill:#be123c}.good{fill:#0b7a3b}.base{fill:#2563eb}
+</style>
+  
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#222"/></marker>
+    <marker id="greenArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0b7a3b"/></marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="520"/>
+<text class="text title" x="60" y="70">RL is polish, not rescue</text>
+<rect class="card green" x="80" y="135" width="390" height="145"/>
+<text class="text label" x="104" y="173" fill="#0b7a3b">Good path</text>
+<text class="text small" x="104" y="205">Coherent assistant</text>
+<text class="text small" x="104" y="231">→ reward-gated RL</text>
+<text class="text small" x="104" y="257">→ less repetition, cleaner endings</text>
+<rect class="card red" x="730" y="135" width="390" height="145"/>
+<text class="text label" x="754" y="173" fill="#be123c">Bad path</text>
+<text class="text small" x="754" y="205">Weak assistant</text>
+<text class="text small" x="754" y="231">→ RL</text>
+<text class="text small" x="754" y="257">→ metric gaming / keyword soup</text>
+<line class="gArrow" x1="470" y1="205" x2="640" y2="205"/>
+<line class="arrow" x1="730" y1="205" x2="650" y2="205"/>
+<rect class="card amber" x="390" y="360" width="420" height="80"/><text class="mono small" x="430" y="408">quality_gate = min(correctness, fluency, directness)</text>
+</svg>
