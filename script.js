@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const HOME_SECTIONS = new Set([
         'home',
         'focus',
-        'systems',
         'experience',
         'projects',
         'publications',

@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Antonio Lobo-Santos | Research Engineer</title>
     <meta name="description"
-        content="Portfolio of Antonio Lobo-Santos, Research Engineer working across LLM evaluation, efficient model serving, AI safety, robotics/HRI, ML systems, and production data platforms.">
+        content="Antonio Lobo-Santos, research engineer at DFKI Saarbrücken working on LLM post-training and interpretability in the SOOFI project.">
 
     <!-- Open Graph for sharing -->
     <meta property="og:title" content="Antonio Lobo-Santos | Research Engineer">
     <meta property="og:description"
-        content="Research engineer working across LLM evaluation, efficient model serving, AI safety, robotics/HRI, ML systems, and production data platforms.">
+        content="Research engineer at DFKI Saarbrücken working on LLM post-training and interpretability in the SOOFI project.">
     <meta property="og:type" content="website">
 
     <!-- Fonts: Outfit for Headings, Inter for Body -->
@@ -63,7 +63,6 @@
             <ul class="nav-links" id="desktop-nav">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#focus">Focus</a></li>
-                <li><a href="#systems">Systems</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#publications">Publications &amp; Talks</a></li>
@@ -87,7 +86,6 @@
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#focus">Focus</a></li>
-            <li><a href="#systems">Systems</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#publications">Publications &amp; Talks</a></li>
@@ -104,16 +102,15 @@
                 <div class="hero-text">
                     <h2 class="greeting">Research Engineer</h2>
                     <h1 class="name">Antonio <span>Lobo Santos</span></h1>
-                    <h3 class="role">ML Systems &middot; AI Safety &amp; Robotics</h3>
-                    <p class="hero-summary">I build evaluation, inference and software systems for difficult AI problems - from LLM safety evaluation and real-time human-robot interaction to production data platforms and on-prem infrastructure.</p>
+                    <h3 class="role">LLM Post-training &middot; Interpretability</h3>
+                    <p class="hero-summary">I work at DFKI in Saarbrücken on the SOOFI project, as part of the post-training team. My focus is interpretability of new LLM architectures.</p>
                     <div class="hero-keywords" aria-label="Focus areas">
+                        <span>Post-training</span>
+                        <span>Interpretability</span>
                         <span>LLM Evaluation</span>
-                        <span>Efficient Model Serving</span>
-                        <span>Robotics/HRI</span>
-                        <span>ML Systems</span>
-                        <span>Production Data Platforms</span>
+                        <span>Model Serving</span>
                     </div>
-                    <p class="location"><i class="fa-solid fa-location-dot"></i> Oxford, UK / Seville, Spain</p>
+                    <p class="location"><i class="fa-solid fa-location-dot"></i> Saarbrücken, Germany</p>
 
                     <div class="social-links">
                         <a href="mailto:alobosantos10@gmail.com" title="Email" class="glass-btn"><i
@@ -141,97 +138,32 @@
                 <h2 class="section-title reveal">Research & <span>Engineering Focus</span></h2>
                 <div class="focus-grid">
                     <div class="focus-card glass-card reveal">
-                        <div class="focus-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h3>LLM Evaluation &amp; AI Safety</h3>
-                        <p>Designing evaluation pipelines for LLM robustness, moral-capability analysis and failure-mode discovery. Experience with synthetic data generation, custom metrics, adversarial prompting, value-alignment tests and computational experiment execution on shared infrastructure.</p>
+                        <div class="focus-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <h3>Post-training &amp; Interpretability</h3>
+                        <p>Post-training open LLMs at DFKI, and studying what new architectures learn and how their internals change during post-training.</p>
                     </div>
                     <div class="focus-card glass-card reveal delay-1">
-                        <div class="focus-icon"><i class="fa-solid fa-bolt"></i></div>
-                        <h3>Efficient LLM Serving</h3>
-                        <p>Building low-latency LLM serving pipelines with vLLM, quantisation and open-weight models for multi-user research environments and real-time HRI experiments.</p>
+                        <div class="focus-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>LLM Evaluation</h3>
+                        <p>Evaluation pipelines for classifiers and LLMs: synthetic data, custom metrics and moral-capability tests, run on HPC clusters.</p>
                     </div>
                     <div class="focus-card glass-card reveal delay-2">
                         <div class="focus-icon"><i class="fa-solid fa-robot"></i></div>
-                        <h3>Robotics &amp; Human-Robot Interaction</h3>
-                        <p>Integrating LLM-side interaction modules into ROS2-based socially assistive robotics systems, with structured dialogue, ASR/TTS coordination and real-time constraints for lab-based HRI studies.</p>
+                        <h3>LLM Serving &amp; HRI</h3>
+                        <p>Low-latency vLLM serving with quantised open-weight models, connected to ROS2 robots for human-robot interaction studies.</p>
                     </div>
                     <div class="focus-card glass-card reveal delay-3">
                         <div class="focus-icon"><i class="fa-solid fa-server"></i></div>
-                        <h3>ML Systems &amp; HPC</h3>
-                        <p>Training and evaluating transformer-based and BERT-style models using shared HPC, Slurm/HTCondor workflows and multi-GPU servers, with reproducible experiment configuration and analysis pipelines.</p>
-                    </div>
-                    <div class="focus-card glass-card reveal delay-4">
-                        <div class="focus-icon"><i class="fa-solid fa-chart-line"></i></div>
-                        <h3>Reinforcement Learning &amp; Optimisation</h3>
-                        <p>Research-level exposure to reinforcement learning, including from-scratch PPO and no-critic GRPO implementations for continuous-control experiments, plus coursework honours in Reinforcement Learning.</p>
-                    </div>
-                    <div class="focus-card glass-card reveal delay-5">
-                        <div class="focus-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                        <h3>Production Software &amp; Data Platforms</h3>
-                        <p>Designing production Python/TypeScript microservices, APIs, CI/CD pipelines, Kubernetes/MicroK8s deployments and Kafka/NiFi data-processing systems for real-time monitoring platforms.</p>
+                        <h3>Production Software</h3>
+                        <p>Two years building Python/TypeScript microservices, Kubernetes deployments and Kafka/NiFi pipelines for monitoring platforms.</p>
                     </div>
                 </div>
 
                 <div class="profile-panel glass-card reveal">
-                    <h3>Professional Profile</h3>
-                    <p>I am a research engineer and ML systems builder working across LLM evaluation, efficient model serving, AI safety, robotics/HRI and production data platforms. I enjoy problems where scientific uncertainty meets engineering constraints: systems that need rigorous modelling, careful evaluation and reliable software.</p>
-                    <p>At CSIC-IIIA, I design evaluation workflows for moral capabilities, robustness and model behaviour in text classifiers and LLMs. My work includes synthetic data generation, custom metric design, BERT-style classifier fine-tuning, open-weight LLM evaluation and computational experiments on shared HPC and multi-GPU infrastructure.</p>
-                    <p>I also build efficient LLM-serving pipelines for real-time human-robot interaction, using vLLM, quantisation and structured dialogue components integrated with ROS2-based robotic systems. The goal is practical AI behaviour under real interaction constraints, not just offline benchmark performance.</p>
-                    <p>Before AI research, I worked full-time as a software engineer at Axión, building production microservices, on-prem Kubernetes/MicroK8s infrastructure, GitLab CI/CD, Kafka/NiFi ETL pipelines and real-time monitoring systems for public-service and private infrastructure.</p>
-                    <p>At Oxford, my current work focuses on game-theoretic results for learning stability and equilibrium in multi-agent systems, with applications to multi-agent coordination and learning dynamics.</p>
-                    <div class="skill-tags">
-                        <span class="tag">LLM Evaluation</span>
-                        <span class="tag">vLLM Serving</span>
-                        <span class="tag">ROS2 HRI</span>
-                        <span class="tag">HPC Experiments</span>
-                        <span class="tag">Kubernetes/Data Platforms</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Selected Systems Section -->
-        <section id="systems" class="section systems-section">
-            <div class="section-container">
-                <h2 class="section-title reveal">Selected <span>Systems Built</span></h2>
-                <div class="systems-grid">
-                    <article class="system-card glass-card hover-glow reveal">
-                        <div class="system-label">System 01</div>
-                        <h3>Real-time LLM serving for human-robot interaction</h3>
-                        <p>Built the LLM-side serving and integration stack for ROS2-based HRI lab studies: vLLM serving, quantised open-weight models, structured dialogue components, ASR/TTS coordination and real-time inference constraints.</p>
-                        <div class="tech-list"><span>vLLM</span><span>Quantisation</span><span>Open-weight LLMs</span><span>ROS2</span><span>LangChain/LangGraph</span><span>Pydantic</span><span>ASR/TTS</span><span>Multi-GPU servers</span></div>
-                    </article>
-                    <article class="system-card glass-card hover-glow reveal delay-1">
-                        <div class="system-label">System 02</div>
-                        <h3>Moral-capability and robustness evaluation pipeline</h3>
-                        <p>Designed evaluation workflows for moral-capability analysis in text classifiers and LLMs, grounded in moral psychology theories such as Moral Foundations Theory and Schwartz's theory of values. Built synthetic datasets, custom metrics and experiment pipelines for classifier and LLM evaluation.</p>
-                        <div class="note-pill">Current research; manuscript in preparation.</div>
-                        <div class="tech-list"><span>Python</span><span>PyTorch</span><span>Transformers</span><span>BERT-style classifiers</span><span>LLM evaluation</span><span>Synthetic data</span><span>HTCondor</span><span>Shared HPC</span></div>
-                    </article>
-                    <article class="system-card glass-card hover-glow reveal delay-2">
-                        <div class="system-label">System 03</div>
-                        <h3>Production monitoring and data-platform infrastructure</h3>
-                        <p>Main developer on production monitoring systems for public-service and private infrastructure. Built Python/FastAPI and TypeScript/NestJS microservices, APIs and real-time monitoring components; operated Kafka/NiFi ETL workflows; deployed GitLab CI/CD; and migrated web applications to an on-prem high-availability MicroK8s/Kubernetes platform.</p>
-                        <div class="tech-list"><span>Python</span><span>FastAPI</span><span>TypeScript</span><span>NestJS</span><span>Kafka</span><span>Apache NiFi</span><span>Elasticsearch/Kibana</span><span>WebSockets</span><span>GraphQL</span><span>Docker</span><span>MicroK8s</span><span>GitLab CI/CD</span></div>
-                    </article>
-                    <article class="system-card glass-card hover-glow reveal">
-                        <div class="system-label">System 04</div>
-                        <h3>Deep open-set recognition framework</h3>
-                        <p>Co-designed and developed a modular PyTorch Lightning framework for open-set recognition experiments, with configurable backbones, OSR strategies, Hydra experiment configuration, standardised metrics and visualisation tools.</p>
-                        <div class="tech-list"><span>PyTorch Lightning</span><span>Hydra</span><span>ResNet</span><span>EfficientNet</span><span>ViT</span><span>DINOv2</span><span>AUROC</span><span>OSCR</span><span>ROC/t-SNE visualisation</span></div>
-                    </article>
-                    <article class="system-card glass-card hover-glow reveal delay-1">
-                        <div class="system-label">System 05</div>
-                        <h3>Flood decision-support full-stack system</h3>
-                        <p>Integrated the components of a flood decision-support project into a full-stack application combining data integration, ML models, APIs and interactive dashboards for flood risk analysis and decision support.</p>
-                        <div class="tech-list"><span>Python</span><span>FastAPI</span><span>Streamlit</span><span>ML pipelines</span><span>Data integration</span><span>Risk visualisation</span></div>
-                    </article>
-                    <article class="system-card glass-card hover-glow reveal delay-2">
-                        <div class="system-label">System 06</div>
-                        <h3>ShadowPals - computer-vision interaction system</h3>
-                        <p>Developed the mathematical parametrisation layer for an interactive shadow-puppetry learning platform using computer vision, MediaPipe hand landmarks and real-time feedback.</p>
-                        <div class="tech-list"><span>Computer vision</span><span>MediaPipe</span><span>Parametric modelling</span><span>FastAPI</span><span>React</span><span>Docker</span></div>
-                    </article>
+                    <h3>About</h3>
+                    <p>I'm a research engineer at DFKI in Saarbrücken, where I work on the SOOFI project as part of the post-training team. My focus is interpretability of new LLM architectures.</p>
+                    <p>Before that I was an academic visitor at Oxford, working on learning stability and equilibria in multi-agent systems. At CSIC-IIIA in Barcelona I evaluated the moral capabilities of classifiers and LLMs, and built the LLM serving stack for a socially assistive robot.</p>
+                    <p>I started out as a software engineer at Axión in Seville, working full-time while studying Mathematics and Computer Engineering.</p>
                 </div>
             </div>
         </section>
@@ -242,6 +174,25 @@
                 <h2 class="section-title reveal">Research & Engineering <span>Experience</span></h2>
 
                 <div class="timeline">
+                    <!-- DFKI -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-card hover-glow">
+                            <div class="timeline-header">
+                                <div class="timeline-title">
+                                    <h3>Research Engineer - LLM Post-training &amp; Interpretability</h3>
+                                    <h4><a href="https://www.dfki.de/" target="_blank" class="institution-link">DFKI, German Research Center for Artificial Intelligence</a></h4>
+                                </div>
+                                <div class="timeline-logo timeline-logo--text">DFKI</div>
+                            </div>
+                            <div class="timeline-meta">
+                                <span><i class="fa-regular fa-calendar"></i> 2026 – Present</span>
+                                <span><i class="fa-solid fa-location-dot"></i> Saarbrücken, Germany</span>
+                            </div>
+                            <p>Member of the post-training team in the SOOFI project, which builds open foundation models. I work on interpretability of new LLM architectures.</p>
+                        </div>
+                    </div>
+
                     <!-- Oxford -->
                     <div class="timeline-item reveal">
                         <div class="timeline-dot"></div>
@@ -259,7 +210,7 @@
                                 <span><i class="fa-regular fa-calendar"></i> March 2026 – July 2026</span>
                                 <span><i class="fa-solid fa-location-dot"></i> Oxford, UK</span>
                             </div>
-                            <p>Studying game-theoretic conditions for learning stability and equilibrium in multi-agent systems, with applications to multi-agent coordination and learning dynamics.</p>
+                            <p>Worked on game-theoretic conditions for learning stability and equilibria in multi-agent systems.</p>
                         </div>
                     </div>
 
@@ -281,13 +232,11 @@
                                 <span><i class="fa-solid fa-location-dot"></i> Barcelona, Spain</span>
                             </div>
                             <ul class="timeline-list timeline-list--columns">
-                                <li>Designed moral-capability evaluation workflows for text classifiers and LLMs, grounded in moral psychology theories including Moral Foundations Theory and Schwartz's theory of values.</li>
-                                <li>Created synthetic datasets, custom metrics and experiment pipelines for robustness, value-alignment and behavioural failure-mode analysis.</li>
-                                <li>Fine-tuned BERT-style classifiers with representation-learning techniques and custom losses for moral text classification.</li>
-                                <li>Ran computationally intensive experiments on shared HPC, HTCondor and local multi-GPU servers for classifiers and open-weight LLMs.</li>
-                                <li>Built efficient LLM-serving pipelines using vLLM, quantisation and recent open-weight models for real-time HRI lab studies.</li>
-                                <li>Integrated LLM-side dialogue components into ROS2-based socially assistive robotics systems, coordinating with ASR/TTS and robotics modules.</li>
-                                <li>Contributed to software development for ROS2 experimental workflows, including real-time interaction constraints and structured dialogue interfaces.</li>
+                                <li>Built moral-capability evaluations for text classifiers and LLMs, based on Moral Foundations Theory and Schwartz's theory of values.</li>
+                                <li>Generated synthetic datasets and designed metrics for robustness and value-alignment tests.</li>
+                                <li>Fine-tuned BERT-style classifiers with custom losses; ran experiments on HTCondor and multi-GPU servers.</li>
+                                <li>Built the vLLM serving pipeline (quantised open-weight models) for real-time HRI studies.</li>
+                                <li>Integrated the dialogue components with the ROS2 robot stack, including ASR/TTS.</li>
                             </ul>
                         </div>
                     </div>
@@ -309,9 +258,7 @@
                                 <span><i class="fa-regular fa-calendar"></i> Jan 2025 – April 2025</span>
                                 <span><i class="fa-solid fa-location-dot"></i> Barcelona, Spain</span>
                             </div>
-                            <p>Designed and delivered lectures on probabilistic graphical models for AI, covering
-                                theoretical foundations and practical applications, with emphasis on efficient Bayesian
-                                inference in structured probabilistic models.</p>
+                            <p>Taught probabilistic graphical models, with a focus on Bayesian inference.</p>
                         </div>
                     </div>
 
@@ -332,7 +279,7 @@
                                 <span><i class="fa-regular fa-calendar"></i> Sept 2023 – July 2024</span>
                                 <span><i class="fa-solid fa-location-dot"></i> Seville, Spain</span>
                             </div>
-                            <p>Built and evaluated a LangChain/RAG pipeline for extracting mathematical knowledge from LaTeX sources into OWL knowledge graphs. The work became my bachelor's thesis, was selected as a university finalist and later resulted in a peer-reviewed journal publication.</p>
+                            <p>Built a LangChain/RAG pipeline that extracts mathematical knowledge from LaTeX into OWL knowledge graphs. This became my bachelor's thesis and a journal paper.</p>
                         </div>
                     </div>
 
@@ -356,13 +303,10 @@
                             </div>
                             <p class="timeline-note">Full-time while completing dual B.Sc. degrees in Computer Engineering and Mathematics.</p>
                             <ul class="timeline-list timeline-list--columns">
-                                <li>Built and maintained Python/FastAPI and TypeScript/NestJS microservices and APIs for production monitoring platforms.</li>
-                                <li>Deployed and operated an on-prem high-availability MicroK8s/Kubernetes platform, migrating company web applications to the new deployment model with GitLab CI/CD.</li>
-                                <li>Operated Apache Kafka and Apache NiFi ETL workflows for real-time data-processing and monitoring systems.</li>
-                                <li>Developed real-time monitoring features using WebSockets, GraphQL, Elasticsearch/Kibana and selected AngularJS integrations.</li>
-                                <li>Worked on production deployments for public-service and private infrastructure monitoring, including transport, port, public-space and communications-related systems.</li>
-                                <li>Delivered training sessions to technical and non-technical public-administration users, translating operator feedback into implementation priorities.</li>
-                                <li>Coordinated a small engineering team in the second year, bridging communication between management and junior developers, reviewing work, assigning tasks, shaping architecture and mentoring two interns.</li>
+                                <li>Built Python/FastAPI and TypeScript/NestJS microservices for monitoring platforms used in transport, ports and public spaces.</li>
+                                <li>Set up an on-prem high-availability MicroK8s cluster and migrated the company's web apps to it with GitLab CI/CD.</li>
+                                <li>Ran Kafka and NiFi ETL pipelines; built real-time features with WebSockets, GraphQL and Elasticsearch.</li>
+                                <li>In the second year, led a small team and mentored two interns.</li>
                             </ul>
                         </div>
                     </div>
@@ -379,7 +323,7 @@
                     <div class="project-card glass-card hover-glow reveal">
                         <div class="project-content">
                             <h3>MariChatmen - written Andalûh language model</h3>
-                            <p>Experimental Qwen3.5 adaptation for written Andalusian Spanish, covering tokeniser expansion, Andalûh adaptive pretraining, SFT, ORPO, persona tuning and release-gate evaluation.</p>
+                            <p>Qwen3.5 adapted to written Andalusian Spanish: tokeniser expansion, continued pretraining, SFT and ORPO.</p>
                             <div class="project-tags"><span>LLM fine-tuning</span><span>Dialectal AI</span><span>Hugging Face</span></div>
                             <div class="project-actions">
                                 <a href="blog/posts/marichatmen/" data-blog-post="posts/marichatmen/" class="project-link">
@@ -394,21 +338,21 @@
                     <div class="project-card glass-card hover-glow reveal">
                         <div class="project-content">
                             <h3>Moral-capability evaluation for LLMs and classifiers</h3>
-                            <p>Synthetic data, custom metrics, moral psychology, BERT-style classifiers, LLM evaluation, HPC/HTCondor and multi-GPU experiments.</p>
-                            <div class="project-tags"><span>Current research</span><span>AI safety evaluation</span></div>
+                            <p>Evaluation of moral reasoning in BERT-style classifiers and LLMs, using synthetic data and custom metrics.</p>
+                            <div class="project-tags"><span>Manuscript in preparation</span></div>
                         </div>
                     </div>
                     <div class="project-card glass-card hover-glow reveal delay-1">
                         <div class="project-content">
                             <h3>Real-time LLM serving for HRI</h3>
-                            <p>vLLM, quantised open-weight models, ROS2, structured dialogue, ASR/TTS coordination and real-time lab-study constraints.</p>
+                            <p>vLLM serving of quantised open-weight models for a ROS2 robot, with structured dialogue and ASR/TTS.</p>
                             <div class="project-tags"><span>vLLM</span><span>ROS2</span><span>HRI</span></div>
                         </div>
                     </div>
                     <div class="project-card glass-card hover-glow reveal delay-2">
                         <div class="project-content">
                             <h3>Deep Open-Set Recognition framework</h3>
-                            <p>PyTorch Lightning/Hydra framework with ResNet, EfficientNet, ViT and DINOv2 backbones, OSR metrics and visualisation.</p>
+                            <p>PyTorch Lightning/Hydra framework for open-set recognition with ResNet, EfficientNet, ViT and DINOv2 backbones.</p>
                             <a href="https://github.com/alobo01/mai-dl2" target="_blank" class="project-link">
                                 View Repository <i class="fa-solid fa-arrow-right"></i>
                             </a>
@@ -417,7 +361,7 @@
                     <div class="project-card glass-card hover-glow reveal">
                         <div class="project-content">
                             <h3>PPO/GRPO continuous-control RL framework</h3>
-                            <p>From-scratch course project implementing PPO and no-critic GRPO variants, configurable experiments, logging, checkpoints and performance comparison.</p>
+                            <p>PPO and critic-free GRPO implemented from scratch for continuous control.</p>
                             <a href="https://github.com/alobo01/mai-atci-ppo" target="_blank" class="project-link">
                                 View Repository <i class="fa-solid fa-arrow-right"></i>
                             </a>
@@ -426,7 +370,7 @@
                     <div class="project-card glass-card hover-glow reveal delay-1">
                         <div class="project-content">
                             <h3>Flood-IDSS</h3>
-                            <p>Full-stack flood decision-support application integrating data sources, ML models, backend APIs and interactive dashboards.</p>
+                            <p>Flood decision-support app combining data sources, ML models, an API and dashboards.</p>
                             <a href="https://github.com/alobo01/mai-idss-flood" target="_blank" class="project-link">
                                 View Repository <i class="fa-solid fa-arrow-right"></i>
                             </a>
@@ -435,7 +379,7 @@
                     <div class="project-card glass-card hover-glow reveal delay-2">
                         <div class="project-content">
                             <h3>Mathematical Knowledge Graphs with LLMs</h3>
-                            <p>LLM/RAG pipeline for extracting mathematical knowledge from LaTeX into OWL knowledge graphs; resulted in peer-reviewed publication.</p>
+                            <p>LLM/RAG pipeline that turns LaTeX mathematics into OWL knowledge graphs.</p>
                             <a href="https://www.mdpi.com/2673-3951/6/3/53" target="_blank" class="project-link">
                                 Read Publication <i class="fa-solid fa-arrow-right"></i>
                             </a>
@@ -444,14 +388,14 @@
                     <div class="project-card glass-card hover-glow reveal">
                         <div class="project-content">
                             <h3>AB Data Challenge - Finalist</h3>
-                            <p>Transformer-based time-series anomaly detection for utility data; designed training code and deployed experiments on distributed hardware.</p>
+                            <p>Transformer-based anomaly detection on utility time-series data.</p>
                             <div class="project-tags"><span>Time series</span><span>Transformers</span><span>Finalist</span></div>
                         </div>
                     </div>
                     <div class="project-card glass-card hover-glow reveal delay-1">
                         <div class="project-content">
                             <h3>ShadowPals</h3>
-                            <p>Computer-vision learning platform using MediaPipe landmarks and mathematical hand-pose parametrisation.</p>
+                            <p>Shadow-puppetry learning app using MediaPipe hand landmarks; I wrote the hand-pose parametrisation.</p>
                             <a href="https://github.com/alobo01/mai-cir" target="_blank" class="project-link">
                                 View Repository <i class="fa-solid fa-arrow-right"></i>
                             </a>
@@ -495,7 +439,7 @@
                         <h3 class="pub-title">EMY: Supporting Autism Therapy with a Socially Assistive Robot</h3>
                         <p class="pub-authors">Sara Cooper, Antonio Lobo-Santos, et al.</p>
                         <p class="pub-journal">HRI '26: 21st ACM/IEEE International Conference on Human-Robot Interaction</p>
-                        <p class="pub-abstract">Contributed to LLM-supported interaction and system integration for a socially assistive robotics system.</p>
+                        <p class="pub-abstract">I worked on the LLM dialogue and system integration.</p>
                         <a href="https://dl.acm.org/doi/10.1145/3776734.3794581" target="_blank" class="pub-link">
                             <i class="fa-solid fa-link"></i> View Article
                         </a>
@@ -505,9 +449,8 @@
                         <div class="pub-date"><i class="fa-regular fa-calendar"></i> Modelling, 2025</div>
                         <h3 class="pub-title">Enhancing Mathematical Knowledge Graphs with Large Language Models</h3>
                         <p class="pub-authors">A. Lobo-Santos, J. Borrego-Díaz</p>
-                        <p class="pub-journal">Peer-reviewed journal article derived from my bachelor's thesis</p>
-                        <p class="pub-abstract">Built and evaluated an LLM-assisted pipeline for extracting mathematical knowledge from LaTeX into queryable knowledge graphs.</p>
-                        <a href="https://www.mdpi.com/2673-3951/6/3/53" target="_blank" class="pub-link">
+                        <p class="pub-journal">Modelling (MDPI), based on my bachelor's thesis</p>
+                                                <a href="https://www.mdpi.com/2673-3951/6/3/53" target="_blank" class="pub-link">
                             <i class="fa-solid fa-link"></i> View Article
                         </a>
                     </div>
@@ -516,20 +459,23 @@
                         <div class="pub-date"><i class="fa-regular fa-calendar"></i> ECAI 2025 Workshop</div>
                         <h3 class="pub-title">Trustworthy AI Through Dual-Role Reasoning</h3>
                         <p class="pub-authors">Workshop contribution</p>
-                        <p class="pub-journal">Safety-oriented reasoning and evaluation work for LLM systems</p>
-                        <p class="pub-abstract">Explored dual-role reasoning as a safety-oriented approach to evaluating and improving reasoning behaviour in LLM systems.</p>
+                        <p class="pub-abstract">Dual-role reasoning as a way to evaluate and improve the safety of LLM reasoning.</p>
                     </div>
                 </div>
 
                 <h3 class="subsection-title reveal">Current Research</h3>
                 <div class="publications-grid two-column-grid">
                     <div class="pub-card glass-card hover-glow reveal">
-                        <h3 class="pub-title">Moral-capability evaluation for classifiers and LLMs</h3>
-                        <p class="pub-abstract">Designing evaluation workflows grounded in moral psychology, with synthetic data generation, custom metrics and HPC/multi-GPU experiments.</p>
+                        <h3 class="pub-title">Interpretability of new LLM architectures</h3>
+                        <p class="pub-abstract">At DFKI, within the SOOFI post-training team.</p>
                     </div>
                     <div class="pub-card glass-card hover-glow reveal delay-1">
+                        <h3 class="pub-title">Moral-capability evaluation for classifiers and LLMs</h3>
+                        <p class="pub-abstract">Manuscript in preparation.</p>
+                    </div>
+                    <div class="pub-card glass-card hover-glow reveal">
                         <h3 class="pub-title">NLP pragmatics and formal grammars</h3>
-                        <p class="pub-abstract">Researching NLP problems involving pragmatics and classical context-free grammar formalisms.</p>
+                        <p class="pub-abstract">Pragmatics problems studied with context-free grammar formalisms.</p>
                     </div>
                 </div>
 
@@ -539,13 +485,13 @@
                         <div class="pub-date"><i class="fa-regular fa-calendar"></i> October 2025 &middot; Madrid, Spain</div>
                         <h3 class="pub-title">Invited Speaker: LLM-Tools for Coding</h3>
                         <p class="pub-journal">La Moncloa (Spanish Government)</p>
-                        <p class="pub-abstract">Delivered an invited seminar on effective and proper use of LLM tools for coding, focused on best practices, capabilities and safety considerations for software engineering workflows.</p>
+                        <p class="pub-abstract">How to use LLM coding tools well, and where they go wrong.</p>
                     </div>
                     <div class="pub-card glass-card hover-glow reveal delay-1">
                         <div class="pub-date"><i class="fa-regular fa-calendar"></i> November 2025 &middot; Barcelona, Spain</div>
                         <h3 class="pub-title">Seminar: LLM-Tools for Coding</h3>
                         <p class="pub-journal">CSIC-IIIA</p>
-                        <p class="pub-abstract">Conducted a technical seminar for researchers at IIIA on advanced usage of LLM tools for coding, with emphasis on prompting strategies, assistant workflows and safe implementation practices.</p>
+                        <p class="pub-abstract">Seminar for IIIA researchers on prompting and working with coding assistants.</p>
                         <a href="https://www.iiia.csic.es/en-us/news-events/seminar-details/?seminar_id=151" target="_blank" class="pub-link">
                             <i class="fa-solid fa-link"></i> View Seminar Details
                         </a>
@@ -597,7 +543,7 @@
                             <span><i class="fa-regular fa-calendar"></i> 2024 – June 2026</span>
                             <span><i class="fa-solid fa-location-dot"></i> Barcelona, Spain</span>
                         </div>
-                        <p>Focus: reinforcement learning, deep learning, statistical modelling, ML systems and AI research. Honours in Machine Learning, Deep Learning, Reinforcement Learning and Complex Networks. Selected projects include from-scratch PPO/GRPO implementations, open-set recognition, flood decision support and computer-vision interaction systems.</p>
+                        <p>Honours in Machine Learning, Deep Learning, Reinforcement Learning and Complex Networks.</p>
                     </div>
 
                     <!-- Bachelor Math -->
@@ -615,9 +561,7 @@
                             <span><i class="fa-regular fa-calendar"></i> 2019 – 2024</span>
                             <span><i class="fa-solid fa-location-dot"></i> Seville, Spain</span>
                         </div>
-                        <p>Strong training in probability theory, statistics, optimisation, mathematical modelling, and
-                            rigorous analysis. Developed a deep theoretical foundation for advanced machine learning and
-                            data science.</p>
+                        <p>Probability, statistics, optimisation and analysis.</p>
                     </div>
 
                     <!-- Bachelor CS -->
@@ -640,11 +584,6 @@
                         <p class="thesis"><em>Bachelor's Thesis: Large Language Models and Knowledge Graphs to Model
                                 Mathematical
                                 Knowledge</em></p>
-                        <p
-                            style="font-size: 0.9rem; margin-top: 0.5rem; margin-bottom: 1.5rem; color: var(--text-light);">
-                            Developed and
-                            evaluated an LLM-based pipeline for extracting mathematical knowledge from LaTeX into a
-                            structured knowledge graph.</p>
                         <a href="assets/TFG_Antonio_Lobo.pdf" target="_blank" class="thesis-link">
                             <i class="fa-regular fa-file-pdf"></i> Read Thesis
                         </a>
@@ -692,16 +631,10 @@
             <div class="section-container">
                 <h2 class="section-title reveal">Technical <span>Skills</span></h2>
                 <div class="skills-matrix">
-                    <div class="skill-category skill-category--wide glass-card reveal">
-                        <h3><i class="fa-solid fa-compass"></i> Core areas</h3>
-                        <div class="skill-list">
-                            <span>LLM evaluation</span><span>AI safety evaluation</span><span>Efficient LLM serving</span><span>Robotics/HRI</span><span>ML systems</span><span>Reinforcement learning</span><span>Production backend engineering</span><span>Data platforms</span>
-                        </div>
-                    </div>
                     <div class="skill-category glass-card reveal delay-1">
                         <h3><i class="fa-solid fa-brain"></i> ML / AI</h3>
                         <div class="skill-list">
-                            <span>PyTorch</span><span>Transformers</span><span>BERT-style classifiers</span><span>Representation learning</span><span>RAG</span><span>LangChain</span><span>LangGraph</span><span>DSPy</span><span>Model evaluation</span><span>Synthetic data</span><span>Custom metrics</span>
+                            <span>PyTorch</span><span>Transformers</span><span>Post-training</span><span>Interpretability</span><span>BERT-style classifiers</span><span>Representation learning</span><span>RAG</span><span>LangChain</span><span>LangGraph</span><span>DSPy</span><span>Model evaluation</span><span>Synthetic data</span><span>Custom metrics</span>
                         </div>
                     </div>
                     <div class="skill-category glass-card reveal delay-2">
@@ -739,7 +672,6 @@
                 <div class="language-panel glass-card reveal">
                     <div class="language-panel-header">
                         <h3><i class="fa-solid fa-language"></i> Languages</h3>
-                        <p>Working languages for research, engineering and collaboration.</p>
                     </div>
                     <div class="language-list">
                         <div class="language-item">
